@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home Service Ad Agency V10</title>
+<title>Home Service Ad Agency v11</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -16,7 +16,6 @@
   <h2 style="color:white; margin-top:30px;">Discover How You Can Double Your Jobs Without Wasting a Single Ad Dollar</h2>
 </header>
 
-<!-- Sections remain unchanged -->
 <section>
   <h2>Why Choose Us?</h2>
   <div class="columns">
@@ -74,12 +73,14 @@
   <p>© 2025 Your Agency Name | <a href="#" id="footerCall">Book a Call</a></p>
 </footer>
 
-<!-- Popup Form -->
+<!-- Hidden iframe for form submission -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
 <div class="popup-overlay" id="popup">
   <div class="popup">
-    <span class="close-btn" id="closePopup">✖</span>
+    <span class="close-btn" onclick="closePopup()">✖</span>
     <h2>Book a Call Now</h2>
-    <form id="leadForm">
+    <form id="leadForm" action="https://script.google.com/macros/s/YOUR_APPS_SCRIPT_ID/exec" method="POST" target="hidden_iframe">
       <label>Full Name</label><input type="text" name="name" required>
       <label>Company Name</label><input type="text" name="company">
       <label>Company Service Types</label><input type="text" name="services">
@@ -91,7 +92,7 @@
       </label>
       <button type="submit" class="submit-btn">Book A Call Now</button>
     </form>
-    <p id="formStatus" style="text-align:center; margin-top:10px;"></p>
+    <p id="formStatus" style="margin-top:10px; font-weight:bold;"></p>
   </div>
 </div>
 
