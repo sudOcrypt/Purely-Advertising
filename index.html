@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home Service Ad Agency v13</title>
+<title>Home Service Ad Agency V14</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -75,9 +75,9 @@
 
 <div class="popup-overlay" id="popup">
   <div class="popup">
-    <span class="close-btn" onclick="document.getElementById('popup').style.display='none'; document.getElementById('formStatus').textContent='';">✖</span>
+    <span class="close-btn" id="closePopup">✖</span>
     <h2>Book a Call Now</h2>
-    <form id="leadForm" action="https://script.google.com/macros/s/AKfycbw-jDAJcuk_WJ29zKexmUAs9iITusNFl2erfVCRgIlR6NcMfRc4Z8A3S4UffywjiRxk8A/exec" method="POST" target="hidden_iframe">
+    <form id="leadForm">
       <label>Full Name</label><input type="text" name="name" required>
       <label>Company Name</label><input type="text" name="company">
       <label>Company Service Types</label><input type="text" name="services">
@@ -89,15 +89,10 @@
       </label>
       <button type="submit" class="submit-btn">Book A Call Now</button>
     </form>
-    <p id="formStatus" style="color:green; font-weight:bold; text-align:center;"></p>
+    <div id="debug" style="margin-top:10px;color:red;font-size:0.9rem;"></div>
   </div>
 </div>
-
-<!-- Hidden iframe to submit the form (avoids CORS) -->
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
 <script src="script.js"></script>
 </body>
 </html>
-
-
