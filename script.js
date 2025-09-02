@@ -1,24 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const openModal = document.getElementById("openModal");
-  const footerCall = document.getElementById("footerCall");
-  const popup = document.getElementById("popup");
-  const closeBtn = document.querySelector(".close-btn");
-  const form = document.getElementById("leadForm");
+  const popup = document.getElementById('popup');
+  const openModalBtn = document.getElementById('openModal');
+  const footerCallBtn = document.getElementById('footerCall');
+  const closeBtn = document.getElementById('closePopup');
+  const form = document.getElementById('leadForm');
+  const webAppURL = "https://script.google.com/macros/s/AKfycbxc0sBMGYNCTaAYHYIUKdSDyzkxZHCUZ9LiAQ8xfz8k-esNC4MmEBmUbGtd2Ll_SC8GIg/exec"; // <-- replace with your Web App URL
 
   // Open popup
-  openModal.addEventListener("click", () => popup.style.display = "flex");
-  footerCall.addEventListener("click", () => popup.style.display = "flex");
-
-  // Auto popup after 5 seconds
-  setTimeout(() => { popup.style.display = "flex"; }, 5000);
+  openModalBtn.addEventListener("click", () => popup.style.display = 'flex');
+  footerCallBtn.addEventListener("click", () => popup.style.display = 'flex');
 
   // Close popup
-  closeBtn.addEventListener("click", () => popup.style.display = "none");
+  closeBtn.addEventListener("click", () => popup.style.display = 'none');
 
-  // Submit form
-  form.addEventListener("submit", async (e) => {
+  // Auto popup after 5 seconds
+  setTimeout(() => popup.style.display = 'flex', 5000);
+
+  // Submit form to Google Sheets
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
-
     const data = {
       name: form.name.value,
       company: form.company.value,
@@ -28,24 +28,21 @@ document.addEventListener("DOMContentLoaded", () => {
       smsConsent: form.smsConsent.checked
     };
 
-    try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbz5EHe4p5KUDHJVtVmf4Z0KY2p3S-ODgfPjYqgLrJ2RMAHMWp0Z9wS6_dkSf_qtfxyibg/exec", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-
-      const result = await response.json();
-      if(result.result === "success") {
+    fetch(webAppURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(resp => {
+      if(resp.result === "success") {
         alert("✅ Thank you! Your call is booked.");
-        popup.style.display = "none";
+        popup.style.display = 'none';
         form.reset();
       } else {
-        alert("❌ Error: " + (result.error || "Unknown error"));
+        alert("❌ Error: " + (resp.error || "Unknown error"));
       }
-    } catch (err) {
-      alert("❌ Error sending data: " + err);
-    }
+    })
+    .catch(err => alert("❌ Error sending data: " + err));
   });
 });
-
