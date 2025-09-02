@@ -1,45 +1,50 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const popup = document.getElementById("popup");
-  const openModalBtn = document.getElementById("openModal");
+  const openModal = document.getElementById("openModal");
   const footerCall = document.getElementById("footerCall");
-  const leadForm = document.getElementById("leadForm");
+  const popup = document.getElementById("popup");
+  const closeBtn = document.querySelector(".close-btn");
+  const form = document.getElementById("leadForm");
 
   // Open popup
-  openModalBtn.addEventListener("click", () => popup.style.display = "flex");
-  footerCall.addEventListener("click", (e) => {
-    e.preventDefault();
-    popup.style.display = "flex";
-  });
+  openModal.addEventListener("click", () => popup.style.display = "flex");
+  footerCall.addEventListener("click", () => popup.style.display = "flex");
 
-  // Close popup function (already referenced inline in HTML)
-  window.closePopup = function() {
-    popup.style.display = "none";
-  }
-
-  // Auto-popup after 5 seconds
+  // Auto popup after 5 seconds
   setTimeout(() => { popup.style.display = "flex"; }, 5000);
 
-  // Submit form to Google Sheets
-  leadForm.addEventListener("submit", function(e){
+  // Close popup
+  closeBtn.addEventListener("click", () => popup.style.display = "none");
+
+  // Submit form
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
     const data = {
-      name: this.name.value,
-      company: this.company.value,
-      services: this.services.value,
-      phone: this.phone.value,
-      email: this.email.value,
-      smsConsent: this.smsConsent.checked
+      name: form.name.value,
+      company: form.company.value,
+      services: form.services.value,
+      phone: form.phone.value,
+      email: form.email.value,
+      smsConsent: form.smsConsent.checked
     };
-    fetch("https://script.google.com/macros/s/AKfycbwrsP6QtqqCejSLHBPzsYywEvWx4HtqtQpAavlhsGpW1HKwubgJwS52ATAeieHQYQafGA/exec", {
-      method: "POST",
-      body: JSON.stringify(data)
-    })
-    .then(res => res.text())
-    .then(() => {
-      alert("✅ Thank you! Your call is booked.");
-      popup.style.display = "none";
-      this.reset();
-    })
-    .catch(err => alert("❌ Error: " + err));
+
+    try {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbwrsP6QtqqCejSLHBPzsYywEvWx4HtqtQpAavlhsGpW1HKwubgJwS52ATAeieHQYQafGA/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+      if(result.result === "success") {
+        alert("✅ Thank you! Your call is booked.");
+        popup.style.display = "none";
+        form.reset();
+      } else {
+        alert("❌ Error: " + (result.error || "Unknown error"));
+      }
+    } catch (err) {
+      alert("❌ Error sending data: " + err);
+    }
   });
 });
