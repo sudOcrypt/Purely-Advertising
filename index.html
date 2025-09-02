@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home Service Ad Agency v11</title>
+<title>Home Service Ad Agency v12</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -73,14 +73,11 @@
   <p>© 2025 Your Agency Name | <a href="#" id="footerCall">Book a Call</a></p>
 </footer>
 
-<!-- Hidden iframe for form submission -->
-<iframe name="hidden_iframe" style="display:none;"></iframe>
-
 <div class="popup-overlay" id="popup">
   <div class="popup">
-    <span class="close-btn" onclick="closePopup()">✖</span>
+    <span class="close-btn" onclick="document.getElementById('popup').style.display='none'; document.getElementById('formStatus').textContent='';">✖</span>
     <h2>Book a Call Now</h2>
-    <form id="leadForm" action="https://script.google.com/macros/s/AKfycbwlWz6hom4-bW_IImxOBp2-0-sSS7UP-fLa_Tzkky53UOOJo1RDyQaNznl1dK-9PN5-/exec" method="POST" target="hidden_iframe">
+    <form id="leadForm" action="https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec" method="POST" target="hidden_iframe">
       <label>Full Name</label><input type="text" name="name" required>
       <label>Company Name</label><input type="text" name="company">
       <label>Company Service Types</label><input type="text" name="services">
@@ -92,11 +89,13 @@
       </label>
       <button type="submit" class="submit-btn">Book A Call Now</button>
     </form>
-    <p id="formStatus" style="margin-top:10px; font-weight:bold;"></p>
+    <p id="formStatus" style="color:green; font-weight:bold; text-align:center;"></p>
   </div>
 </div>
+
+<!-- Hidden iframe to submit the form (avoids CORS) -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
 <script src="script.js"></script>
 </body>
 </html>
-
