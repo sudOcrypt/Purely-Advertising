@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("leadForm");
   const debug = document.getElementById("debug");
 
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzDOEHl5tW38yiRXRV1EiwGs6Xm4PPPVmSPIj-SbhLAemVLEMVhCwqf-1nGbGbJeBJHuA/exec";
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyoPd2ta6XEVCa_jcBFaJz2dE-67AvRXFvPPy80dqjBVPBVGwwUXFNyS74JY5Qkx0kd1Q/exec";
 
   // Open popup
   openModalBtn.onclick = () => popup.style.display = "flex";
@@ -51,3 +51,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
