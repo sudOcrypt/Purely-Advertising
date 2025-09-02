@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbwrsP6QtqqCejSLHBPzsYywEvWx4HtqtQpAavlhsGpW1HKwubgJwS52ATAeieHQYQafGA/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbz5EHe4p5KUDHJVtVmf4Z0KY2p3S-ODgfPjYqgLrJ2RMAHMWp0Z9wS6_dkSf_qtfxyibg/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -48,3 +48,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
