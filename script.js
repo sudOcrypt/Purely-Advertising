@@ -5,9 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("leadForm");
 
   // Open popup
-  openBtns.forEach(btn => {
-    btn.addEventListener("click", () => popup.style.display = "flex");
-  });
+  openBtns.forEach(btn => btn.addEventListener("click", () => popup.style.display = "flex"));
 
   // Close popup
   closeBtn.addEventListener("click", () => popup.style.display = "none");
@@ -18,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Submit form
   form.addEventListener("submit", function(e){
     e.preventDefault();
+
     const formData = new URLSearchParams();
     formData.append("name", this.name.value);
     formData.append("company", this.company.value);
@@ -26,15 +25,20 @@ document.addEventListener("DOMContentLoaded", () => {
     formData.append("email", this.email.value);
     formData.append("smsConsent", this.smsConsent.checked);
 
-    fetch("https://script.google.com/macros/s/AKfycbx5hDyuZ1M25FpwYuL52eIO5BpCaneGGuY3XDcG4GmN7v-PCSGHlwOKjp9hvMWYTzhHbA/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbz1q5pD80jxsxkfTFNsmnjZ_S0nJ6s--NxJaKjmnahIVnYhwD3djs4qTGLPX7fp21i7Hg/exec", {
       method: "POST",
       body: formData
     })
-    .then(() => {
-      alert("✅ Thank you! Your call is booked.");
-      popup.style.display = "none";
-      form.reset();
+    .then(res => res.json())
+    .then(data => {
+      if(data.status === "success") {
+        alert("✅ Thank you! Your consultation is booked! You will receive a call shortly!");
+        popup.style.display = "none";
+        form.reset();
+      } else {
+        alert("❌ Error sending data: " + data.message);
+      }
     })
-    .catch(err => alert("❌ Error sending data. Please try again later."));
+    .catch(err => alert("❌ Error sending data: " + err));
   });
 });
