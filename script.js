@@ -1,22 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
   const popup = document.getElementById("popup");
-  const openModalBtn = document.getElementById("openModal");
-  const footerCallBtn = document.getElementById("footerCall");
-  const closeBtn = document.querySelector(".close-btn");
+  const openModal = document.getElementById("openModal");
+  const footerCall = document.getElementById("footerCall");
+  const closePopupBtn = document.getElementById("closePopup");
   const form = document.getElementById("leadForm");
 
-  // Open popup on button clicks
-  openModalBtn.addEventListener("click", () => popup.style.display = "flex");
-  footerCallBtn.addEventListener("click", () => popup.style.display = "flex");
-
-  // Auto-open popup after 5 seconds
-  setTimeout(() => popup.style.display = "flex", 5000);
+  // Open popup
+  openModal.onclick = () => popup.style.display = "flex";
+  footerCall.onclick = () => popup.style.display = "flex";
 
   // Close popup
-  closeBtn.addEventListener("click", () => popup.style.display = "none");
+  closePopupBtn.onclick = () => popup.style.display = "none";
 
-  // Submit form
-  form.addEventListener("submit", async (e) => {
+  // Auto popup after 5 seconds
+  setTimeout(() => { popup.style.display = "flex"; }, 5000);
+
+  // Submit form via fetch
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const data = {
@@ -30,26 +30,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Sending data to Apps Script:", data);
 
-    try {
-      const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbzWRFcYwLm8x556kvpJ74DPsHxQjSnvjFl_a_81WD9VmWXdbpYwrcCnvczpPeljcYJe7A/exec",
-        {
-          method: "POST",
-          mode: "no-cors", // avoids CORS errors with Apps Script
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data)
-        }
-      );
-
-      console.log("Response received:", response);
-      alert("✅ Thank you! Your call is booked.");
-      popup.style.display = "none";
-      form.reset();
-    } catch (err) {
+    fetch("https://script.google.com/macros/s/AKfycbwQxRzzfRq0jYsRZfqEtUL8mgmE3l_bga7k04Jj9vdWpK1XBUF6QwaECXXJz7J1SrWoPQ/exec", {
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log("Response received:", result);
+      if(result.status === "success") {
+        alert("✅ Thank you! Your call is booked.");
+        form.reset();
+        popup.style.display = "none";
+      } else {
+        alert("❌ Error sending data: " + result.message);
+      }
+    })
+    .catch(err => {
       console.error("❌ Error sending data:", err);
-      alert("❌ Error sending data. Please check console for details.");
-    }
+      alert("❌ Error sending data. Check console for details.");
+    });
   });
 });
