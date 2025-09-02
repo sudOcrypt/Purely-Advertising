@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home Service Ad Agency V15</title>
+<title>Home Service Ad Agency V16</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -35,15 +35,15 @@
 
   <div class="columns" style="margin-top:40px;">
     <div class="col">
-      <img src="https://via.placeholder.com/250x150" alt="Ad Example" style="width:100%; border-radius:12px;">
+      <img src="https://via.placeholder.com/250x150" alt="Ad Example">
       <p>Example of a high-performing ad creative</p>
     </div>
     <div class="col">
-      <img src="https://via.placeholder.com/250x150" alt="Landing Page" style="width:100%; border-radius:12px;">
+      <img src="https://via.placeholder.com/250x150" alt="Landing Page">
       <p>Landing page that converts visitors into leads</p>
     </div>
     <div class="col">
-      <img src="https://via.placeholder.com/250x150" alt="Client Dashboard" style="width:100%; border-radius:12px;">
+      <img src="https://via.placeholder.com/250x150" alt="Client Dashboard">
       <p>Easy-to-read dashboard showing results</p>
     </div>
   </div>
@@ -70,28 +70,24 @@
 </section>
 
 <footer>
-  <p>© 2025 Your Agency Name | <a href="#" id="footerCall">Book a Call</a></p>
+  <p>© 2025 Your Agency Name | <span class="btn" id="footerCall">Book a Call</span></p>
 </footer>
 
-<!-- Popup Form -->
+<!-- Popup with Google Form -->
 <div class="popup-overlay" id="popup">
   <div class="popup">
     <span class="close-btn" id="closePopup">✖</span>
     <h2>Book a Call Now</h2>
-    <form id="leadForm">
-      <label>Full Name</label><input type="text" name="name" required>
-      <label>Company Name</label><input type="text" name="company">
-      <label>Company Service Types</label><input type="text" name="services">
-      <label>Phone (required)</label><input type="tel" name="phone" required>
-      <label>Email (required)</label><input type="email" name="email" required>
-      <label class="checkbox-label">
-        <input type="checkbox" name="smsConsent">
-        I Consent to Receive SMS Messages, Alerts & Occasional Marketing Communication. Msg & data rates may apply.
-      </label>
-      <button type="submit" class="submit-btn">Book A Call Now</button>
-    </form>
-    <!-- Debug info will appear here -->
-    <div id="debug" style="color:red; text-align:center; margin-top:10px;"></div>
+    <div class="iframe-container">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/viewform?embedded=true" 
+              width="100%" 
+              height="959" 
+              frameborder="0" 
+              marginheight="0" 
+              marginwidth="0">
+        Loading…
+      </iframe>
+    </div>
   </div>
 </div>
 
