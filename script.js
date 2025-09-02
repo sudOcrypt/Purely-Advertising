@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const footerCallBtn = document.getElementById('footerCall');
   const closeBtn = document.getElementById('closePopup');
   const form = document.getElementById('leadForm');
-  const webAppURL = "https://script.google.com/macros/s/AKfycbxc0sBMGYNCTaAYHYIUKdSDyzkxZHCUZ9LiAQ8xfz8k-esNC4MmEBmUbGtd2Ll_SC8GIg/exec"; // <-- replace with your Web App URL
+  const webAppURL = "https://script.google.com/macros/s/AKfycbxm4vkP3Fji5IsRdR-2aVPwHqik7TqOtAXTmcnoJ83EJMALyLw6mw4Kkvy5hMqheYUiPA/exec"; // <-- replace with your Web App URL
 
   // Open popup
   openModalBtn.addEventListener("click", () => popup.style.display = 'flex');
@@ -46,3 +46,4 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(err => alert("❌ Error sending data: " + err));
   });
 });
+
