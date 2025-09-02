@@ -1,41 +1,53 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const popup = document.getElementById("popup");
   const openModalBtn = document.getElementById("openModal");
   const footerCallBtn = document.getElementById("footerCall");
-  const popup = document.getElementById("popup");
-  const leadForm = document.getElementById("leadForm");
-  const formStatus = document.getElementById("formStatus");
-  const iframe = document.getElementById("hidden_iframe");
+  const closeBtn = document.getElementById("closePopup");
+  const form = document.getElementById("leadForm");
+  const debug = document.getElementById("debug");
+
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzDOEHl5tW38yiRXRV1EiwGs6Xm4PPPVmSPIj-SbhLAemVLEMVhCwqf-1nGbGbJeBJHuA/exec";
 
   // Open popup
   openModalBtn.onclick = () => popup.style.display = "flex";
   footerCallBtn.onclick = () => popup.style.display = "flex";
 
-  // Handle form submit with debug
-  leadForm.addEventListener("submit", function() {
-    formStatus.textContent = "Sending data to Apps Script...";
-    console.log("Sending data to Apps Script:", {
-      name: this.name.value,
-      company: this.company.value,
-      services: this.services.value,
-      phone: this.phone.value,
-      email: this.email.value,
-      smsConsent: this.smsConsent.checked
-    });
-  });
-
-  // Debug message on iframe load
-  iframe.onload = () => {
-    if (formStatus.textContent.includes("Sending")) {
-      console.log("Response received from Apps Script.");
-      formStatus.textContent = "✅ Call successfully booked!";
-      leadForm.reset();
-      setTimeout(() => {
-        popup.style.display = "none";
-        formStatus.textContent = "";
-      }, 2500);
-    }
-  };
+  // Close popup
+  closeBtn.onclick = () => popup.style.display = "none";
 
   // Auto popup after 5 seconds
   setTimeout(() => { popup.style.display = "flex"; }, 5000);
+
+  // Submit form
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    debug.textContent = "Sending data to Apps Script...";
+
+    const data = {
+      name: form.name.value,
+      company: form.company.value,
+      services: form.services.value,
+      phone: form.phone.value,
+      email: form.email.value,
+      smsConsent: form.smsConsent.checked
+    };
+
+    try {
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors", // bypass CORS restrictions
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      debug.textContent = "✅ Call booked successfully!";
+      alert("✅ Call booked successfully!");
+      popup.style.display = "none";
+      form.reset();
+      console.log("Data sent to Apps Script:", data);
+    } catch (err) {
+      console.error("❌ Error sending data:", err);
+      debug.textContent = `❌ Error sending data: ${err}`;
+    }
+  });
 });
