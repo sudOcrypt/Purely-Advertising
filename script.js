@@ -2,22 +2,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const openModal = document.getElementById("openModal");
   const footerCall = document.getElementById("footerCall");
   const popup = document.getElementById("popup");
-  const closeBtn = document.querySelector(".close-btn");
+  const closePopupBtn = document.getElementById("closePopup");
   const form = document.getElementById("leadForm");
 
-  // Auto popup after 5 seconds
-  setTimeout(() => {
-    popup.style.display = "flex";
-  }, 5000);
-
-  // Open popup
+  // Show popup manually
   openModal.addEventListener("click", () => popup.style.display = "flex");
   footerCall.addEventListener("click", () => popup.style.display = "flex");
 
   // Close popup
-  closeBtn.addEventListener("click", () => popup.style.display = "none");
+  closePopupBtn.addEventListener("click", () => popup.style.display = "none");
 
-  // Submit form
+  // Auto popup after 5 seconds
+  setTimeout(() => popup.style.display = "flex", 5000);
+
+  // Form submit
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -31,23 +29,21 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbxnm_Uweh_51C0TgSdfxYYVkM9iNCD30FMfqk3rWB5uIluX9oLimvy-uoSVqOAZhPC5Zg/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbwagoPhf455VsBPdnHxp-Umin6LpglRIMUVhczPKP47bDNaFDOq1_c6MpzeIb9_J1I5/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
       });
 
-      const result = await response.json();
+      if (!response.ok) throw new Error("Network response was not ok");
 
-      if(result.result === "success"){
-        alert("✅ Thank you! Your call is booked.");
-        popup.style.display = "none";
-        form.reset();
-      } else {
-        alert("❌ Error sending data: " + (result.error || "Unknown error"));
-      }
-    } catch(err) {
-      alert("❌ Error sending data: " + err);
+      alert("✅ Thank you! Your call is booked.");
+      form.reset();
+      popup.style.display = "none";
+
+    } catch (err) {
+      console.error("Error sending data:", err);
+      alert("❌ Error sending data. Please try again later.");
     }
   });
 });
