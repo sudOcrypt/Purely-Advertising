@@ -1,56 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Purely Advertising</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Service Ad Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Grow Your Business With Purely Advertising</h1>
-    <p>We help local businesses scale with smart digital campaigns.</p>
-    <button id="bookCall">📅 Book a Call</button>
-  </section>
 
-  <!-- Testimonials -->
-  <section class="testimonials">
-    <h2>What Our Clients Say</h2>
-    <div class="testimonial">
-      <p>“Our revenue doubled within 90 days thanks to their ad strategy.”</p>
-      <span>- Roofing Company Owner</span>
-    </div>
-    <div class="testimonial">
-      <p>“We get consistent calls every week, the best ROI we’ve had.”</p>
-      <span>- Sealcoating Business</span>
-    </div>
-  </section>
+<header>
+  <h1>We Help Home Service Businesses Book More Jobs</h1>
+  <p>From roofing to seal coating, we bring you high-intent local clients ready to book.</p>
+  <span class="btn" id="openModal">Book a Free Strategy Call</span>
+  <h2 style="color:white; margin-top:30px;">Discover How You Can Double Your Jobs Without Wasting a Single Ad Dollar</h2>
+</header>
 
-  <!-- Popup Form -->
-  <div class="popup" id="popupForm">
-    <div class="popup-content">
-      <span class="close" id="closePopup">&times;</span>
-      <h2>Book a Free Call</h2>
-      <form id="leadForm">
-        <input type="text" name="fullname" placeholder="Full Name" required />
-        <input type="text" name="company" placeholder="Company Name" />
-        <input type="text" name="service" placeholder="Company Service Type" />
-        <input type="tel" name="phone" placeholder="Phone (required)" required />
-        <button type="submit">Submit</button>
-      </form>
+<section>
+  <h2>Why Choose Us?</h2>
+  <div class="columns">
+    <div class="col">
+      <strong>📅 Full Calendars</strong><br>
+      Stop worrying about empty slots. We deliver high-intent leads ready to book.
+    </div>
+    <div class="col">
+      <strong>💸 Max ROI Ads</strong><br>
+      Only pay for ads that convert. Every dollar is tracked for maximum results.
+    </div>
+    <div class="col">
+      <strong>🤝 Hassle-Free Scheduling</strong><br>
+      Leads are automatically routed to your calendar—no missed calls or emails.
     </div>
   </div>
 
-  <!-- Calendly Embed -->
-  <section class="calendly">
-    <div class="calendly-inline-widget"
-      data-url="https://calendly.com/yourusername"
-      style="min-width:320px;height:630px;">
+  <div class="columns" style="margin-top:40px;">
+    <div class="col">
+      <img src="https://via.placeholder.com/250x150" alt="Ad Example" style="width:100%; border-radius:12px;">
+      <p>Example of a high-performing ad creative</p>
     </div>
-    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  </section>
+    <div class="col">
+      <img src="https://via.placeholder.com/250x150" alt="Landing Page" style="width:100%; border-radius:12px;">
+      <p>Landing page that converts visitors into leads</p>
+    </div>
+    <div class="col">
+      <img src="https://via.placeholder.com/250x150" alt="Client Dashboard" style="width:100%; border-radius:12px;">
+      <p>Easy-to-read dashboard showing results</p>
+    </div>
+  </div>
+</section>
 
-  <script src="script.js"></script>
+<section class="calendly-section">
+  <h2>Schedule a Call at Your Convenience</h2>
+  <p>Use our simple online scheduler to pick a date and time that works best for you:</p>
+  <div class="calendly-inline-widget" data-url="https://calendly.com/jaredmatthewaigner/advertising-consultation" style="min-width:320px;height:600px;"></div>
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</section>
+
+<section>
+  <h2>What Our Clients Say</h2>
+  <div class="testimonial">
+    "After working with this team for just one month, our roofing business saw a 65% increase in booked jobs. They handle all the advertising, so I can focus on managing my crew." – Mike R., Roofing Contractor
+  </div>
+  <div class="testimonial">
+    "We struggled for years with inconsistent leads. In the first three weeks, we received multiple high-intent inquiries every day. The team’s ad targeting is spot-on." – Sarah L., Landscaping
+  </div>
+  <div class="testimonial">
+    "I was skeptical at first, but their automated scheduling system has saved us countless hours. No more missed calls and our calendar is always full." – James T., Seal Coating
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Your Agency Name | <a href="#" id="footerCall">Book a Call</a></p>
+</footer>
+
+<div class="popup-overlay" id="popup">
+  <div class="popup">
+    <span class="close-btn" onclick="closePopup()">✖</span>
+    <h2>Book a Call Now</h2>
+    <form id="leadForm">
+      <label>Full Name</label><input type="text" name="name" required>
+      <label>Company Name</label><input type="text" name="company">
+      <label>Company Service Types</label><input type="text" name="services">
+      <label>Phone (required)</label><input type="tel" name="phone" required>
+      <label>Email (required)</label><input type="email" name="email" required>
+      <label class="checkbox-label">
+        <input type="checkbox" name="smsConsent">
+        I Consent to Receive SMS Messages, Alerts & Occasional Marketing Communication. Msg & data rates may apply.
+      </label>
+      <button type="submit" class="submit-btn">Book A Call Now</button>
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
