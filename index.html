@@ -5,102 +5,114 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Purely Advertising | Home Services Marketing</title>
 <meta name="description" content="We help home service businesses grow with advertising, SEO, and paid media. Contact us for your free growth plan.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;height:auto;display:block}
+/* ---------- Base & Reset ---------- */
+* { box-sizing: border-box; }
+html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color: #111; background: #0f1113; }
+a { color: inherit; text-decoration: none; }
 
-/* Colors (replica) */
+/* ---------- Palette (replica) ---------- */
 :root{
-  --primary:#1a73e8;
-  --dark-bg:#111;
-  --light-bg:#fdfdfd;
-  --muted:#ddd;
-  --card:#f6f6f6;
+  --bg-dark: #121214;
+  --nav-bg: #191919;
+  --card-bg: #fdfdfd;
+  --muted: #9aa0a6;
+  --accent: #1a73e8;
+  --soft-card: #f6f6f6;
+  --white: #ffffff;
 }
 
-/* Topbar */
-.topbar{background:var(--dark-bg);padding:.5rem 1rem;color:#fff;display:flex;justify-content:space-between;align-items:center;font-size:.95rem}
-.topbar .phone{font-weight:600}
+/* ---------- Topbar ---------- */
+.topbar{background:var(--nav-bg);padding:.5rem 1rem;color:var(--white);display:flex;justify-content:space-between;align-items:center;font-size:.95rem}
+.topbar .phone{font-weight:700}
 
-/* Nav (replica) */
-nav.nav{background:#191919;color:#fff;padding:.75rem 1rem;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.03)}
+/* ---------- Nav ---------- */
+nav.nav{background:var(--nav-bg);color:var(--white);padding:.75rem 1rem;position:sticky;top:0;z-index:60;border-bottom:1px solid rgba(255,255,255,.03)}
 .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
 .brand{display:flex;align-items:center;gap:.6rem}
-.brand .logo-mark{width:44px;height:44px;background:var(--primary);border-radius:6px;display:inline-block}
+.brand .logo-mark{width:44px;height:44px;background:var(--accent);border-radius:6px;display:inline-block}
 .brand h1{font-size:1rem;margin:0}
 .nav-links{display:flex;gap:1rem;align-items:center}
 .nav-links a{color:#ddd;padding:.25rem .6rem;border-radius:6px}
-.cta-btn{background:var(--primary);color:#fff;padding:.6rem 1rem;border-radius:999px;font-weight:700;border:none;cursor:pointer;transition:all .3s}
-.cta-btn:hover{background:#155ab6}
+.cta-btn{background:var(--accent);color:#fff;padding:.6rem 1rem;border-radius:999px;font-weight:700;border:none;cursor:pointer;transition:all .25s}
+.cta-btn:hover{transform:translateY(-2px);}
 
-/* Hero (replica) */
-.hero{background:linear-gradient(180deg,#191919,#121212);color:#fff;padding:4rem 1rem}
+/* ---------- Hero ---------- */
+.hero{background:linear-gradient(180deg,#191919,#0f0f10);color:var(--white);padding:3.6rem 1rem}
 .hero .inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:center}
 .hero h2{margin:0 0 1rem;font-size:2rem;line-height:1.05}
-.hero p.lead{margin:0 0 1.5rem;color:#ddd}
-.hero .mini-logos{display:flex;gap:.6rem;flex-wrap:wrap}
-.hero .mini-logos div{background:var(--card);color:#111;padding:.5rem 1rem;border-radius:6px;font-weight:700}
+.hero p.lead{margin:0 0 1.2rem;color:#cfcfcf}
+.hero .mini-logos{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem}
+.hero .mini-logos div{background:var(--soft-card);color:#111;padding:.45rem .85rem;border-radius:6px;font-weight:700;font-size:.9rem}
 
-/* Hero card (iframe) */
-.hero .card{background:var(--light-bg);padding:1rem;border-radius:10px;color:#191919;box-shadow:0 8px 25px rgba(0,0,0,.2)}
-.hero .card iframe{width:100%;border:none;border-radius:6px;height:600px}
+/* ---------- Card (where the custom form sits) ---------- */
+.card{background:var(--card-bg);padding:1rem;border-radius:10px;color:#111;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.card h3{margin:0 0 .5rem;font-size:1.05rem}
 
-/* Section container (replica) */
+/* ---------- Uiverse-inspired form (floating label, animated button) ---------- */
+.u-form { width:100%; max-width:100%; }
+.u-form .user-box { position: relative; margin-bottom: 20px; }
+.u-form .user-box input,
+.u-form .user-box select { width:100%; padding: 10px 6px; font-size:16px; color:#111; border: none; border-bottom: 1px solid #ccc; background: transparent; outline: none; }
+.u-form .user-box label { position: absolute; top: 0; left: 6px; padding: 10px 0; font-size:15px; color:#777; pointer-events:none; transition: .35s; }
+.u-form .user-box input:focus ~ label,
+.u-form .user-box input:valid ~ label,
+.u-form .user-box select:focus ~ label,
+.u-form .user-box select:valid ~ label { top:-18px; font-size:12px; color:#333; }
+
+/* button animation */
+.u-btn { position: relative; display: inline-block; padding: 10px 18px; font-weight:bold; color:#fff; background:var(--accent); border-radius:8px; border:0; cursor:pointer; overflow:hidden; margin-top:8px; letter-spacing:2px; }
+.u-btn:hover { background:#155ab6; }
+.u-btn span { position:absolute; display:block; }
+.u-btn span:nth-child(1){ top:0; left:-100%; width:100%; height:2px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7)); animation:btn-anim1 1.5s linear infinite; }
+@keyframes btn-anim1 { 0%{left:-100%}50%,100%{left:100%} }
+.u-btn span:nth-child(2){ top:-100%; right:0; width:2px; height:100%; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.7)); animation:btn-anim2 1.5s linear infinite; animation-delay:.375s; }
+@keyframes btn-anim2 { 0%{top:-100%}50%,100%{top:100%} }
+.u-btn span:nth-child(3){ bottom:0; right:-100%; width:100%; height:2px; background: linear-gradient(270deg, transparent, rgba(255,255,255,0.7)); animation:btn-anim3 1.5s linear infinite; animation-delay:.75s; }
+@keyframes btn-anim3 { 0%{right:-100%}50%,100%{right:100%} }
+.u-btn span:nth-child(4){ bottom:-100%; left:0; width:2px; height:100%; background: linear-gradient(360deg, transparent, rgba(255,255,255,0.7)); animation:btn-anim4 1.5s linear infinite; animation-delay:1.125s; }
+@keyframes btn-anim4 { 0%{bottom:-100%}50%,100%{bottom:100%} }
+
+/* ---------- Features / small boxes ---------- */
 .section{max-width:1200px;margin:3rem auto;padding:0 1rem}
-
-/* Features as boxes (replica + small shadow boxes added) */
 .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem}
-.feature{background:var(--card);padding:1.2rem;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.06);color:#111;transition:transform .3s}
-.feature:hover{transform:translateY(-5px)}
-.feature h3{margin:.2rem 0 .6rem;font-size:1rem}
-
-/* Small accent boxes under heading (new, styled to match replica) */
+.feature{background:var(--soft-card);padding:1.2rem;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.06);color:#111;transition:transform .25s}
+.feature:hover{transform:translateY(-6px)}
 .small-box-row{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1rem}
-.small-box{background:#fff;padding:.5rem 1rem;border-radius:8px;box-shadow:0 8px 25px rgba(0,0,0,.06);font-weight:700;color:#111;font-size:.95rem}
+.small-box{background:#fff;padding:.5rem .9rem;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.06);font-weight:700;color:#111;font-size:.95rem}
 
-/* Project slider (replica look) */
-.project-slider-container{overflow:hidden;margin-top:2rem;background:#eee;padding:1rem;border-radius:10px;position:relative}
+/* ---------- Project slider ---------- */
+.project-slider-container{overflow:hidden;margin-top:2rem;background:#0f1720;padding:1rem;border-radius:10px;position:relative}
 .project-slider{display:flex;gap:1rem;animation:scroll 60s linear infinite}
-.project-slide{flex:0 0 auto;width:250px;background:#fff;padding:.8rem;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.06);text-align:center;font-size:.85rem}
-.project-slide img{width:100%;height:150px;object-fit:cover;border-radius:6px;margin-bottom:.4rem}
+.project-slide{flex:0 0 auto;width:260px;background:#fff;padding:.8rem;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.25);text-align:center;font-size:.9rem}
+.project-slide img{width:100%;height:150px;object-fit:cover;border-radius:6px;margin-bottom:.5rem}
 @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* Case studies */
+/* ---------- Case list ---------- */
 .case-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1rem}
-.case{background:#fff;padding:1rem;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
-.case .stat{font-size:1.7rem;color:var(--primary);font-weight:800;margin:0}
 
-/* Accordion (replica) */
+/* ---------- Accordion ---------- */
 .accordion{margin-top:1rem}
-.acc-item{border-bottom:1px solid #eee;padding:.8rem 0}
+.acc-item{border-bottom:1px solid #e9e9e9;padding:.8rem 0}
 .acc-item button{background:none;border:0;padding:0;font-weight:700;display:flex;justify-content:space-between;width:100%;cursor:pointer}
-.acc-item .content{display:none;margin-top:.6rem;color:#333}
+.acc-item .content{display:none;margin-top:.6rem;color:#333;background:#fff;padding:.8rem;border-radius:6px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
 
-/* Footer */
-footer.site-footer{background:#1b1b1b;color:#ddd;padding:2rem 1rem;margin-top:3rem}
+/* ---------- Footer ---------- */
+footer.site-footer{background:#111;color:#ddd;padding:2rem 1rem;margin-top:3rem}
 .footer-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:flex-start}
 .footer-col{min-width:200px}
 .small{font-size:.9rem;color:#999;margin-top:.6rem}
 
-/* Modal / custom form inside (styled to fit replica) */
+/* ---------- Modal adjustments ---------- */
 #modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);align-items:center;justify-content:center;z-index:999}
-#modal .modal-content{background:#fff;max-width:680px;width:92%;padding:1.5rem;border-radius:10px;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.25)}
-#modal .modal-content h3{margin-top:0}
-#modal .modal-close{position:absolute;right:12px;top:12px;background:none;border:0;font-size:1.2rem;cursor:pointer}
+#modal .modal-content{background:#fff;max-width:680px;width:92%;padding:1.5rem;border-radius:10px;position:relative}
 
-/* Custom modal form fields (posting to Google Forms) */
-.modal-form{display:grid;gap:.6rem}
-.modal-form input{padding:.6rem;border:1px solid #ddd;border-radius:6px;font-size:1rem}
-.modal-form button{margin-top:.6rem;padding:.6rem 1rem;background:var(--primary);color:#fff;border-radius:999px;border:0;font-weight:700;cursor:pointer}
-
-/* Responsive */
-@media (max-width:880px){
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
   .hero .inner{grid-template-columns:1fr}
-  .nav-links{display:none}
-  .nav-toggle{display:inline-block;background:#222;padding:.4rem;border-radius:6px;color:#fff}
-  .hero .card iframe{height:500px}
+  .project-slide{width:220px}
+  .card{padding:.9rem}
 }
 </style>
 </head>
@@ -119,15 +131,16 @@ footer.site-footer{background:#1b1b1b;color:#ddd;padding:2rem 1rem;margin-top:3r
       <span class="logo-mark" aria-hidden="true"></span>
       <h1>Purely Advertising <small style="display:block;font-size:.7rem;color:#bbb">Home Services Marketing</small></h1>
     </div>
+
     <div class="nav-links" aria-hidden="false">
       <a href="#services">What we do</a>
       <a href="#work">Projects</a>
       <a href="#insights">FAQ</a>
       <a href="#contact">Contact</a>
     </div>
+
     <div style="display:flex;gap:.6rem;align-items:center">
       <button class="cta-btn" id="open-modal">Get Started</button>
-      <button class="nav-toggle" id="mobile-toggle" aria-label="Open menu" style="display:none">☰</button>
     </div>
   </div>
 </nav>
@@ -145,23 +158,78 @@ footer.site-footer{background:#1b1b1b;color:#ddd;padding:2rem 1rem;margin-top:3r
       <p style="margin-top:1rem"><a class="cta-btn" href="#work" style="background:#fff;color:#191919;padding:.6rem 1rem;border-radius:999px;font-weight:700">View projects</a></p>
     </div>
 
+    <!-- Card with custom inline form (Uiverse inspired) -->
     <aside class="card" aria-labelledby="proposal-heading">
-      <h3 id="proposal-heading" style="font-size:1.05rem;margin:0 0 .5rem">GET YOUR FREE GROWTH STRATEGY</h3>
-      <p style="margin:0 0 1rem;font-size:.95rem;color:#555">Fill this quick form for a tailored plan (submits to your Google Form).</p>
+      <h3 id="proposal-heading">GET YOUR FREE GROWTH STRATEGY</h3>
+      <p style="margin:0 0 1rem;color:#555">Quick form — goes directly to your Google Form / Sheet.</p>
 
-      <!-- INLINE GOOGLE FORM IFRAME (you provided) -->
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+      <!-- Hero Custom Form (posts to Google Form formResponse) -->
+      <form id="heroForm" class="u-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" method="POST" target="hidden_iframe">
+        <div class="user-box">
+          <input type="text" name="entry.1895950474" required />
+          <label>Full Name</label>
+        </div>
+
+        <div class="user-box">
+          <input type="tel" name="entry.1848460539" required />
+          <label>Phone number</label>
+        </div>
+
+        <div class="user-box">
+          <input type="email" name="entry.1417314964" required />
+          <label>Email</label>
+        </div>
+
+        <div class="user-box">
+          <select name="entry.306218684" required>
+            <option value="" disabled selected></option>
+            <option value="YESTERDAY!">YESTERDAY!</option>
+            <option value="This week">This week</option>
+            <option value="Some other time in the future">Some other time in the future</option>
+          </select>
+          <label>How soon do you need digital advertising?</label>
+        </div>
+
+        <div class="user-box">
+          <select name="entry.739887506" required>
+            <option value="" disabled selected></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          <label>Does your company specialize in seal coating?</label>
+        </div>
+
+        <div class="user-box">
+          <select name="entry.1507047135" required>
+            <option value="" disabled selected></option>
+            <option value="$0 - $10,000">$0 - $10,000</option>
+            <option value="$10,000 - $15,000">$10,000 - $15,000</option>
+            <option value="$15,000 - $20,000">$15,000 - $20,000</option>
+            <option value="$20,000+">$20,000+</option>
+          </select>
+          <label>How much are you producing in profit each month?</label>
+        </div>
+
+        <button class="u-btn" type="submit" aria-label="Submit form">
+          <span></span><span></span><span></span><span></span>
+          Submit
+        </button>
+      </form>
+
+      <div id="hero-thanks" style="display:none;margin-top:12px;background:#f1f6fb;padding:.8rem;border-radius:6px;">
+        <strong>Thanks! Your submission was received.</strong>
+        <div style="font-size:.95rem;color:#444">We'll review your details and be in touch.</div>
+      </div>
     </aside>
   </div>
 </header>
 
-<!-- Features / services -->
+<!-- Small boxed features + features grid -->
 <section id="services" class="section" aria-labelledby="services-heading">
   <h2 id="services-heading">If we were just another agency we wouldn't be Purely Advertising</h2>
-  <p class="small" style="color:#999">We operate at the benchmark of performance — performance-based fees, direct access to specialists, and tech-enabled teams.</p>
+  <p style="color:var(--muted)">We operate at the benchmark of performance — performance-based fees, direct access to specialists, and tech-enabled teams.</p>
 
-  <!-- small boxes row (new) -->
-  <div class="small-box-row" style="margin-top:1rem">
+  <div class="small-box-row">
     <div class="small-box">Performance-based fees</div>
     <div class="small-box">Direct access to specialists</div>
     <div class="small-box">Breaking the silos: SEO + PPC + CRO</div>
@@ -169,49 +237,36 @@ footer.site-footer{background:#1b1b1b;color:#ddd;padding:2rem 1rem;margin-top:3r
   </div>
 
   <div class="features" style="margin-top:1rem">
-    <div class="feature">
-      <h3>Roofing Services</h3>
-      <p>Expert roofing campaigns for maximum leads.</p>
-    </div>
-    <div class="feature">
-      <h3>Sealcoating</h3>
-      <p>Drive more clients to your sealcoating business.</p>
-    </div>
-    <div class="feature">
-      <h3>Home Repair</h3>
-      <p>Increase bookings for home repair and renovations efficiently.</p>
-    </div>
-    <div class="feature">
-      <h3>Landscaping</h3>
-      <p>Get more local landscaping clients with targeted ads.</p>
-    </div>
+    <div class="feature"><h3>Roofing Services</h3><p>Expert roofing campaigns for maximum leads.</p></div>
+    <div class="feature"><h3>Sealcoating</h3><p>Drive more clients to your sealcoating business.</p></div>
+    <div class="feature"><h3>Home Repair</h3><p>Increase bookings for home repair and renovations efficiently.</p></div>
+    <div class="feature"><h3>Landscaping</h3><p>Get more local landscaping clients.</p></div>
   </div>
 </section>
 
-<!-- Project Slider (seamless) -->
+<!-- Project slider (15 slides) -->
 <section class="project-slider-container section" aria-labelledby="projects-heading">
   <h3 id="projects-heading">Our Clients' Projects</h3>
   <div class="project-slider" id="project-slider">
-    <!-- 15 slides (using picsum for stable placeholder images) -->
-    <div class="project-slide"><img src="https://picsum.photos/seed/roof1/400/240" alt="Roofing Project"><p class="small">"This 5,000 roofing job was brought to us by Purely Advertising"</p><strong>John Doe — Roofing</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/seal1/400/240" alt="Sealcoating Project"><p class="small">"Our parking lot sealcoating business doubled bookings"</p><strong>Jane Smith — Sealcoating</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/home1/400/240" alt="Home Repair"><p class="small">"10 home repair leads in just one week!"</p><strong>Bob Brown — Home Repair</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/land1/400/240" alt="Landscaping"><p class="small">"Grew landscaping clients by 40% in a month"</p><strong>Mary Johnson — Landscaping</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/roof2/400/240" alt="Roofing"><p class="small">"15 new roofing leads in 2 weeks"</p><strong>Mike Wilson — Roofing</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/seal2/400/240" alt="Sealcoating"><p class="small">"Large sealcoating contract secured through ads"</p><strong>Linda Green — Sealcoating</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/home2/400/240" alt="Home Repair"><p class="small">"Home repair bookings skyrocketed this month"</p><strong>Kevin Lee — Home Repair</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/land2/400/240" alt="Landscaping"><p class="small">"New landscaping clients came from targeted campaigns"</p><strong>Rachel Adams — Landscaping</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/roof3/400/240" alt="Roofing"><p class="small">"This roofing company doubled revenue with ads"</p><strong>Tom Baker — Roofing</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/seal3/400/240" alt="Sealcoating"><p class="small">"Sealcoating leads increased by 70% in 1 month"</p><strong>Susan White — Sealcoating</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/home3/400/240" alt="Home Repair"><p class="small">"Multiple home repair contracts secured"</p><strong>Chris Martin — Home Repair</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/land3/400/240" alt="Landscaping"><p class="small">"Landscaping service grew to 10 new clients/week"</p><strong>Patricia Scott — Landscaping</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/roof4/400/240" alt="Roofing"><p class="small">"Roofing leads increased 150% in one campaign"</p><strong>Steve Hall — Roofing</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/seal4/400/240" alt="Sealcoating"><p class="small">"High-value sealcoating clients acquired easily"</p><strong>Karen Young — Sealcoating</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/home4/400/240" alt="Home Repair"><p class="small">"Home repair client bookings doubled"</p><strong>Daniel King — Home Repair</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/roof1/400/240" alt=""><p class="small">"This 5,000 roofing job was brought to us by Purely Advertising"</p><strong>John Doe — Roofing</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/seal1/400/240" alt=""><p class="small">"Our parking lot sealcoating business doubled bookings"</p><strong>Jane Smith — Sealcoating</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/home1/400/240" alt=""><p class="small">"10 home repair leads in just one week!"</p><strong>Bob Brown — Home Repair</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/land1/400/240" alt=""><p class="small">"Grew landscaping clients by 40% in a month"</p><strong>Mary Johnson — Landscaping</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/roof2/400/240" alt=""><p class="small">"15 new roofing leads in 2 weeks"</p><strong>Mike Wilson — Roofing</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/seal2/400/240" alt=""><p class="small">"Large sealcoating contract secured through ads"</p><strong>Linda Green — Sealcoating</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/home2/400/240" alt=""><p class="small">"Home repair bookings skyrocketed this month"</p><strong>Kevin Lee — Home Repair</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/land2/400/240" alt=""><p class="small">"New landscaping clients came from targeted campaigns"</p><strong>Rachel Adams — Landscaping</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/roof3/400/240" alt=""><p class="small">"This roofing company doubled revenue with ads"</p><strong>Tom Baker — Roofing</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/seal3/400/240" alt=""><p class="small">"Sealcoating leads increased by 70% in 1 month"</p><strong>Susan White — Sealcoating</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/home3/400/240" alt=""><p class="small">"Multiple home repair contracts secured"</p><strong>Chris Martin — Home Repair</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/land3/400/240" alt=""><p class="small">"Landscaping service grew to 10 new clients/week"</p><strong>Patricia Scott — Landscaping</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/roof4/400/240" alt=""><p class="small">"Roofing leads increased 150% in one campaign"</p><strong>Steve Hall — Roofing</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/seal4/400/240" alt=""><p class="small">"High-value sealcoating clients acquired easily"</p><strong>Karen Young — Sealcoating</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/seed/home4/400/240" alt=""><p class="small">"Home repair client bookings doubled"</p><strong>Daniel King — Home Repair</strong></div>
   </div>
 </section>
 
-<!-- Case Studies -->
+<!-- Case studies -->
 <section id="work" class="section" aria-labelledby="work-heading">
   <h3 id="work-heading">Featured Projects</h3>
   <div class="case-list" style="margin-top:1rem">
@@ -275,54 +330,116 @@ footer.site-footer{background:#1b1b1b;color:#ddd;padding:2rem 1rem;margin-top:3r
   </div>
 </footer>
 
-<!-- Modal (custom HTML form posts to Google Forms formResponse) -->
+<!-- Modal with same custom form (posts to same Google Form) -->
 <div id="modal" role="dialog" aria-modal="true">
-  <div class="modal-content" role="document">
-    <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+  <div class="modal-content">
+    <button id="modal-close" class="modal-close" aria-label="close">✕</button>
     <h3>Get Your Free Growth Strategy</h3>
-    <!-- Custom form posts directly to Google Forms (formResponse) so results appear in linked Sheet -->
-    <form id="modalForm" class="modal-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" method="POST" target="hidden_iframe">
-      <!-- Use the exact entry IDs from your form -->
-      <input name="entry.1895950474" type="text" placeholder="Full name" required>
-      <input name="entry.306218684" type="text" placeholder="Company name" required>
-      <input name="entry.739887506" type="text" placeholder="Service (e.g. Roofing, Sealcoating)" required>
-      <input name="entry.1848460539" type="tel" placeholder="Phone" required>
-      <input name="entry.1417314964" type="email" placeholder="Email" required>
-      <button type="submit">Send</button>
+
+    <form id="modalForm" class="u-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" method="POST" target="hidden_iframe" style="margin-top:10px;">
+      <div class="user-box"><input type="text" name="entry.1895950474" required><label>Full Name</label></div>
+      <div class="user-box"><input type="tel" name="entry.1848460539" required><label>Phone number</label></div>
+      <div class="user-box"><input type="email" name="entry.1417314964" required><label>Email</label></div>
+
+      <div class="user-box">
+        <select name="entry.306218684" required>
+          <option value="" disabled selected></option>
+          <option value="YESTERDAY!">YESTERDAY!</option>
+          <option value="This week">This week</option>
+          <option value="Some other time in the future">Some other time in the future</option>
+        </select>
+        <label>How soon do you need digital advertising?</label>
+      </div>
+
+      <div class="user-box">
+        <select name="entry.739887506" required>
+          <option value="" disabled selected></option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+        <label>Does your company specialize in seal coating?</label>
+      </div>
+
+      <div class="user-box">
+        <select name="entry.1507047135" required>
+          <option value="" disabled selected></option>
+          <option value="$0 - $10,000">$0 - $10,000</option>
+          <option value="$10,000 - $15,000">$10,000 - $15,000</option>
+          <option value="$15,000 - $20,000">$15,000 - $20,000</option>
+          <option value="$20,000+">$20,000+</option>
+        </select>
+        <label>How much are you producing in profit each month?</label>
+      </div>
+
+      <button class="u-btn" type="submit"><span></span><span></span><span></span><span></span>Send</button>
     </form>
 
-    <div id="modal-thanks" style="display:none;margin-top:1rem;padding:1rem;background:#f6f6f6;border-radius:8px;">
+    <div id="modal-thanks" style="display:none;margin-top:12px;background:#f1f6fb;padding:.8rem;border-radius:6px;">
       <strong>Thanks — submission received.</strong>
-      <p>We'll review your details and be in touch.</p>
+      <div style="font-size:.95rem;color:#444">We'll review your details and be in touch.</div>
     </div>
   </div>
 </div>
 
-<!-- Hidden iframe for form POSTs (prevents redirect) -->
-<iframe name="hidden_iframe" style="display:none;"></iframe>
+<!-- hidden iframe to prevent redirect on Google Form POST -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+<!-- Calendly (optional) -->
+<!-- Replace the data-url with your Calendly link if desired -->
+<div style="max-width:1200px;margin:1.5rem auto;padding:0 1rem;">
+  <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.06)">
+    <h4 style="margin:0 0 .5rem">Schedule a call</h4>
+    <p style="margin:0 0 6px;color:#666">Or use our calendar to pick a convenient time</p>
+    <div class="calendly-inline-widget" data-url="https://calendly.com/jaredmatthewaigner/advertising-consultation" style="min-width:320px;height:480px;"></div>
+  </div>
+</div>
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 <script>
-// Modal open / close (replica behavior)
+/* ---------- Modal open/close ---------- */
 const modal = document.getElementById('modal');
-function openModal(){ modal.style.display = 'flex'; document.body.style.overflow='hidden'; }
-function closeModal(){ modal.style.display = 'none'; document.body.style.overflow='auto'; }
-document.getElementById('open-modal').addEventListener('click', openModal);
-document.getElementById('open-modal-2').addEventListener('click', openModal);
-document.getElementById('modal-close').addEventListener('click', closeModal);
-modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+const openBtns = [document.getElementById('open-modal'), document.getElementById('open-modal-2')].filter(Boolean);
+const modalClose = document.getElementById('modal-close');
 
-// Modal form submission (post to Google Forms via hidden iframe)
-const modalForm = document.getElementById('modalForm');
-const modalThanks = document.getElementById('modal-thanks');
-modalForm.addEventListener('submit', function(evt){
-  // Let the form post to hidden_iframe (no AJAX) then show thanks immediately
-  // We still prevent double-submits by disabling the form UI right away
-  modalForm.style.display = 'none';
-  modalThanks.style.display = 'block';
-  // the actual form will POST to Google and populate your sheet
+openBtns.forEach(btn => btn && btn.addEventListener('click', (e) => {
+  e.preventDefault();
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}));
+
+modalClose && modalClose.addEventListener('click', () => {
+  modal.style.display = 'none';
+  document.body.style.overflow = 'auto';
 });
 
-// Accordion (replica)
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+});
+
+/* Auto open modal after 5s (optional) */
+setTimeout(()=>{ if(!modal.style.display || modal.style.display === 'none') modal.style.display = 'flex'; }, 5000);
+
+/* ---------- Hero & Modal form submission behavior ---------- */
+const heroForm = document.getElementById('heroForm');
+const heroThanks = document.getElementById('hero-thanks');
+heroForm && heroForm.addEventListener('submit', (e) => {
+  // allow default POST to hidden_iframe; swap UI immediately to thank you to prevent double-submits
+  heroForm.style.display = 'none';
+  heroThanks.style.display = 'block';
+});
+
+/* Modal form */
+const modalForm = document.getElementById('modalForm');
+const modalThanks = document.getElementById('modal-thanks');
+modalForm && modalForm.addEventListener('submit', (e) => {
+  modalForm.style.display = 'none';
+  modalThanks.style.display = 'block';
+});
+
+/* ---------- Accordion ---------- */
 document.querySelectorAll('.acc-item button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     const expanded = btn.getAttribute('aria-expanded') === 'true';
@@ -332,20 +449,21 @@ document.querySelectorAll('.acc-item button').forEach(btn=>{
   });
 });
 
-// Mobile nav toggle
+/* ---------- Duplicate slider slides for continuous effect ---------- */
+const slider = document.getElementById('project-slider');
+if (slider) slider.innerHTML += slider.innerHTML;
+
+/* ---------- Mobile nav: minimal toggle support (if nav toggle is present) ---------- */
 const mobileToggle = document.getElementById('mobile-toggle');
 const navLinks = document.querySelector('.nav-links');
 function setMobileView(){
-  if(window.innerWidth <= 880){ mobileToggle.style.display='inline-block'; navLinks.style.display='none'; }
-  else{ mobileToggle.style.display='none'; navLinks.style.display='flex'; }
+  if(window.innerWidth <= 880){ if(mobileToggle) mobileToggle.style.display = 'inline-block'; if(navLinks) navLinks.style.display = 'none'; }
+  else { if(mobileToggle) mobileToggle.style.display = 'none'; if(navLinks) navLinks.style.display = 'flex'; }
 }
 setMobileView();
 window.addEventListener('resize', setMobileView);
-mobileToggle.addEventListener('click', ()=>{ navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex'; });
+if (mobileToggle) mobileToggle.addEventListener('click', ()=>{ navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex'; });
 
-// Duplicate slider for seamless scroll
-const slider = document.getElementById('project-slider');
-slider.innerHTML += slider.innerHTML; // clone slides so CSS animation scrolls seamlessly
 </script>
 </body>
 </html>
