@@ -45,9 +45,12 @@ body{min-height:100%}
 .awards-logos{display:flex;gap:18px;align-items:center;justify-content:center;width:100%}
 .award-logo{width:140px;height:36px;opacity:0.95;display:inline-block}
 .award-logo rect{fill:transparent}
-.award-logo-img{width:100%;height:100%;object-fit:contain;display:block;background:transparent}
-.award-logo-img,img.award-logo-img{filter:brightness(0) invert(1);}
-.cert-icon img{width:28px;height:28px;display:block;object-fit:contain;filter:brightness(0) invert(1);}
+/* constrain awards strip logos so they don't render oversized */
+.awards-logos{display:flex;gap:18px;align-items:center;justify-content:center;width:100%;flex-wrap:wrap}
+.award-item{width:120px;height:64px;display:flex;align-items:center;justify-content:center}
+.award-logo-img{max-height:56px;width:auto;object-fit:contain;display:block;background:transparent}
+/* don't invert uploaded full-color logos by default; use transparent PNGs/SVGs for best result */
+.cert-icon img{width:28px;height:28px;display:block;object-fit:contain}
 
 /* Certifications grid */
 .certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
@@ -355,11 +358,11 @@ body::before,body::after{z-index:-3}
         <div class="awards-inner">
           <div class="awards-logos" aria-hidden="true">
             <!-- use uploaded images from assets/ (make sure these files exist in assets/) -->
-            <img src="assets/image-1756920410850.png" alt="Google Ads" class="award-logo-img"/>
-            <img src="assets/image-1756920417724.png" alt="Google Analytics" class="award-logo-img"/>
-            <img src="assets/image-1756920436462.png" alt="Meta" class="award-logo-img"/>
-            <img src="assets/image-1756920453066.png" alt="Microsoft" class="award-logo-img"/>
-            <img src="assets/image-1756920475881.png" alt="Display & Video Ads" class="award-logo-img"/>
+            <div class="award-item"><img src="assets/image-1756920410850.png" alt="Google Ads" class="award-logo-img"/></div>
+            <div class="award-item"><img src="assets/image-1756920417724.png" alt="Google Analytics" class="award-logo-img"/></div>
+            <div class="award-item"><img src="assets/image-1756920436462.png" alt="Meta" class="award-logo-img"/></div>
+            <div class="award-item"><img src="assets/image-1756920453066.png" alt="Microsoft" class="award-logo-img"/></div>
+            <div class="award-item"><img src="assets/image-1756920475881.png" alt="Display & Video Ads" class="award-logo-img"/></div>
           </div>
         </div>
       </div>
