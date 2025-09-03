@@ -6,7 +6,7 @@
 <title>Purely Advertising | Home Services Marketing</title>
 <style>
 /* Reset & base */
-:root{--bg:#0f1720;--card:#0b1220;--muted:#cbd5e1;--accent:#7c3aed;--accent-2:#ff4da6}
+:root{--bg:#0f1720;--card:#0b1220;--muted:#cbd5e1;--accent:#7c3aed;--accent-2:#ff4da6; --blob-blur:120px; --blob-color-1: rgba(99,102,241,0.14); --blob-color-2: rgba(236,72,153,0.10);}
 *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
 body{background-color:var(--bg);background-image:radial-gradient(circle at 10% 20%, rgba(124,58,237,0.06) 0%, rgba(124,58,237,0) 25%), radial-gradient(circle at 90% 80%, rgba(255,77,166,0.05) 0%, rgba(255,77,166,0) 20%), linear-gradient(120deg,#071023 0%,#071827 55%,#05273a 100%), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><circle cx='1' cy='1' r='1' fill='%2312171c' opacity='0.06'/></svg>");background-repeat:repeat,repeat,no-repeat,repeat;background-size:100% 100%,100% 100%,400% 400%,20px 20px;/* animation disabled by default for performance */color:var(--muted);line-height:1.4;position:relative;overflow-x:hidden}
 
@@ -769,6 +769,69 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-overflow-scrolling:touch}
   </div>
 </footer>
 
+<!-- Restore visual effects: blurred background blobs, shadows, and subtle animations -->
+<style>
+:root{ --blob-blur:120px; --blob-color-1: rgba(99,102,241,0.14); --blob-color-2: rgba(236,72,153,0.10); }
+
+/* Re-enable transitions/animations (placed after performance-mode block so it wins) */
+* {
+  transition: background-color 300ms ease, color 200ms ease, transform 300ms ease, opacity 250ms ease !important;
+  animation: initial !important;
+}
+
+/* Blurred decorative blobs similar to the original design */
+body::before,
+body::after{
+  content: "";
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+  width: 60vw;
+  height: 60vh;
+  transform: translateZ(0);
+  filter: blur(var(--blob-blur));
+  opacity: 0.85;
+}
+
+body::before{
+  left: -8vw;
+  top: -6vh;
+  background: radial-gradient(closest-side at 25% 25%, var(--blob-color-1), transparent 45%);
+}
+
+body::after{
+  right: -6vw;
+  bottom: -6vh;
+  background: radial-gradient(closest-side at 75% 75%, var(--blob-color-2), transparent 45%);
+  opacity: 0.7;
+}
+
+/* Restore richer card shadows and hover lift */
+.card, .testimonial-slide, .cert-badge, .container-form, .modal-card {
+  box-shadow: 0 18px 50px rgba(2,6,23,0.12), 0 6px 18px rgba(2,6,23,0.06);
+  transition: box-shadow 280ms ease, transform 260ms ease !important;
+  will-change: box-shadow, transform;
+}
+.card:hover, .testimonial-slide:hover, .cert-badge:hover, .modal-card:hover{
+  transform: translateY(-6px) perspective(500px);
+  box-shadow: 0 30px 90px rgba(2,6,23,0.14), 0 10px 30px rgba(2,6,23,0.08);
+}
+
+/* Subtle floating animation applied to hero visuals and featured cards */
+@keyframes floaty {
+  0%{ transform: translateY(0px); }
+  50%{ transform: translateY(-8px); }
+  100%{ transform: translateY(0px); }
+}
+
+.hero-left, .hero-visual, .card--float, .card.hero-card {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+/* Bring back the dot/SVG pattern visibility slightly */
+.site-bg-pattern { opacity: 0.18 !important; }
+
+</style>
 <script>
 // Accordion (revamped)
 document.querySelectorAll('.acc-item').forEach(item=>{
