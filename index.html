@@ -8,7 +8,7 @@
 /* Reset & base */
 :root{--bg:#0f1720;--card:#0b1220;--muted:#cbd5e1;--accent:#7c3aed;--accent-2:#ff4da6}
 *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
-body{background:linear-gradient(120deg,#071023 0%,#071827 55%,#05273a 100%);background-size:400% 400%;/* animation disabled by default for performance */color:var(--muted);line-height:1.4;position:relative;overflow-x:hidden}
+body{background-color:var(--bg);background-image:radial-gradient(circle at 10% 20%, rgba(124,58,237,0.06) 0%, rgba(124,58,237,0) 25%), radial-gradient(circle at 90% 80%, rgba(255,77,166,0.05) 0%, rgba(255,77,166,0) 20%), linear-gradient(120deg,#071023 0%,#071827 55%,#05273a 100%), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><circle cx='1' cy='1' r='1' fill='%2312171c' opacity='0.06'/></svg>");background-repeat:repeat,repeat,no-repeat,repeat;background-size:100% 100%,100% 100%,400% 400%,20px 20px;/* animation disabled by default for performance */color:var(--muted);line-height:1.4;position:relative;overflow-x:hidden}
 
 /* animated gradient */
 @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
