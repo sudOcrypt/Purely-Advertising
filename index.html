@@ -1,228 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Purely Advertising | Home Services Marketing</title>
 <style>
-/* --- Base Styles --- */
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,sans-serif;}
-body{background:#111;color:#eee;overflow-x:hidden;}
-a{color:inherit;text-decoration:none;}
-:root{
-  --primary:#1a73e8;
-  --secondary:#1a1a1a;
-  --accent:#00ff75;
-  --light:#eee;
-  --dark:#111;
-}
-/* --- Topbar --- */
-.topbar{background:var(--secondary);padding:.5rem 1rem;display:flex;justify-content:space-between;align-items:center;font-size:.95rem;color:var(--light);}
-.topbar .phone{font-weight:600;}
-/* --- Navigation --- */
-nav.nav{background:#1b1b1b;color:var(--light);padding:.75rem 1rem;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.05);}
-.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
-.brand{display:flex;align-items:center;gap:.6rem;}
-.brand .logo-mark{width:44px;height:44px;background:var(--primary);border-radius:6px;display:inline-block;}
-.brand h1{font-size:1rem;margin:0;}
-.nav-links{display:flex;gap:1rem;align-items:center;}
-.nav-links a{color:#ddd;padding:.25rem .6rem;border-radius:6px;}
-/* 3D Header Button */
-.btn-container{padding:2px;background:linear-gradient(180deg,#f3aefe,#8d35d3);border-radius:12px;transition:all .4s;}
-.btn-container .button{color:white;cursor:pointer;padding:8px 14px;font-size:.95rem;font-weight:600;border-radius:10px;border:none;background:linear-gradient(180deg,#d28dff,#8533c6);transition:.3s;position:relative;transform-style:preserve-3d;}
-.btn-container .button::before{content:'';position:absolute;inset:0;background:#fff;opacity:0;transform:translateZ(-10px);transition:.3s;z-index:-1;border-radius:10px;}
-.btn-container .button:hover{transform:rotateX(15deg) rotateY(15deg);}
-/* --- Hero --- */
-.hero{background:linear-gradient(180deg,#1b1b1b,#111);color:var(--light);padding:4rem 1rem;}
-.hero .inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:start;}
-.hero h2{margin:0 0 1rem;font-size:2rem;line-height:1.05;}
-.hero p.lead{margin:0 0 1.5rem;color:#ccc;}
-.hero .mini-logos{display:flex;gap:.6rem;flex-wrap:wrap;}
-.hero .mini-logos div{background:var(--secondary);color:var(--light);padding:.5rem 1rem;border-radius:6px;font-weight:700;}
+/* Reset & base */
+:root{--bg:#0f1720;--card:#0b1220;--muted:#cbd5e1;--accent:#7c3aed;--accent-2:#ff4da6}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+body{background:linear-gradient(180deg,#071023 0%,#071827 55%);color:var(--muted);line-height:1.4}
+.container{max-width:1200px;margin:0 auto;padding:2rem}
+.header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 0}
+.brand{display:flex;align-items:center;gap:.75rem}
+.logo-mark{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#5b21b6);box-shadow:0 6px 18px rgba(124,58,237,0.25)}
+.brand h1{font-size:1rem;color:white}
+.nav a{color:rgba(255,255,255,0.85);margin-left:1rem;text-decoration:none}
+.hero{display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:start;padding:3rem 0}
+.hero-left h2{color:white;font-size:2.1rem;line-height:1.05;margin-bottom:.6rem}
+.lead{color:#a5b4c7;margin-bottom:1rem}
+.kpis{display:flex;gap:1rem;margin-top:1rem}
+.kpi{background:linear-gradient(180deg,#061425,#081a30);padding:.8rem 1rem;border-radius:12px;color:#cbd5e1;font-weight:700}
+/* cards row */
+.services{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.5rem}
+/* allow cards to form up to three columns on wider tablets */
+.services .card{flex:0 0 calc(33.333% - 0.66rem);max-width:190px}
+.card{position:relative;width:190px;height:254px;background-color:#000;display:flex;flex-direction:column;justify-content:end;padding:12px;gap:12px;border-radius:12px;cursor:pointer;overflow:visible;z-index:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02), 0 10px 30px rgba(2,6,23,0.6)}
+.card::before{content:'';position:absolute;top:-6px;left:-6px;right:-6px;bottom:-6px;background:linear-gradient(-45deg,#e81cff 0%,#40c9ff 100%);border-radius:14px;z-index:-1;transition:transform .6s cubic-bezier(.17,.89,.32,1.28);transform-origin:center}
+.card::after{content:'';position:absolute;inset:0;background:linear-gradient(-45deg,#fc00ff 0%,#00dbde 100%);filter:blur(18px);z-index:-2;transition:filter .6s,transform .6s;transform:scale(.97)}
+.card .heading{font-size:18px;color:white;font-weight:800}
+.card p{margin:0;color:#cbd5e1}
+.card p.meta{color:var(--accent);font-weight:700}
+.card:hover::after{filter:blur(30px);transform:scale(1.05)}
+.card:hover::before{transform:rotate(-90deg) scaleX(1.34) scaleY(0.77)}
+/* form */
+.container-form{background:linear-gradient(180deg,#071025 0%,#071827 100%);border-radius:18px;padding:22px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,23,0.6);position:relative;overflow:hidden}
+.container-form::before{content:'';position:absolute;width:220px;height:110px;right:8px;top:-40px;background:radial-gradient(circle at 30% 30%, rgba(255,77,166,0.9) 0%, rgba(255,77,166,0.45) 20%, rgba(255,77,166,0.05) 40%, rgba(255,77,166,0) 60%);filter:blur(30px);z-index:0;border-radius:50%}
+.container-form::after{content:'';position:absolute;width:160px;height:160px;right:-20px;top:-70px;background:radial-gradient(circle at 40% 40%, rgba(124,58,237,0.95) 0%, rgba(124,58,237,0.45) 20%, rgba(124,58,237,0.08) 40%, rgba(124,58,237,0) 60%);filter:blur(30px);z-index:0;border-radius:50%}
+.container-form .heading{position:relative;z-index:1;color:white;font-size:20px;font-weight:800;text-align:center;margin-bottom:12px}
+.container-form .form{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
+.input{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);padding:12px 14px;border-radius:12px;color:var(--muted);font-size:14px}
+.input::placeholder{color:#89a0bd}
+.input:focus{outline:none;border-color:rgba(124,58,237,0.6);box-shadow:0 8px 24px rgba(124,58,237,0.08)}
+.login-button{background:linear-gradient(45deg,var(--accent),#5b21b6);color:white;padding:12px;border-radius:12px;border:none;font-weight:700;cursor:pointer}
+/* footer and misc */
+.project-slider-container{margin-top:2rem}
 
-/* --- Service Cards --- */
-.services {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 2rem;
-  justify-content: start;
-}
+.testimonials-section{margin-top:2.25rem}
+.testimonials-viewport{overflow:hidden;padding:1rem 0}
+/* full-bleed helper: when the viewport should span the whole screen */
+.testimonials-viewport.full-bleed{position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;width:100vw;box-sizing:border-box;padding:1rem 0}
+.testimonials-slider{display:flex;gap:1rem;align-items:stretch;animation:testimonial-scroll 28s linear infinite}
+.testimonial-slide{flex:0 0 auto;width:280px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:12px;box-shadow:0 8px 30px rgba(2,6,23,0.45);border:1px solid rgba(255,255,255,0.03);color:#dbeafe}
+.testimonial-slide img{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px}
+.testimonial-slide h4{margin:0 0 6px;color:white;font-size:16px}
+.testimonial-slide p{margin:0;color:#cbd5e1;font-size:14px}
+.testimonial-slide .by{margin-top:8px;color:var(--accent);font-weight:700}
+.testimonials-slider:hover{animation-play-state:paused}
+@keyframes testimonial-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-.card {
-  position: relative;
-  width: 190px;
-  height: 254px;
-  background-color: #000;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  padding: 12px;
-  gap: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  overflow: visible;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
-  border-radius: 10px;
-  z-index: -2;
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+@media(min-width:1200px){
+  .testimonial-slide{width:340px}
+  .testimonials-slider{gap:1.25rem}
 }
 
-.card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
-  transform: translate3d(0, 0, 0) scale(0.95);
-  filter: blur(20px);
-  z-index: -1;
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+/* --- FAQ (revamped) --- */
+.accordion{margin-top:2rem;display:grid;gap:12px}
+.acc-item{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;border:1px solid rgba(255,255,255,0.04);overflow:hidden;box-shadow:0 6px 20px rgba(2,6,23,0.45)}
+.acc-item button{background:none;border:0;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#e6eef8;font-weight:700;cursor:pointer;width:100%;font-size:15px}
+.acc-item button .label{flex:1;text-align:left}
+.acc-item button .icon{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.02);display:inline-flex;align-items:center;justify-content:center;color:#9fb0c8;transition:transform .28s ease,background .28s ease}
+.acc-item .content{max-height:0;overflow:hidden;padding:0 16px;transition:max-height .34s ease,padding .28s ease;color:#cbd5e1;font-size:14px}
+.acc-item.open .content{padding:12px 16px 16px}
+.acc-item.open button .icon{transform:rotate(45deg);background:linear-gradient(45deg,var(--accent),var(--accent-2));color:white;box-shadow:0 8px 20px rgba(124,58,237,0.18)}
+.acc-item .answer-list{margin:6px 0 0;padding-left:18px}
+.faq-cta{margin-top:10px;background:transparent;border-radius:10px;padding:12px 14px;border:1px dashed rgba(255,255,255,0.03);color:#cfe3ff}
+.footer{display:none}
 
-.card p.heading {
-  font-size: 20px;
-  text-transform: capitalize;
-  font-weight: 700;
-  color: white;
-  position: relative;
-  z-index: 1;
-}
-
-.card p:not(.heading) {
-  font-size: 14px;
-  color: white;
-  position: relative;
-  z-index: 1;
-}
-
-.card p:last-child {
-  color: #e81cff;
-  font-weight: 600;
-  position: relative;
-  z-index: 1;
-}
-
-.card:hover::after {
-  filter: blur(30px);
-}
-
-.card:hover::before {
-  transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
-}
-
-/* --- Form Styles (from Smit-Prajapati) --- */
-.container-form{max-width:350px;background:linear-gradient(0deg,#fff,#f4f7fb);border-radius:40px;padding:25px 35px;border:5px solid #fff;box-shadow:rgba(133,189,215,0.88) 0px 30px 30px -20px;margin:20px;}
-.container-form .heading{text-align:center;font-weight:900;font-size:30px;color:rgb(16,137,211);}
-.container-form .form{margin-top:20px;}
-.container-form .form .input{width:100%;background:white;border:none;padding:15px 20px;border-radius:20px;margin-top:15px;box-shadow:#cff0ff 0px 10px 10px -5px;border-inline:2px solid transparent;}
-.container-form .form .input::placeholder{color:rgb(170,170,170);}
-.container-form .form .input:focus{outline:none;border-inline:2px solid #12b1d1;}
-.container-form .form .login-button{display:block;width:100%;font-weight:bold;background:linear-gradient(45deg,#1089d3 0%,#12b1d1 100%);color:white;padding-block:15px;margin:20px auto;border-radius:20px;box-shadow:rgba(133,189,215,0.878) 0px 20px 10px -15px;border:none;transition:all .2s ease-in-out;}
-.container-form .form .login-button:hover{transform:scale(1.03);box-shadow:rgba(133,189,215,0.878) 0px 23px 10px -20px;}
-.container-form .form .login-button:active{transform:scale(0.95);box-shadow:rgba(133,189,215,0.878) 0px 15px 10px -10px;}
-
-/* --- FAQ --- */
-.accordion{margin-top:2rem;}
-.acc-item{border-bottom:1px solid #222;padding:.8rem 0;}
-.acc-item button{background:none;border:0;padding:0;font-weight:700;display:flex;justify-content:space-between;width:100%;color:#eee;cursor:pointer;transition:.3s;}
-.acc-item .content{display:none;margin-top:.6rem;color:#ccc;transition:max-height .3s ease;overflow:hidden;}
-
-/* --- Project Slider --- */
-.project-slider-container{overflow:hidden;margin-top:2rem;padding:1rem;border-radius:10px;}
-.project-slider{display:flex;gap:1rem;animation:scroll 60s linear infinite;}
-.project-slide{flex:0 0 auto;width:250px;background:#1a1a1a;padding:.5rem;border-radius:10px;box-shadow:4px 4px 10px #000,-4px -4px 10px #222;text-align:center;font-size:.85rem;}
-.project-slide img{width:100%;height:150px;object-fit:cover;border-radius:6px;margin-bottom:.4rem;}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* --- Footer --- */
-footer.site-footer{background:#1b1b1b;color:#ccc;padding:2rem 1rem;margin-top:3rem;}
-.footer-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:flex-start;}
-.footer-col{min-width:200px;}
-.small{font-size:.9rem;color:#999;margin-top:.6rem;}
-
-/* --- Modal --- */
-#modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);align-items:center;justify-content:center;z-index:999;}
-#modal .modal-content{background:#1a1a1a;max-width:680px;width:92%;padding:2rem;border-radius:20px;position:relative;}
-#modal button#modal-close{position:absolute;right:12px;top:12px;background:none;border:0;font-size:1.2rem;color:#eee;cursor:pointer;}
-
-/* --- Responsive --- */
-@media(max-width:880px){.hero .inner{grid-template-columns:1fr;}.nav-links{display:none;}.nav-toggle{display:inline-block;background:#222;padding:.4rem;border-radius:6px;color:#fff;}}
+/* --- Site Footer (themed) --- */
+.site-footer{background:linear-gradient(180deg,#061018,#071018);color:#9fb0c8;padding:3rem 0;margin-top:3rem;border-top:1px solid rgba(255,255,255,0.03)}
+.site-footer .footer-inner{max-width:1200px;margin:0 auto;display:flex;gap:2rem;align-items:start;justify-content:space-between;padding:0 2rem;flex-wrap:wrap}
+.footer-col{flex:1 1 220px;min-width:200px}
+.footer-brand{display:flex;gap:1rem;align-items:flex-start}
+.footer-brand .logo-mark{width:64px;height:64px;border-radius:12px}
+.footer-brand .brand-text{color:#fff;font-weight:800}
+.footer-links{display:flex;gap:2rem}
+.footer-links ul{list-style:none;padding:0;margin:0}
+.footer-links li{margin:10px 0;color:#d1dbe8}
+.footer-cta{background:linear-gradient(90deg,#0b1726,#071025);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+.footer-cta .phone{font-weight:900;color:white;margin-bottom:8px}
+.footer-cta .cta-btn{display:inline-block;margin-top:8px;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;font-weight:800;text-decoration:none}
+.footer-bottom{margin-top:1.6rem;border-top:1px solid rgba(255,255,255,0.02);padding-top:12px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:12px 2rem}
+.stars{display:flex;align-items:center;gap:8px;color:#ffd166;font-weight:700}
+.socials{display:flex;gap:12px;align-items:center}
+.socials a{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.02);display:inline-flex;align-items:center;justify-content:center;color:#9fb0c8;text-decoration:none}
+.site-footer small{color:#90a8bf}
+/* responsive */
+@media(max-width:980px){.hero{grid-template-columns:1fr;}.nav a{display:none}.container{padding:1rem}.services{justify-content:center}}
 </style>
 </head>
 <body>
+<header class="container header">
+  <div class="brand"><span class="logo-mark"></span><h1>Purely Advertising <small style="display:block;font-size:.7rem;color:#9fb0c8">Home Services Marketing</small></h1></div>
+  <nav class="nav"><a href="#services">Services</a><a href="#work">Work</a><a href="#insights">FAQ</a><a href="#contact">Contact</a></nav>
+</header>
+<main class="container">
+  <section class="hero">
+    <div class="hero-left">
+      <h2>We help local home services scale predictable lead flow</h2>
+      <p class="lead">Paid media + local funnels tailored to roofing, landscaping, sealcoating, and repair contractors.</p>
 
-<!-- Topbar -->
-<div class="topbar">
-  <div>Your trusted advertising partner for home services</div>
-  <div class="phone">Say Hello +1 267-981-5104</div>
-</div>
-
-<!-- Navigation -->
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="brand">
-      <span class="logo-mark"></span>
-      <h1>Purely Advertising <small style="display:block;font-size:.7rem;color:#bbb">Home Services Marketing</small></h1>
-    </div>
-    <div class="nav-links">
-      <a href="#services">What we do</a>
-      <a href="#work">Projects</a>
-      <a href="#insights">FAQ</a>
-      <a href="#contact">Contact</a>
-      <div class="btn-container">
-        <button class="button" id="top-btn">Get Free Marketing Plan</button>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<!-- Hero -->
-<header class="hero">
-  <div class="inner">
-    <div>
-      <h2>Grow Your Home Service Business with Purely Advertising</h2>
-      <p class="lead">We bring contractors and local service businesses more leads through targeted digital marketing and paid media.</p>
-      <div class="mini-logos">
-        <div>Boosting Local Businesses Since 2020</div>
-        <div>Experts in Roofing & Home Services Advertising</div>
+      <div class="kpis">
+        <div class="kpi">$2.1M Revenue Driven</div>
+        <div class="kpi">3,400 Leads Generated</div>
       </div>
 
-      <!-- Service Cards -->
-      <div class="services">
-        <div class="card">
-          <p class="heading">Roofing Services</p>
-          <p>Expert campaigns for maximum leads.</p>
-          <p>Mike, Roofing</p>
-        </div>
-        <div class="card">
-          <p class="heading">Sealcoating</p>
-          <p>Drive more clients to your sealcoating business.</p>
-          <p>Linda, Sealcoating</p>
-        </div>
-        <div class="card">
-          <p class="heading">Home Repair</p>
-          <p>Increase bookings for home repair and renovations efficiently.</p>
-          <p>Kevin, Home Repair</p>
-        </div>
-        <div class="card">
-          <p class="heading">Landscaping</p>
-          <p>Get more local landscaping clients.</p>
-          <p>Sarah, Landscaping</p>
-        </div>
+      <div class="services" id="services">
+        <div class="card"><p class="heading">Roofing Services</p><p>Expert campaigns for maximum leads.</p><p class="meta">Mike, Roofing</p></div>
+        <div class="card"><p class="heading">Sealcoating</p><p>Drive more clients to your sealcoating business.</p><p class="meta">Linda, Sealcoating</p></div>
+        <div class="card"><p class="heading">Home Repair</p><p>Increase bookings for home repair and renovations efficiently.</p><p class="meta">Kevin, Home Repair</p></div>
+        <div class="card"><p class="heading">Landscaping</p><p>Get more local landscaping clients.</p><p class="meta">Sarah, Landscaping</p></div>
+        <div class="card"><p class="heading">HVAC Services</p><p>Drive service calls and maintenance leads for HVAC companies.</p><p class="meta">Tom, HVAC</p></div>
+        <div class="card"><p class="heading">Exterior Painting</p><p>Attract local painting jobs with conversion-focused campaigns.</p><p class="meta">Jill, Painting</p></div>
       </div>
     </div>
 
-    <!-- Form -->
-    <aside class="container-form">
+    <aside class="container-form" id="contact">
       <div class="heading">Get Your Free Marketing Plan</div>
       <form class="form">
         <input class="input" type="text" placeholder="Full Name" required>
@@ -249,84 +151,182 @@ footer.site-footer{background:#1b1b1b;color:#ccc;padding:2rem 1rem;margin-top:3r
         <input class="login-button" type="submit" value="Submit">
       </form>
     </aside>
-  </div>
-</header>
+  </section>
 
-<!-- Project Slider -->
-<section class="project-slider-container">
-  <div class="project-slider">
-    <div class="project-slide"><img src="https://picsum.photos/250/150?random=1"><p>"This 5,000 roofing job was brought to us by Purely Advertising"</p><strong>Mike Wilson, Roofing</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/250/150?random=2"><p>"Large sealcoating contract secured through ads"</p><strong>Linda Green, Sealcoating</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/250/150?random=3"><p>"Home repair bookings skyrocketed"</p><strong>Kevin Lee, Home Repair</strong></div>
-  </div>
-</section>
+  <!-- project-slider removed; testimonials moved into the testimonials carousel -->
 
-<!-- FAQ -->
-<section id="insights">
-  <h3>Commonly Asked Questions</h3>
-  <div class="accordion">
-    <div class="acc-item">
-      <button aria-expanded="false">What is Digital Marketing?<span>+</span></button>
-      <div class="content">Digital marketing for home services includes ads, SEO, and local campaigns to get more leads.</div>
+  <!-- Testimonials Carousel -->
+  <section class="testimonials-section">
+    <div class="container">
+      <h3 style="color:white;margin-bottom:10px">What our clients say</h3>
     </div>
-    <div class="acc-item">
-      <button aria-expanded="false">How long to see results?<span>+</span></button>
-      <div class="content">Paid ads can show results immediately; SEO is longer-term but effective for lasting leads.</div>
-    </div>
-    <div class="acc-item">
-      <button aria-expanded="false">How much does it cost?<span>+</span></button>
-      <div class="content">Costs depend on ad spend, competition, and services offered. We provide tailored proposals.</div>
-    </div>
-  </div>
-</section>
+    <div class="testimonials-viewport full-bleed">
+      <div class="testimonials-slider">
+        <div class="testimonial-slide">
+          <img src="https://picsum.photos/480/320?random=21" alt="roofing job">
+          <h4>"5-star lead flow for our roofing business"</h4>
+          <p>Purely Advertising delivered a steady stream of roofing leads that converted into three large jobs in 30 days.</p>
+          <div class="by">— Mike, Roofing Contractor</div>
+        </div>
 
-<!-- Footer -->
-<footer class="site-footer" id="contact">
+        <div class="testimonial-slide">
+          <img src="https://picsum.photos/480/320?random=22" alt="sealcoating crew">
+          <h4>"Booked more sealcoating work than expected"</h4>
+          <p>Targeted local ads filled our calendar for the whole season. Great ROI and fast results.</p>
+          <div class="by">— Linda, Sealcoating</div>
+        </div>
+
+        <div class="testimonial-slide">
+          <img src="https://picsum.photos/480/320?random=23" alt="landscaping project">
+          <h4>"Landscaping leads that convert"</h4>
+          <p>We doubled our local inquiries and got higher-quality leads with conversion-focused creatives.</p>
+          <div class="by">— Sarah, Landscaping</div>
+        </div>
+
+        <div class="testimonial-slide">
+          <img src="https://picsum.photos/480/320?random=24" alt="home repair work">
+          <h4>"Reliable bookings for home repair"</h4>
+          <p>The team at Purely Advertising helped us optimize ads and landing pages for consistent bookings.</p>
+          <div class="by">— Kevin, Home Repair</div>
+        </div>
+
+          <div class="testimonial-slide">
+            <img src="https://picsum.photos/250/150?random=1" alt="roofing job">
+            <h4>"This 5,000 roofing job was brought to us by Purely Advertising"</h4>
+            <p>"This 5,000 roofing job was brought to us by Purely Advertising"</p>
+            <div class="by">— Mike Wilson, Roofing</div>
+          </div>
+
+          <div class="testimonial-slide">
+            <img src="https://picsum.photos/250/150?random=2" alt="sealcoating job">
+            <h4>"Large sealcoating contract secured through ads"</h4>
+            <p>"Large sealcoating contract secured through ads"</p>
+            <div class="by">— Linda Green, Sealcoating</div>
+          </div>
+
+        <!-- duplicate set for seamless infinite scroll (JS will also duplicate) -->
+      </div>
+    </div>
+  </section>
+
+  <section id="insights">
+    <h3 style="color:white;margin-top:1.6rem">Commonly Asked Questions</h3>
+    <div class="accordion">
+      <div class="acc-item" id="q1">
+        <button aria-expanded="false"><span class="label">How long before we see leads from ads?</span><span class="icon">+</span></button>
+        <div class="content">
+          Most paid campaigns start delivering leads within 48–72 hours, depending on budget and targeting. Expect a ramp-up period of 2–6 weeks for stable, predictable results.
+        </div>
+      </div>
+
+      <div class="acc-item" id="q2">
+        <button aria-expanded="false"><span class="label">How much should I budget for my first campaign?</span><span class="icon">+</span></button>
+        <div class="content">
+          A healthy starting budget for local home services is $2,000–$6,000/mo in ad spend to collect conversion data. We can work with smaller pilots, then scale fast once we find winning creatives.
+        </div>
+      </div>
+
+      <div class="acc-item" id="q3">
+        <button aria-expanded="false"><span class="label">Do you work with one-off projects or ongoing retainers?</span><span class="icon">+</span></button>
+        <div class="content">
+          We offer both. Many clients start with a 90-day growth sprint and transition to a long-term retainer for sustained lead flow and scaling.
+        </div>
+      </div>
+
+      <div class="faq-cta">Want help estimating ROI for your business? <a href="#contact" style="color:#fff;text-decoration:underline">Get a free projection</a>.</div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" aria-label="Site footer">
   <div class="footer-inner">
-    <div class="footer-col">
-      <strong>Purely Advertising</strong>
-      <p class="small">LET’S CREATE SOMETHING IMPRESSIVE</p>
-      <p class="small">© Purely Advertising 2025</p>
+    <div class="footer-col footer-brand">
+      <span class="logo-mark"></span>
+      <div>
+        <div class="brand-text">Purely Advertising</div>
+        <small style="display:block;margin-top:8px;color:#90a8bf">Home services growth specialists — Roofing, Sealcoating, Landscaping & more</small>
+      </div>
     </div>
-    <div class="footer-col">
-      <strong>Agency</strong>
-      <p class="small"><a href="#work">Projects</a> · <a href="#insights">FAQ</a></p>
+
+    <div class="footer-col footer-links">
+      <div>
+        <strong style="color:white;display:block;margin-bottom:8px">Agency</strong>
+        <ul>
+          <li>Who we are</li>
+          <li>Careers</li>
+          <li>Services</li>
+          <li>Work</li>
+          <li>Contact</li>
+        </ul>
+      </div>
+      <div>
+        <strong style="color:white;display:block;margin-bottom:8px">Services</strong>
+        <ul>
+          <li>Roofing</li>
+          <li>Sealcoating</li>
+          <li>Landscaping</li>
+          <li>Home Repair</li>
+        </ul>
+      </div>
     </div>
+
     <div class="footer-col">
-      <strong>Contact</strong>
-      <p class="small">Say Hello +1 267-981-5104</p>
-      <p class="small"><a href="mailto:info@purelyadvertising.com">info@purelyadvertising.com</a></p>
+      <div class="footer-cta">
+        <div class="phone">Say Hello +1 267-981-5104</div>
+        <div style="color:#90a8bf">Need help estimating monthly leads or ad spend? We'll run a quick projection.</div>
+        <a class="cta-btn" href="#contact">Get Free Projection</a>
+      </div>
     </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="stars">★★★★★ <span style="color:#cfe3ff;margin-left:6px">4.9 stars out of 150+ reviews</span></div>
+    <div class="socials">
+      <a href="#">f</a>
+      <a href="#">in</a>
+      <a href="#">ig</a>
+    </div>
+    <small>© Purely Advertising 2025</small>
   </div>
 </footer>
 
-<!-- Modal -->
-<div id="modal">
-  <div class="modal-content">
-    <button id="modal-close">✕</button>
-    <iframe src="YOUR_GOOGLE_FORM_URL_HERE" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-  </div>
-</div>
-
 <script>
-// Modal
-const modal=document.getElementById('modal');
-document.getElementById('top-btn').addEventListener('click',()=>{modal.style.display='flex';document.body.style.overflow='hidden';});
-document.getElementById('modal-close').addEventListener('click',()=>{modal.style.display='none';document.body.style.overflow='auto';});
-modal.addEventListener('click',(e)=>{if(e.target===modal){modal.style.display='none';document.body.style.overflow='auto';}});
-// Accordion
-document.querySelectorAll('.acc-item button').forEach(btn=>{
+// Accordion (revamped)
+document.querySelectorAll('.acc-item').forEach(item=>{
+  const btn=item.querySelector('button');
+  const content=item.querySelector('.content');
   btn.addEventListener('click',()=>{
-    const expanded=btn.getAttribute('aria-expanded')==='true';
-    btn.setAttribute('aria-expanded',String(!expanded));
-    const content=btn.nextElementSibling;
-    if(expanded){content.style.maxHeight=null;} else {content.style.maxHeight=content.scrollHeight+'px';}
+    const isOpen=item.classList.contains('open');
+    if(isOpen){
+      item.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      content.style.maxHeight=null;
+    } else {
+      // close others
+      document.querySelectorAll('.acc-item.open').forEach(openItem=>{
+        openItem.classList.remove('open');
+        openItem.querySelector('button').setAttribute('aria-expanded','false');
+        openItem.querySelector('.content').style.maxHeight=null;
+      });
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+      content.style.maxHeight=content.scrollHeight+'px';
+    }
   });
 });
-// Duplicate slider for infinite scroll
-const slider=document.querySelector('.project-slider');
-slider.innerHTML+=slider.innerHTML;
-</script>
 
+// Duplicate testimonial slides for infinite scroll
+const tSlider=document.querySelector('.testimonials-slider');
+if(tSlider){
+  // clone the slides to give us a seamless loop
+  tSlider.innerHTML += tSlider.innerHTML;
+}
+
+// Ensure project slider duplicates (if present)
+const pSlider=document.querySelector('.project-slider');
+if(pSlider && pSlider.children.length){
+  pSlider.innerHTML += pSlider.innerHTML;
+}
+</script>
 </body>
 </html>
