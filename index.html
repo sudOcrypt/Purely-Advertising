@@ -60,7 +60,17 @@ p { max-width: 700px; margin: 0 auto 20px auto; font-size: 1.1rem; color: #333; 
 .calendly-inline-widget { margin-top:30px; height:650px; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.1); }
 
 /* ====== Footer ====== */
-footer { background:#111; color:#ccc; padding:50px 20px; text-align:center; }
+footer { background:#111; color:#ccc; padding:50px 20px; text-align:center; position:relative; }
+/* Gradient fade at top of footer */
+footer::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(to top, rgba(17,17,17,0), #f5f7fa);
+}
 footer a { color:#fbbf24; text-decoration:none; }
 footer a:hover { text-decoration:underline; }
 
@@ -149,6 +159,21 @@ footer a:hover { text-decoration:underline; }
   </div>
   <div class="testimonial">
     "I was skeptical at first, but their automated scheduling system has saved us countless hours. No more missed calls and our calendar is always full." – James T., Seal Coating
+  </div>
+  <div class="testimonial">
+    "The attention to detail in their ad campaigns is incredible. Every lead feels pre-qualified and ready to book, which has massively reduced my admin work." – Laura K., HVAC Services
+  </div>
+  <div class="testimonial">
+    "Their team completely transformed how we get clients. Our plumbing business went from two calls a day to ten, and our staff is no longer overwhelmed with empty days." – Tom S., Plumbing
+  </div>
+  <div class="testimonial">
+    "We tried multiple marketing agencies before, but none delivered consistent results like this. Their approach is data-driven and tailored to our local area." – Angela W., Landscaping
+  </div>
+  <div class="testimonial">
+    "I love that I can rely on their automated scheduling. It’s seamless, professional, and my calendar has never looked this full." – Brian L., Roofing
+  </div>
+  <div class="testimonial">
+    "The return on investment is unmatched. Every dollar spent on ads is justified by high-quality leads that actually convert." – Michelle D., Seal Coating
   </div>
 </section>
 
