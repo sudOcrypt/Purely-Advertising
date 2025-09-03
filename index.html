@@ -1,469 +1,259 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Purely Advertising | Home Services Marketing</title>
-<meta name="description" content="We help home service businesses grow with advertising, SEO, and paid media. Contact us for your free growth plan.">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<meta name="description" content="Grow your home service business with Purely Advertising. Get a free marketing plan today.">
 <style>
-/* ---------- Base & Reset ---------- */
-* { box-sizing: border-box; }
-html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color: #111; background: #0f1113; }
+/* Base & Dark Theme */
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: #111;
+  color: #eee;
+}
+
 a { color: inherit; text-decoration: none; }
 
-/* ---------- Palette (replica) ---------- */
-:root{
-  --bg-dark: #121214;
-  --nav-bg: #191919;
-  --card-bg: #fdfdfd;
-  --muted: #9aa0a6;
-  --accent: #1a73e8;
-  --soft-card: #f6f6f6;
-  --white: #ffffff;
+h2, h3, h4 { margin: 0 0 1rem 0; }
+
+.section { max-width: 1200px; margin: 3rem auto; padding: 0 1rem; }
+
+/* Neumorphic Cards */
+.neu-card {
+  background: #1b1b1b;
+  border-radius: 16px;
+  box-shadow: 6px 6px 16px #0f0f0f, -6px -6px 16px #242424;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-/* ---------- Topbar ---------- */
-.topbar{background:var(--nav-bg);padding:.5rem 1rem;color:var(--white);display:flex;justify-content:space-between;align-items:center;font-size:.95rem}
-.topbar .phone{font-weight:700}
-
-/* ---------- Nav ---------- */
-nav.nav{background:var(--nav-bg);color:var(--white);padding:.75rem 1rem;position:sticky;top:0;z-index:60;border-bottom:1px solid rgba(255,255,255,.03)}
-.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.brand{display:flex;align-items:center;gap:.6rem}
-.brand .logo-mark{width:44px;height:44px;background:var(--accent);border-radius:6px;display:inline-block}
-.brand h1{font-size:1rem;margin:0}
-.nav-links{display:flex;gap:1rem;align-items:center}
-.nav-links a{color:#ddd;padding:.25rem .6rem;border-radius:6px}
-.cta-btn{background:var(--accent);color:#fff;padding:.6rem 1rem;border-radius:999px;font-weight:700;border:none;cursor:pointer;transition:all .25s}
-.cta-btn:hover{transform:translateY(-2px);}
-
-/* ---------- Hero ---------- */
-.hero{background:linear-gradient(180deg,#191919,#0f0f10);color:var(--white);padding:3.6rem 1rem}
-.hero .inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:center}
-.hero h2{margin:0 0 1rem;font-size:2rem;line-height:1.05}
-.hero p.lead{margin:0 0 1.2rem;color:#cfcfcf}
-.hero .mini-logos{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem}
-.hero .mini-logos div{background:var(--soft-card);color:#111;padding:.45rem .85rem;border-radius:6px;font-weight:700;font-size:.9rem}
-
-/* ---------- Card (where the custom form sits) ---------- */
-.card{background:var(--card-bg);padding:1rem;border-radius:10px;color:#111;box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.card h3{margin:0 0 .5rem;font-size:1.05rem}
-
-/* ---------- Uiverse-inspired form (floating label, animated button) ---------- */
-.u-form { width:100%; max-width:100%; }
-.u-form .user-box { position: relative; margin-bottom: 20px; }
-.u-form .user-box input,
-.u-form .user-box select { width:100%; padding: 10px 6px; font-size:16px; color:#111; border: none; border-bottom: 1px solid #ccc; background: transparent; outline: none; }
-.u-form .user-box label { position: absolute; top: 0; left: 6px; padding: 10px 0; font-size:15px; color:#777; pointer-events:none; transition: .35s; }
-.u-form .user-box input:focus ~ label,
-.u-form .user-box input:valid ~ label,
-.u-form .user-box select:focus ~ label,
-.u-form .user-box select:valid ~ label { top:-18px; font-size:12px; color:#333; }
-
-/* button animation */
-.u-btn { position: relative; display: inline-block; padding: 10px 18px; font-weight:bold; color:#fff; background:var(--accent); border-radius:8px; border:0; cursor:pointer; overflow:hidden; margin-top:8px; letter-spacing:2px; }
-.u-btn:hover { background:#155ab6; }
-.u-btn span { position:absolute; display:block; }
-.u-btn span:nth-child(1){ top:0; left:-100%; width:100%; height:2px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7)); animation:btn-anim1 1.5s linear infinite; }
-@keyframes btn-anim1 { 0%{left:-100%}50%,100%{left:100%} }
-.u-btn span:nth-child(2){ top:-100%; right:0; width:2px; height:100%; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.7)); animation:btn-anim2 1.5s linear infinite; animation-delay:.375s; }
-@keyframes btn-anim2 { 0%{top:-100%}50%,100%{top:100%} }
-.u-btn span:nth-child(3){ bottom:0; right:-100%; width:100%; height:2px; background: linear-gradient(270deg, transparent, rgba(255,255,255,0.7)); animation:btn-anim3 1.5s linear infinite; animation-delay:.75s; }
-@keyframes btn-anim3 { 0%{right:-100%}50%,100%{right:100%} }
-.u-btn span:nth-child(4){ bottom:-100%; left:0; width:2px; height:100%; background: linear-gradient(360deg, transparent, rgba(255,255,255,0.7)); animation:btn-anim4 1.5s linear infinite; animation-delay:1.125s; }
-@keyframes btn-anim4 { 0%{bottom:-100%}50%,100%{bottom:100%} }
-
-/* ---------- Features / small boxes ---------- */
-.section{max-width:1200px;margin:3rem auto;padding:0 1rem}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem}
-.feature{background:var(--soft-card);padding:1.2rem;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.06);color:#111;transition:transform .25s}
-.feature:hover{transform:translateY(-6px)}
-.small-box-row{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1rem}
-.small-box{background:#fff;padding:.5rem .9rem;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.06);font-weight:700;color:#111;font-size:.95rem}
-
-/* ---------- Project slider ---------- */
-.project-slider-container{overflow:hidden;margin-top:2rem;background:#0f1720;padding:1rem;border-radius:10px;position:relative}
-.project-slider{display:flex;gap:1rem;animation:scroll 60s linear infinite}
-.project-slide{flex:0 0 auto;width:260px;background:#fff;padding:.8rem;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.25);text-align:center;font-size:.9rem}
-.project-slide img{width:100%;height:150px;object-fit:cover;border-radius:6px;margin-bottom:.5rem}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* ---------- Case list ---------- */
-.case-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1rem}
-
-/* ---------- Accordion ---------- */
-.accordion{margin-top:1rem}
-.acc-item{border-bottom:1px solid #e9e9e9;padding:.8rem 0}
-.acc-item button{background:none;border:0;padding:0;font-weight:700;display:flex;justify-content:space-between;width:100%;cursor:pointer}
-.acc-item .content{display:none;margin-top:.6rem;color:#333;background:#fff;padding:.8rem;border-radius:6px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
-
-/* ---------- Footer ---------- */
-footer.site-footer{background:#111;color:#ddd;padding:2rem 1rem;margin-top:3rem}
-.footer-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:flex-start}
-.footer-col{min-width:200px}
-.small{font-size:.9rem;color:#999;margin-top:.6rem}
-
-/* ---------- Modal adjustments ---------- */
-#modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);align-items:center;justify-content:center;z-index:999}
-#modal .modal-content{background:#fff;max-width:680px;width:92%;padding:1.5rem;border-radius:10px;position:relative}
-
-/* ---------- Responsive ---------- */
-@media (max-width:980px){
-  .hero .inner{grid-template-columns:1fr}
-  .project-slide{width:220px}
-  .card{padding:.9rem}
+/* Buttons */
+.neu-button {
+  background-color: #1b1b1b;
+  border-radius: 50px;
+  box-shadow: 6px 6px 16px #0f0f0f, -6px -6px 16px #242424;
+  color: #eee;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 15px 40px;
+  transition: all 0.2s ease-in-out;
+  border: none;
+  font-weight: 700;
 }
+.neu-button:hover {
+  box-shadow: inset 2px 2px 5px #0f0f0f, inset -2px -2px 5px #242424, 2px 2px 8px #0f0f0f, -2px -2px 8px #242424;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(180deg,#111,#1b1b1b);
+  padding: 4rem 1rem;
+  text-align: center;
+}
+.hero h2 { font-size: 2.2rem; }
+.hero p.lead { color: #ccc; font-size: 1.1rem; }
+
+/* Features Grid */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+.feature { text-align: center; }
+
+/* Form Styles - Neumorphic Dark */
+.form-box {
+  background: #1b1b1b;
+  border-radius: 16px;
+  box-shadow: 6px 6px 16px #0f0f0f, -6px -6px 16px #242424;
+  padding: 2rem;
+  max-width: 400px;
+  margin: 2rem auto;
+}
+.form-box p { text-align: center; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; }
+.form-box .user-box { position: relative; margin-bottom: 2rem; }
+.form-box input, .form-box select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  background: #1b1b1b;
+  border: none;
+  box-shadow: inset 4px 4px 12px #0f0f0f, inset -4px -4px 12px #242424;
+  color: #eee;
+  font-size: 16px;
+  outline: none;
+}
+.form-box label {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #aaa;
+  pointer-events: none;
+  transition: 0.3s;
+}
+.form-box input:focus ~ label,
+.form-box input:valid ~ label,
+.form-box select:focus ~ label,
+.form-box select:valid ~ label {
+  top: -10px;
+  font-size: 12px;
+  color: #eee;
+  background: #111;
+  padding: 0 6px;
+}
+
+/* Accordion */
+.accordion .acc-item { margin-bottom: 1rem; }
+.accordion .acc-item button {
+  background: #1b1b1b;
+  border-radius: 16px;
+  box-shadow: 6px 6px 16px #0f0f0f, -6px -6px 16px #242424;
+  color: #eee;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-weight: 600;
+}
+.accordion .content {
+  display: none;
+  padding: 12px 16px;
+  background: #111;
+  border-radius: 12px;
+  margin-top: 0.5rem;
+  box-shadow: inset 4px 4px 12px #0f0f0f, inset -4px -4px 12px #242424;
+}
+
+/* Footer */
+footer.site-footer {
+  background: #1b1b1b;
+  padding: 2rem 1rem;
+  color: #ccc;
+  text-align: center;
+}
+
+/* Responsive */
+@media(max-width:880px){ .features { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
-<!-- Topbar -->
-<div class="topbar">
-  <div>Your trusted advertising partner for home services</div>
-  <div class="phone">Say Hello +1 267-981-5104</div>
-</div>
-
-<!-- Navigation -->
-<nav class="nav" role="navigation" aria-label="Main">
-  <div class="nav-inner">
-    <div class="brand">
-      <span class="logo-mark" aria-hidden="true"></span>
-      <h1>Purely Advertising <small style="display:block;font-size:.7rem;color:#bbb">Home Services Marketing</small></h1>
-    </div>
-
-    <div class="nav-links" aria-hidden="false">
-      <a href="#services">What we do</a>
-      <a href="#work">Projects</a>
-      <a href="#insights">FAQ</a>
-      <a href="#contact">Contact</a>
-    </div>
-
-    <div style="display:flex;gap:.6rem;align-items:center">
-      <button class="cta-btn" id="open-modal">Get Started</button>
-    </div>
-  </div>
-</nav>
-
 <!-- Hero -->
-<header class="hero" role="banner">
-  <div class="inner">
-    <div>
-      <h2>PROFITABLE GROWTH FOR HOME SERVICE BUSINESSES WITH SEO & PAID MEDIA</h2>
-      <p class="lead">We help roofing, sealcoating, landscaping, and home repair businesses get more booked jobs with data-driven digital marketing.</p>
-      <div class="mini-logos" aria-hidden="true">
-        <div>Boosting Local Businesses Since 2020</div>
-        <div>Experts in Roofing & Home Services Advertising</div>
-      </div>
-      <p style="margin-top:1rem"><a class="cta-btn" href="#work" style="background:#fff;color:#191919;padding:.6rem 1rem;border-radius:999px;font-weight:700">View projects</a></p>
+<section class="hero">
+  <h2>Grow Your Home Service Business</h2>
+  <p class="lead">We help roofing, sealcoating, landscaping, and home repair companies get more leads with digital marketing.</p>
+  <button class="neu-button" onclick="document.getElementById('form-section').scrollIntoView({behavior:'smooth'})">Get a Free Marketing Plan</button>
+</section>
+
+<!-- Features -->
+<section class="section">
+  <h3 style="text-align:center;margin-bottom:2rem;">What We Offer</h3>
+  <div class="features">
+    <div class="feature neu-card">
+      <h4>Roofing Services</h4>
+      <p>Expert campaigns to maximize roofing leads and revenue.</p>
     </div>
+    <div class="feature neu-card">
+      <h4>Sealcoating</h4>
+      <p>Drive more clients to your sealcoating business.</p>
+    </div>
+    <div class="feature neu-card">
+      <h4>Home Repair</h4>
+      <p>Increase bookings for home repair and renovations efficiently.</p>
+    </div>
+    <div class="feature neu-card">
+      <h4>Landscaping</h4>
+      <p>Get more local landscaping clients fast.</p>
+    </div>
+  </div>
+</section>
 
-    <!-- Card with custom inline form (Uiverse inspired) -->
-    <aside class="card" aria-labelledby="proposal-heading">
-      <h3 id="proposal-heading">GET YOUR FREE GROWTH STRATEGY</h3>
-      <p style="margin:0 0 1rem;color:#555">Quick form — goes directly to your Google Form / Sheet.</p>
-
-      <!-- Hero Custom Form (posts to Google Form formResponse) -->
-      <form id="heroForm" class="u-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" method="POST" target="hidden_iframe">
-        <div class="user-box">
-          <input type="text" name="entry.1895950474" required />
-          <label>Full Name</label>
-        </div>
-
-        <div class="user-box">
-          <input type="tel" name="entry.1848460539" required />
-          <label>Phone number</label>
-        </div>
-
-        <div class="user-box">
-          <input type="email" name="entry.1417314964" required />
-          <label>Email</label>
-        </div>
-
-        <div class="user-box">
-          <select name="entry.306218684" required>
-            <option value="" disabled selected></option>
-            <option value="YESTERDAY!">YESTERDAY!</option>
-            <option value="This week">This week</option>
-            <option value="Some other time in the future">Some other time in the future</option>
-          </select>
-          <label>How soon do you need digital advertising?</label>
-        </div>
-
-        <div class="user-box">
-          <select name="entry.739887506" required>
-            <option value="" disabled selected></option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-          <label>Does your company specialize in seal coating?</label>
-        </div>
-
-        <div class="user-box">
-          <select name="entry.1507047135" required>
-            <option value="" disabled selected></option>
-            <option value="$0 - $10,000">$0 - $10,000</option>
-            <option value="$10,000 - $15,000">$10,000 - $15,000</option>
-            <option value="$15,000 - $20,000">$15,000 - $20,000</option>
-            <option value="$20,000+">$20,000+</option>
-          </select>
-          <label>How much are you producing in profit each month?</label>
-        </div>
-
-        <button class="u-btn" type="submit" aria-label="Submit form">
-          <span></span><span></span><span></span><span></span>
-          Submit
-        </button>
-      </form>
-
-      <div id="hero-thanks" style="display:none;margin-top:12px;background:#f1f6fb;padding:.8rem;border-radius:6px;">
-        <strong>Thanks! Your submission was received.</strong>
-        <div style="font-size:.95rem;color:#444">We'll review your details and be in touch.</div>
+<!-- Form -->
+<section id="form-section">
+  <div class="form-box">
+    <p>Get Your Free Marketing Plan</p>
+    <form id="marketing-form">
+      <div class="user-box">
+        <input type="text" required name="fullname">
+        <label>Full Name</label>
       </div>
-    </aside>
-  </div>
-</header>
-
-<!-- Small boxed features + features grid -->
-<section id="services" class="section" aria-labelledby="services-heading">
-  <h2 id="services-heading">If we were just another agency we wouldn't be Purely Advertising</h2>
-  <p style="color:var(--muted)">We operate at the benchmark of performance — performance-based fees, direct access to specialists, and tech-enabled teams.</p>
-
-  <div class="small-box-row">
-    <div class="small-box">Performance-based fees</div>
-    <div class="small-box">Direct access to specialists</div>
-    <div class="small-box">Breaking the silos: SEO + PPC + CRO</div>
-    <div class="small-box">Proprietary tech & automation</div>
-  </div>
-
-  <div class="features" style="margin-top:1rem">
-    <div class="feature"><h3>Roofing Services</h3><p>Expert roofing campaigns for maximum leads.</p></div>
-    <div class="feature"><h3>Sealcoating</h3><p>Drive more clients to your sealcoating business.</p></div>
-    <div class="feature"><h3>Home Repair</h3><p>Increase bookings for home repair and renovations efficiently.</p></div>
-    <div class="feature"><h3>Landscaping</h3><p>Get more local landscaping clients.</p></div>
-  </div>
-</section>
-
-<!-- Project slider (15 slides) -->
-<section class="project-slider-container section" aria-labelledby="projects-heading">
-  <h3 id="projects-heading">Our Clients' Projects</h3>
-  <div class="project-slider" id="project-slider">
-    <div class="project-slide"><img src="https://picsum.photos/seed/roof1/400/240" alt=""><p class="small">"This 5,000 roofing job was brought to us by Purely Advertising"</p><strong>John Doe — Roofing</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/seal1/400/240" alt=""><p class="small">"Our parking lot sealcoating business doubled bookings"</p><strong>Jane Smith — Sealcoating</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/home1/400/240" alt=""><p class="small">"10 home repair leads in just one week!"</p><strong>Bob Brown — Home Repair</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/land1/400/240" alt=""><p class="small">"Grew landscaping clients by 40% in a month"</p><strong>Mary Johnson — Landscaping</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/roof2/400/240" alt=""><p class="small">"15 new roofing leads in 2 weeks"</p><strong>Mike Wilson — Roofing</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/seal2/400/240" alt=""><p class="small">"Large sealcoating contract secured through ads"</p><strong>Linda Green — Sealcoating</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/home2/400/240" alt=""><p class="small">"Home repair bookings skyrocketed this month"</p><strong>Kevin Lee — Home Repair</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/land2/400/240" alt=""><p class="small">"New landscaping clients came from targeted campaigns"</p><strong>Rachel Adams — Landscaping</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/roof3/400/240" alt=""><p class="small">"This roofing company doubled revenue with ads"</p><strong>Tom Baker — Roofing</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/seal3/400/240" alt=""><p class="small">"Sealcoating leads increased by 70% in 1 month"</p><strong>Susan White — Sealcoating</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/home3/400/240" alt=""><p class="small">"Multiple home repair contracts secured"</p><strong>Chris Martin — Home Repair</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/land3/400/240" alt=""><p class="small">"Landscaping service grew to 10 new clients/week"</p><strong>Patricia Scott — Landscaping</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/roof4/400/240" alt=""><p class="small">"Roofing leads increased 150% in one campaign"</p><strong>Steve Hall — Roofing</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/seal4/400/240" alt=""><p class="small">"High-value sealcoating clients acquired easily"</p><strong>Karen Young — Sealcoating</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/seed/home4/400/240" alt=""><p class="small">"Home repair client bookings doubled"</p><strong>Daniel King — Home Repair</strong></div>
-  </div>
-</section>
-
-<!-- Case studies -->
-<section id="work" class="section" aria-labelledby="work-heading">
-  <h3 id="work-heading">Featured Projects</h3>
-  <div class="case-list" style="margin-top:1rem">
-    <div class="case"><h4>Sunshine Roofing — Paid Ads</h4><p class="stat">+150%</p><p class="small">Increase in booked jobs YoY</p></div>
-    <div class="case"><h4>GreenSeal Coating — SEO</h4><p class="stat">+60%</p><p class="small">Revenue growth</p></div>
-    <div class="case"><h4>HomeFix Solutions — PPC</h4><p class="stat">+35%</p><p class="small">New leads per month</p></div>
+      <div class="user-box">
+        <input type="text" required name="phone">
+        <label>Phone Number</label>
+      </div>
+      <div class="user-box">
+        <input type="email" required name="email">
+        <label>Email</label>
+      </div>
+      <div class="user-box">
+        <select required name="timeline">
+          <option value="" disabled selected hidden></option>
+          <option>YESTERDAY!</option>
+          <option>This week</option>
+          <option>Some other time in the future</option>
+        </select>
+        <label>How soon do you need digital advertising?</label>
+      </div>
+      <div class="user-box">
+        <select required name="sealcoating">
+          <option value="" disabled selected hidden></option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+        <label>Does your company specialize in seal coating?</label>
+      </div>
+      <div class="user-box">
+        <select required name="profit">
+          <option value="" disabled selected hidden></option>
+          <option>$0 - $10,000</option>
+          <option>$10,000 - $15,000</option>
+          <option>$15,000 - $20,000</option>
+          <option>$20,000+</option>
+        </select>
+        <label>Monthly Profit Range</label>
+      </div>
+      <button type="submit" class="neu-button" style="width:100%;">Submit</button>
+    </form>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="insights" class="section" aria-labelledby="faq-heading">
-  <h3 id="faq-heading">Commonly Asked Questions</h3>
-  <div class="accordion" role="list">
-    <div class="acc-item" role="listitem">
-      <button aria-expanded="false">What is Digital Marketing?<span aria-hidden="true">+</span></button>
+<section class="section">
+  <h3 style="text-align:center;margin-bottom:2rem;">Frequently Asked Questions</h3>
+  <div class="accordion">
+    <div class="acc-item">
+      <button>What is Digital Marketing?</button>
       <div class="content">Digital marketing for home services includes ads, SEO, and local campaigns to get more leads.</div>
     </div>
-    <div class="acc-item" role="listitem">
-      <button aria-expanded="false">How long to see results?<span aria-hidden="true">+</span></button>
-      <div class="content">Paid ads can show results immediately; SEO is longer-term but effective for lasting leads.</div>
+    <div class="acc-item">
+      <button>How long to see results?</button>
+      <div class="content">Paid ads can show results immediately; SEO takes longer but is effective for lasting leads.</div>
     </div>
-    <div class="acc-item" role="listitem">
-      <button aria-expanded="false">How much does it cost?<span aria-hidden="true">+</span></button>
+    <div class="acc-item">
+      <button>How much does it cost?</button>
       <div class="content">Costs depend on ad spend, competition, and services offered. We provide tailored proposals.</div>
     </div>
-    <div class="acc-item" role="listitem">
-      <button aria-expanded="false">Can you help multiple services at once?<span aria-hidden="true">+</span></button>
-      <div class="content">Yes! Roofing, landscaping, sealcoating, and home repair campaigns can run simultaneously.</div>
-    </div>
-    <div class="acc-item" role="listitem">
-      <button aria-expanded="false">Do you offer reporting?<span aria-hidden="true">+</span></button>
-      <div class="content">Absolutely. We provide dashboards and monthly reporting on ad performance and ROI.</div>
-    </div>
   </div>
-</section>
-
-<!-- CTA -->
-<section class="section" style="text-align:center">
-  <h3>Hit Your Goals</h3>
-  <p class="small">Our clients succeed because we become their business partner, not just a service provider.</p>
-  <p style="margin-top:1rem"><button class="cta-btn" id="open-modal-2">Get Your Free Growth Plan</button></p>
 </section>
 
 <!-- Footer -->
-<footer class="site-footer" id="contact">
-  <div class="footer-inner">
-    <div class="footer-col">
-      <strong>Purely Advertising</strong>
-      <p class="small">LET’S CREATE SOMETHING IMPRESSIVE</p>
-      <p class="small">© Purely Advertising 2025</p>
-    </div>
-    <div class="footer-col">
-      <strong>Agency</strong>
-      <p class="small"><a href="#work">Projects</a> · <a href="#insights">FAQ</a></p>
-    </div>
-    <div class="footer-col">
-      <strong>Contact</strong>
-      <p class="small">Say Hello +1 267-981-5104</p>
-      <p class="small"><a href="mailto:info@purelyadvertising.com">info@purelyadvertising.com</a></p>
-    </div>
-  </div>
+<footer class="site-footer">
+  <p>© Purely Advertising 2025 | Say Hello: +1 267-981-5104 | <a href="mailto:info@purelyadvertising.com">info@purelyadvertising.com</a></p>
 </footer>
 
-<!-- Modal with same custom form (posts to same Google Form) -->
-<div id="modal" role="dialog" aria-modal="true">
-  <div class="modal-content">
-    <button id="modal-close" class="modal-close" aria-label="close">✕</button>
-    <h3>Get Your Free Growth Strategy</h3>
-
-    <form id="modalForm" class="u-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" method="POST" target="hidden_iframe" style="margin-top:10px;">
-      <div class="user-box"><input type="text" name="entry.1895950474" required><label>Full Name</label></div>
-      <div class="user-box"><input type="tel" name="entry.1848460539" required><label>Phone number</label></div>
-      <div class="user-box"><input type="email" name="entry.1417314964" required><label>Email</label></div>
-
-      <div class="user-box">
-        <select name="entry.306218684" required>
-          <option value="" disabled selected></option>
-          <option value="YESTERDAY!">YESTERDAY!</option>
-          <option value="This week">This week</option>
-          <option value="Some other time in the future">Some other time in the future</option>
-        </select>
-        <label>How soon do you need digital advertising?</label>
-      </div>
-
-      <div class="user-box">
-        <select name="entry.739887506" required>
-          <option value="" disabled selected></option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-        <label>Does your company specialize in seal coating?</label>
-      </div>
-
-      <div class="user-box">
-        <select name="entry.1507047135" required>
-          <option value="" disabled selected></option>
-          <option value="$0 - $10,000">$0 - $10,000</option>
-          <option value="$10,000 - $15,000">$10,000 - $15,000</option>
-          <option value="$15,000 - $20,000">$15,000 - $20,000</option>
-          <option value="$20,000+">$20,000+</option>
-        </select>
-        <label>How much are you producing in profit each month?</label>
-      </div>
-
-      <button class="u-btn" type="submit"><span></span><span></span><span></span><span></span>Send</button>
-    </form>
-
-    <div id="modal-thanks" style="display:none;margin-top:12px;background:#f1f6fb;padding:.8rem;border-radius:6px;">
-      <strong>Thanks — submission received.</strong>
-      <div style="font-size:.95rem;color:#444">We'll review your details and be in touch.</div>
-    </div>
-  </div>
-</div>
-
-<!-- hidden iframe to prevent redirect on Google Form POST -->
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-
-<!-- Calendly (optional) -->
-<!-- Replace the data-url with your Calendly link if desired -->
-<div style="max-width:1200px;margin:1.5rem auto;padding:0 1rem;">
-  <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.06)">
-    <h4 style="margin:0 0 .5rem">Schedule a call</h4>
-    <p style="margin:0 0 6px;color:#666">Or use our calendar to pick a convenient time</p>
-    <div class="calendly-inline-widget" data-url="https://calendly.com/jaredmatthewaigner/advertising-consultation" style="min-width:320px;height:480px;"></div>
-  </div>
-</div>
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-
 <script>
-/* ---------- Modal open/close ---------- */
-const modal = document.getElementById('modal');
-const openBtns = [document.getElementById('open-modal'), document.getElementById('open-modal-2')].filter(Boolean);
-const modalClose = document.getElementById('modal-close');
-
-openBtns.forEach(btn => btn && btn.addEventListener('click', (e) => {
-  e.preventDefault();
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}));
-
-modalClose && modalClose.addEventListener('click', () => {
-  modal.style.display = 'none';
-  document.body.style.overflow = 'auto';
-});
-
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
-});
-
-/* Auto open modal after 5s (optional) */
-setTimeout(()=>{ if(!modal.style.display || modal.style.display === 'none') modal.style.display = 'flex'; }, 5000);
-
-/* ---------- Hero & Modal form submission behavior ---------- */
-const heroForm = document.getElementById('heroForm');
-const heroThanks = document.getElementById('hero-thanks');
-heroForm && heroForm.addEventListener('submit', (e) => {
-  // allow default POST to hidden_iframe; swap UI immediately to thank you to prevent double-submits
-  heroForm.style.display = 'none';
-  heroThanks.style.display = 'block';
-});
-
-/* Modal form */
-const modalForm = document.getElementById('modalForm');
-const modalThanks = document.getElementById('modal-thanks');
-modalForm && modalForm.addEventListener('submit', (e) => {
-  modalForm.style.display = 'none';
-  modalThanks.style.display = 'block';
-});
-
-/* ---------- Accordion ---------- */
-document.querySelectorAll('.acc-item button').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!expanded));
+// Accordion Toggle
+document.querySelectorAll('.accordion .acc-item button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
     const content = btn.nextElementSibling;
-    content.style.display = expanded ? 'none' : 'block';
+    content.style.display = content.style.display==='block'?'none':'block';
   });
 });
-
-/* ---------- Duplicate slider slides for continuous effect ---------- */
-const slider = document.getElementById('project-slider');
-if (slider) slider.innerHTML += slider.innerHTML;
-
-/* ---------- Mobile nav: minimal toggle support (if nav toggle is present) ---------- */
-const mobileToggle = document.getElementById('mobile-toggle');
-const navLinks = document.querySelector('.nav-links');
-function setMobileView(){
-  if(window.innerWidth <= 880){ if(mobileToggle) mobileToggle.style.display = 'inline-block'; if(navLinks) navLinks.style.display = 'none'; }
-  else { if(mobileToggle) mobileToggle.style.display = 'none'; if(navLinks) navLinks.style.display = 'flex'; }
-}
-setMobileView();
-window.addEventListener('resize', setMobileView);
-if (mobileToggle) mobileToggle.addEventListener('click', ()=>{ navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex'; });
-
 </script>
+
 </body>
 </html>
