@@ -81,17 +81,17 @@ footer a:hover { text-decoration:underline; }
   <h2>Why Choose Us?</h2>
   <div class="columns">
     <div class="col">
-      <img src="https://via.placeholder.com/150" alt="Full Calendars">
+      <img src="https://imgur.com/mDwuwBy.png" alt="Full Calendars">
       <strong>📅 Full Calendars</strong>
       Stop worrying about empty slots. We deliver high-intent leads ready to book.
     </div>
     <div class="col">
-      <img src="https://via.placeholder.com/150" alt="Max ROI Ads">
+      <img src="https://imgur.com/ei2jcax.png" alt="Max ROI Ads">
       <strong>💸 Max ROI Ads</strong>
       Only pay for ads that convert. Every dollar is tracked for maximum results.
     </div>
     <div class="col">
-      <img src="https://via.placeholder.com/150" alt="Hassle-Free Scheduling">
+      <img src="https://imgur.com/5vyuUGN.png" alt="Hassle-Free Scheduling">
       <strong>🤝 Hassle-Free Scheduling</strong>
       Leads are automatically routed to your calendar—no missed calls or emails.
     </div>
@@ -107,16 +107,11 @@ footer a:hover { text-decoration:underline; }
   <div>
     <h2>Book a Call Form</h2>
     <form class="custom-form" id="customForm" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" method="POST" target="hidden_iframe">
-      <label for="name">Full Name</label>
-      <input type="text" name="entry.1895950474" id="name" required>
-      <label for="company">Company Name</label>
-      <input type="text" name="entry.306218684" id="company" required>
-      <label for="service">What does your company specialize in</label>
-      <input type="text" name="entry.739887506" id="service" required>
-      <label for="phone">Phone number</label>
-      <input type="tel" name="entry.1848460539" id="phone" required>
-      <label for="email">Email</label>
-      <input type="email" name="entry.1417314964" id="email" required>
+      <label>Full Name</label><input type="text" name="entry.1895950474" required>
+      <label>Company Name</label><input type="text" name="entry.306218684" required>
+      <label>What does your company specialize in</label><input type="text" name="entry.739887506" required>
+      <label>Phone number</label><input type="tel" name="entry.1848460539" required>
+      <label>Email</label><input type="email" name="entry.1417314964" required>
       <button type="submit">Submit & Book Call</button>
     </form>
     <div class="thank-you" id="thankYouMessage">✅ Thanks! Your request has been submitted. We'll contact you shortly.</div>
@@ -144,17 +139,13 @@ footer a:hover { text-decoration:underline; }
 <div class="popup-overlay" id="popup">
   <div class="popup">
     <span class="close-btn" id="closePopup">✖</span>
+    <h2 id="popupHeading">Book a Call Now</h2>
     <form class="custom-form" id="popupForm" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" method="POST" target="hidden_iframe">
-      <label for="popupName">Full Name</label>
-      <input type="text" name="entry.1895950474" id="popupName" required>
-      <label for="popupCompany">Company Name</label>
-      <input type="text" name="entry.306218684" id="popupCompany" required>
-      <label for="popupService">What does your company specialize in</label>
-      <input type="text" name="entry.739887506" id="popupService" required>
-      <label for="popupPhone">Phone number</label>
-      <input type="tel" name="entry.1848460539" id="popupPhone" required>
-      <label for="popupEmail">Email</label>
-      <input type="email" name="entry.1417314964" id="popupEmail" required>
+      <label>Full Name</label><input type="text" name="entry.1895950474" required>
+      <label>Company Name</label><input type="text" name="entry.306218684" required>
+      <label>What does your company specialize in</label><input type="text" name="entry.739887506" required>
+      <label>Phone number</label><input type="tel" name="entry.1848460539" required>
+      <label>Email</label><input type="email" name="entry.1417314964" required>
       <button type="submit">Submit & Book Call</button>
     </form>
     <div class="thank-you" id="popupThankYou">✅ Thanks! Your request has been submitted. We'll contact you shortly.</div>
@@ -164,23 +155,24 @@ footer a:hover { text-decoration:underline; }
 <iframe name="hidden_iframe" style="display:none;"></iframe>
 
 <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-
 <script>
-// Elements
+// Popup elements
 const openModal = document.getElementById('openModal');
 const footerCall = document.getElementById('footerCall');
 const popup = document.getElementById('popup');
 const closeModal = document.getElementById('closePopup');
 const popupForm = document.getElementById('popupForm');
 const popupThankYou = document.getElementById('popupThankYou');
-const customForm = document.getElementById('customForm');
-const thankYou = document.getElementById('thankYouMessage');
+const popupHeading = document.getElementById('popupHeading');
 
 // Open popup
 [openModal, footerCall].forEach(btn=>{
   btn.addEventListener('click', e=>{
     e.preventDefault();
     popup.style.display='flex';
+    popupForm.style.display='flex';
+    popupHeading.style.display='block';
+    popupThankYou.style.display='none';
   });
 });
 
@@ -191,15 +183,18 @@ window.addEventListener('click', e=>{if(e.target===popup) popup.style.display='n
 // Auto popup after 5 seconds
 setTimeout(()=>{popup.style.display='flex';},5000);
 
-// Popup form submit
+// Popup form submission
 popupForm.addEventListener('submit', e=>{
   e.preventDefault();
   popupForm.submit();
   popupForm.style.display='none';
+  popupHeading.style.display='none';
   popupThankYou.style.display='block';
 });
 
-// Inline form submit
+// Inline form submission
+const customForm = document.getElementById('customForm');
+const thankYou = document.getElementById('thankYouMessage');
 customForm.addEventListener('submit', e=>{
   e.preventDefault();
   customForm.submit();
@@ -207,5 +202,6 @@ customForm.addEventListener('submit', e=>{
   thankYou.style.display='block';
 });
 </script>
+
 </body>
 </html>
