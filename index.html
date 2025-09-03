@@ -8,23 +8,120 @@
 /* Reset & base */
 :root{--bg:#0f1720;--card:#0b1220;--muted:#cbd5e1;--accent:#7c3aed;--accent-2:#ff4da6}
 *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
-body{background:linear-gradient(180deg,#071023 0%,#071827 55%);color:var(--muted);line-height:1.4}
+body{background:linear-gradient(120deg,#071023 0%,#071827 55%,#05273a 100%);background-size:400% 400%;animation:bgShift 60s ease infinite;color:var(--muted);line-height:1.4;position:relative;overflow-x:hidden}
+
+/* animated gradient */
+@keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* large soft color blobs behind content */
+body::before{content:'';position:fixed;left:-10vw;top:-15vh;width:60vw;height:50vh;background:radial-gradient(circle at 30% 30%, rgba(124,58,237,0.45) 0%, rgba(124,58,237,0.18) 25%, rgba(124,58,237,0.06) 45%, rgba(124,58,237,0) 70%);filter:blur(40px);z-index:-2;pointer-events:none;will-change:filter,transform}
+body::after{content:'';position:fixed;right:-8vw;bottom:-18vh;width:55vw;height:55vh;background:radial-gradient(circle at 60% 60%, rgba(255,77,166,0.35) 0%, rgba(255,77,166,0.18) 20%, rgba(255,77,166,0.06) 40%, rgba(255,77,166,0) 70%);filter:blur(50px);z-index:-2;pointer-events:none;will-change:filter,transform}
+
+/* subtle grain overlay to add texture */
+html::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:-3;opacity:0.04;background-image:radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);background-size:3px 3px}
+
+/* prefer reduced motion: stop background animation and reduce blur */
+@media (prefers-reduced-motion: reduce){
+  body{animation:none}
+  body::before,body::after{filter:blur(30px)}
+}
 .container{max-width:1200px;margin:0 auto;padding:2rem}
+/* subtle moving pattern (adapted & optimized from Uiverse snippet) */
+/* full viewport pattern layer */
+.pattern-layer{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.08;background-color:transparent;
+  /* simplified repeating dot pattern to reduce paint cost */
+  --dot: rgba(6,160,240,0.14);
+  background-image: radial-gradient(circle,var(--dot) 0 2px,transparent 2px), radial-gradient(circle,var(--dot) 0 1.2px,transparent 1.2px);
+  background-size:40px 40px,80px 80px;
+  background-repeat:repeat;transform:translate3d(0,0,0);will-change:transform;background-attachment:local;backface-visibility:hidden;
+}
+
+/* removed background-position animation in favor of transform-based motion (handled by JS parallax) */
+
+/* make sure the big blurred blobs sit behind the pattern */
+body::before,body::after{z-index:-3}
+
+/* ensure content stacks above the pattern layer */
+.header, .header-inner, .container, main, .site-footer, .modal-card{position:relative;z-index:1}
+
+@keyframes patternMove{
+  from{background-position:0px 0px, 3px 0px, 151.5px 0px, 25px 0px, 28px 0px, 176.5px 0px}
+  to{background-position:0px 5000px, 3px 5000px, 151.5px 5000px, 25px 5000px, 28px 5000px, 176.5px 5000px}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .container::after{animation:none;opacity:0.03}
+}
+/* Uiverse button styles (from user) */
+.button{--h-button:48px;--w-button:102px;--round:0.75rem;cursor:pointer;position:relative;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;transition:all 0.25s ease;background:radial-gradient(65.28% 65.28% at 50% 100%,rgba(223,113,255,0.8) 0%,rgba(223,113,255,0) 100%),linear-gradient(0deg,#7a5af8,#7a5af8);border-radius:var(--round);border:none;outline:none;padding:12px 18px}
+.button::before,.button::after{content:"";position:absolute;inset:var(--space);transition:all 0.5s ease-in-out;border-radius:calc(var(--round) - var(--space));z-index:0}
+.button::before{--space:1px;background:linear-gradient(177.95deg,rgba(255,255,255,0.19) 0%,rgba(255,255,255,0) 100%)}
+.button::after{--space:2px;background:radial-gradient(65.28% 65.28% at 50% 100%,rgba(223,113,255,0.8) 0%,rgba(223,113,255,0) 100%),linear-gradient(0deg,#7a5af8,#7a5af8)}
+.button:active{transform:scale(0.95)}
+.fold{z-index:1;position:absolute;top:0;right:0;height:1rem;width:1rem;display:inline-block;transition:all 0.5s ease-in-out;background:radial-gradient(100% 75% at 55%,rgba(223,113,255,0.8) 0%,rgba(223,113,255,0) 100%);box-shadow:0 0 3px black;border-bottom-left-radius:0.5rem;border-top-right-radius:var(--round)}
+.fold::after{content:"";position:absolute;top:0;right:0;width:150%;height:150%;transform:rotate(45deg) translateX(0%) translateY(-18px);background-color:#e8e8e8;pointer-events:none}
+.button:hover .fold{margin-top:-1rem;margin-right:-1rem}
+.points_wrapper{overflow:hidden;width:100%;height:100%;pointer-events:none;position:absolute;z-index:1}
+.points_wrapper .point{bottom:-10px;position:absolute;animation:floating-points infinite ease-in-out;pointer-events:none;width:2px;height:2px;background-color:#fff;border-radius:9999px}
+@keyframes floating-points{0%{transform:translateY(0)}85%{opacity:0}100%{transform:translateY(-55px);opacity:0}}
+.points_wrapper .point:nth-child(1){left:10%;opacity:1;animation-duration:2.35s;animation-delay:0.2s}
+.points_wrapper .point:nth-child(2){left:30%;opacity:0.7;animation-duration:2.5s;animation-delay:0.5s}
+.points_wrapper .point:nth-child(3){left:25%;opacity:0.8;animation-duration:2.2s;animation-delay:0.1s}
+.points_wrapper .point:nth-child(4){left:44%;opacity:0.6;animation-duration:2.05s}
+.points_wrapper .point:nth-child(5){left:50%;opacity:1;animation-duration:1.9s}
+.points_wrapper .point:nth-child(6){left:75%;opacity:0.5;animation-duration:1.5s;animation-delay:1.5s}
+.points_wrapper .point:nth-child(7){left:88%;opacity:0.9;animation-duration:2.2s;animation-delay:0.2s}
+.points_wrapper .point:nth-child(8){left:58%;opacity:0.8;animation-duration:2.25s;animation-delay:0.2s}
+.points_wrapper .point:nth-child(9){left:98%;opacity:0.6;animation-duration:2.6s;animation-delay:0.1s}
+.points_wrapper .point:nth-child(10){left:65%;opacity:1;animation-duration:2.5s;animation-delay:0.2s}
+.inner{z-index:2;gap:6px;position:relative;width:100%;color:white;display:inline-flex;align-items:center;justify-content:center;font-size:16px;font-weight:500;line-height:1.5;transition:color 0.2s ease-in-out}
+.inner svg.icon{width:18px;height:18px;transition:fill 0.1s linear}
+.button:focus svg.icon{fill:white}
+.button:hover svg.icon{fill:transparent;animation:dasharray 1s linear forwards,filled 0.1s linear forwards 0.95s}
+@keyframes dasharray{from{stroke-dasharray:0 0 0 0}to{stroke-dasharray:68 68 0 0}}@keyframes filled{to{fill:white}}
 .header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 0}
 .brand{display:flex;align-items:center;gap:.75rem}
 .logo-mark{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#5b21b6);box-shadow:0 6px 18px rgba(124,58,237,0.25)}
 .brand h1{font-size:1rem;color:white}
 .nav a{color:rgba(255,255,255,0.85);margin-left:1rem;text-decoration:none}
+
+/* Header revamp */
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0 2rem}
+.nav{display:flex;align-items:center;gap:1rem}
+.nav a{padding:8px 10px;border-radius:8px}
+.nav a:hover{background:rgba(255,255,255,0.02)}
+
+/* Modal (form popup) */
+.modal-backdrop{position:fixed;inset:0;background:rgba(3,6,23,0.6);display:none;align-items:center;justify-content:center;padding:24px;z-index:1100}
+.modal-backdrop.open{display:flex}
+.modal-card{width:100%;max-width:640px;background:linear-gradient(180deg,#071025 0%,#071827 100%);border-radius:14px;padding:20px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 20px 60px rgba(2,6,23,0.6);color:var(--muted)}
+.modal-close{position:absolute;right:18px;top:14px;background:transparent;border:0;color:#9fb0c8;font-weight:700;cursor:pointer}
+
+/* small tweak so modal form looks like the right-side form */
+.modal-card .heading{font-size:18px;text-align:left;color:white;margin-bottom:12px}
 .hero{display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:start;padding:3rem 0}
 .hero-left h2{color:white;font-size:2.1rem;line-height:1.05;margin-bottom:.6rem}
+.hero-sub{color:#e6f0ff;font-size:1.05rem;margin-bottom:0.6rem}
 .lead{color:#a5b4c7;margin-bottom:1rem}
+
+/* hero CTAs */
+.hero-ctas{display:flex;gap:0.8rem;margin-top:1rem;align-items:center}
+.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;padding:12px 16px;border-radius:10px;border:0;font-weight:800;cursor:pointer}
+.btn-secondary{background:transparent;color:var(--muted);padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.btn-play{width:40px;height:40px;border-radius:999px;background:linear-gradient(90deg,#ff5ea6,#7c3aed);display:inline-flex;align-items:center;justify-content:center;color:white;border:0}
+
+/* KPI strip */
+.kpi-strip{display:flex;gap:1rem;margin-top:1.25rem;align-items:center}
+.kpi-item{background:linear-gradient(180deg,#061425,#081a30);padding:.6rem .9rem;border-radius:10px;color:#cbd5e1;font-weight:800;display:flex;flex-direction:column;align-items:flex-start}
+.kpi-item .num{font-size:1.25rem;color:white}
+.kpi-note{color:#89a0bd;font-size:13px;margin-left:0.6rem}
 .kpis{display:flex;gap:1rem;margin-top:1rem}
 .kpi{background:linear-gradient(180deg,#061425,#081a30);padding:.8rem 1rem;border-radius:12px;color:#cbd5e1;font-weight:700}
 /* cards row */
 .services{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.5rem}
 /* allow cards to form up to three columns on wider tablets */
 .services .card{flex:0 0 calc(33.333% - 0.66rem);max-width:190px}
-.card{position:relative;width:190px;height:254px;background-color:#000;display:flex;flex-direction:column;justify-content:end;padding:12px;gap:12px;border-radius:12px;cursor:pointer;overflow:visible;z-index:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02), 0 10px 30px rgba(2,6,23,0.6)}
+.card{position:relative;width:190px;height:254px;background-color:#000;display:flex;flex-direction:column;justify-content:end;padding:12px;gap:12px;border-radius:12px;cursor:pointer;overflow:visible;z-index:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02), 0 6px 14px rgba(2,6,23,0.45);will-change:transform}
 .card::before{content:'';position:absolute;top:-6px;left:-6px;right:-6px;bottom:-6px;background:linear-gradient(-45deg,#e81cff 0%,#40c9ff 100%);border-radius:14px;z-index:-1;transition:transform .6s cubic-bezier(.17,.89,.32,1.28);transform-origin:center}
 .card::after{content:'';position:absolute;inset:0;background:linear-gradient(-45deg,#fc00ff 0%,#00dbde 100%);filter:blur(18px);z-index:-2;transition:filter .6s,transform .6s;transform:scale(.97)}
 .card .heading{font-size:18px;color:white;font-weight:800}
@@ -33,7 +130,7 @@ body{background:linear-gradient(180deg,#071023 0%,#071827 55%);color:var(--muted
 .card:hover::after{filter:blur(30px);transform:scale(1.05)}
 .card:hover::before{transform:rotate(-90deg) scaleX(1.34) scaleY(0.77)}
 /* form */
-.container-form{background:linear-gradient(180deg,#071025 0%,#071827 100%);border-radius:18px;padding:22px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,23,0.6);position:relative;overflow:hidden}
+.container-form{background:linear-gradient(180deg,#071025 0%,#071827 100%);border-radius:18px;padding:22px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 6px 18px rgba(2,6,23,0.45);position:relative;overflow:hidden}
 .container-form::before{content:'';position:absolute;width:220px;height:110px;right:8px;top:-40px;background:radial-gradient(circle at 30% 30%, rgba(255,77,166,0.9) 0%, rgba(255,77,166,0.45) 20%, rgba(255,77,166,0.05) 40%, rgba(255,77,166,0) 60%);filter:blur(30px);z-index:0;border-radius:50%}
 .container-form::after{content:'';position:absolute;width:160px;height:160px;right:-20px;top:-70px;background:radial-gradient(circle at 40% 40%, rgba(124,58,237,0.95) 0%, rgba(124,58,237,0.45) 20%, rgba(124,58,237,0.08) 40%, rgba(124,58,237,0) 60%);filter:blur(30px);z-index:0;border-radius:50%}
 .container-form .heading{position:relative;z-index:1;color:white;font-size:20px;font-weight:800;text-align:center;margin-bottom:12px}
@@ -61,6 +158,14 @@ body{background:linear-gradient(180deg,#071023 0%,#071827 55%);color:var(--muted
 @media(min-width:1200px){
   .testimonial-slide{width:340px}
   .testimonials-slider{gap:1.25rem}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .testimonials-slider{animation:none}
+  .card::before,.card::after{transition:none}
+  .card:hover::after{filter:blur(18px);transform:none}
+  .card:hover::before{transform:none}
+  .points_wrapper .point{animation:none}
 }
 
 /* --- FAQ (revamped) --- */
@@ -99,19 +204,75 @@ body{background:linear-gradient(180deg,#071023 0%,#071827 55%);color:var(--muted
 </style>
 </head>
 <body>
-<header class="container header">
-  <div class="brand"><span class="logo-mark"></span><h1>Purely Advertising <small style="display:block;font-size:.7rem;color:#9fb0c8">Home Services Marketing</small></h1></div>
-  <nav class="nav"><a href="#services">Services</a><a href="#work">Work</a><a href="#insights">FAQ</a><a href="#contact">Contact</a></nav>
+  <div class="pattern-layer" aria-hidden="true"></div>
+<header class="header">
+  <div class="header-inner">
+    <div class="brand"><span class="logo-mark"></span><h1>Purely Advertising <small style="display:block;font-size:.7rem;color:#9fb0c8">Home Services Marketing</small></h1></div>
+    <nav class="nav"><a href="#services">Services</a><a href="#work">Work</a><a href="#insights">FAQ</a><a href="#contact">Contact</a></nav>
+    <div>
+      <!-- Uiverse CTA button opens modal form -->
+      <button type="button" class="button" id="open-form-btn" aria-haspopup="dialog" aria-controls="form-modal">
+        <span class="fold"></span>
+        <div class="points_wrapper">
+          <i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i>
+          <i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i>
+        </div>
+        <span class="inner">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"><polyline points="13.18 1.37 13.18 9.64 21.45 9.64 10.82 22.63 10.82 14.36 2.55 14.36 13.18 1.37"></polyline></svg>
+          Request Plan
+        </span>
+      </button>
+    </div>
+  </div>
 </header>
+
+<!-- Modal: form popup -->
+<div class="modal-backdrop" id="form-modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-card" role="document">
+    <button class="modal-close" id="modal-close">Close ✕</button>
+    <div class="heading">Get Your Free Marketing Plan</div>
+    <!-- duplicate form in modal (posts to same Google Form) -->
+    <form class="form modal-form" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" target="hidden_iframe">
+      <input class="input" name="entry.1895950474" type="text" placeholder="Full Name" required>
+      <input class="input" name="entry.1848460539" type="text" placeholder="Phone Number" required>
+      <input class="input" name="entry.1417314964" type="email" placeholder="Email" required>
+      <select class="input" name="entry.306218684" required>
+        <option disabled selected value="">How soon do you need digital advertising?</option>
+        <option value="YESTERDAY!">YESTERDAY!</option>
+        <option value="This week">This week</option>
+        <option value="Some other time in the future">Some other time in the future</option>
+      </select>
+      <select class="input" name="entry.739887506" required>
+        <option disabled selected value="">Does your company specialize in seal coating?</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+      <select class="input" name="entry.1507047135" required>
+        <option disabled selected value="">How much are you producing in profit each month?</option>
+        <option value="$0 - $10,000">$0 - $10,000</option>
+        <option value="$10,000 - $15,000">$10,000 - $15,000</option>
+        <option value="$15,000 - $20,000">$15,000 - $20,000</option>
+        <option value="$20,000+">$20,000+</option>
+      </select>
+      <input class="login-button" type="submit" value="Submit">
+    </form>
+    <div id="modal-success" style="display:none;margin-top:10px;padding:12px;border-radius:10px;background:linear-gradient(90deg,#0b1726,#071025);color:white;font-weight:700;text-align:center">Thanks — we'll be in touch shortly.</div>
+  </div>
+</div>
 <main class="container">
   <section class="hero">
     <div class="hero-left">
-      <h2>We help local home services scale predictable lead flow</h2>
-      <p class="lead">Paid media + local funnels tailored to roofing, landscaping, sealcoating, and repair contractors.</p>
+      <h2>Predictable paid-media lead flow for local home services</h2>
+      <div class="hero-sub">Performance marketing tailored to roofing, landscaping, sealcoating, HVAC and repair contractors — we drive bookings, not just clicks.</div>
+      <p class="lead">Turn ad spend into reliable, bookable leads with focused funnels and proven creatives.</p>
 
-      <div class="kpis">
-        <div class="kpi">$2.1M Revenue Driven</div>
-        <div class="kpi">3,400 Leads Generated</div>
+      <div class="hero-ctas">
+        <button class="btn-primary" id="hero-cta">Get your free plan</button>
+      </div>
+
+      <div class="kpi-strip" aria-hidden="true">
+        <div class="kpi-item"><div class="num" data-target="2100000">$2.1M</div><div class="kpi-note">Revenue driven</div></div>
+        <div class="kpi-item"><div class="num" data-target="3400">3,400</div><div class="kpi-note">Leads generated</div></div>
       </div>
 
       <div class="services" id="services">
@@ -126,30 +287,34 @@ body{background:linear-gradient(180deg,#071023 0%,#071827 55%);color:var(--muted
 
     <aside class="container-form" id="contact">
       <div class="heading">Get Your Free Marketing Plan</div>
-      <form class="form">
-        <input class="input" type="text" placeholder="Full Name" required>
-        <input class="input" type="text" placeholder="Phone Number" required>
-        <input class="input" type="email" placeholder="Email" required>
-        <select class="input" required>
-          <option disabled selected>How soon do you need digital advertising?</option>
-          <option>YESTERDAY!</option>
-          <option>This week</option>
-          <option>Some other time in the future</option>
+      <!-- hidden iframe target for silent Google Form submission -->
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none"></iframe>
+      <!-- form posts to Google Forms formResponse endpoint so entries land in your Sheet -->
+      <form class="form" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" target="hidden_iframe">
+        <input class="input" name="entry.1895950474" type="text" placeholder="Full Name" required>
+        <input class="input" name="entry.1848460539" type="text" placeholder="Phone Number" required>
+        <input class="input" name="entry.1417314964" type="email" placeholder="Email" required>
+        <select class="input" name="entry.306218684" required>
+          <option disabled selected value="">How soon do you need digital advertising?</option>
+          <option value="YESTERDAY!">YESTERDAY!</option>
+          <option value="This week">This week</option>
+          <option value="Some other time in the future">Some other time in the future</option>
         </select>
-        <select class="input" required>
-          <option disabled selected>Does your company specialize in seal coating?</option>
-          <option>Yes</option>
-          <option>No</option>
+        <select class="input" name="entry.739887506" required>
+          <option disabled selected value="">Does your company specialize in seal coating?</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
         </select>
-        <select class="input" required>
-          <option disabled selected>How much are you producing in profit each month?</option>
-          <option>$0 - $10,000</option>
-          <option>$10,000 - $15,000</option>
-          <option>$15,000 - $20,000</option>
-          <option>$20,000+</option>
+        <select class="input" name="entry.1507047135" required>
+          <option disabled selected value="">How much are you producing in profit each month?</option>
+          <option value="$0 - $10,000">$0 - $10,000</option>
+          <option value="$10,000 - $15,000">$10,000 - $15,000</option>
+          <option value="$15,000 - $20,000">$15,000 - $20,000</option>
+          <option value="$20,000+">$20,000+</option>
         </select>
         <input class="login-button" type="submit" value="Submit">
       </form>
+      <div id="form-success" style="display:none;margin-top:10px;padding:12px;border-radius:10px;background:linear-gradient(90deg,#0b1726,#071025);color:white;font-weight:700;text-align:center">Thanks — we'll be in touch shortly.</div>
     </aside>
   </section>
 
@@ -163,42 +328,42 @@ body{background:linear-gradient(180deg,#071023 0%,#071827 55%);color:var(--muted
     <div class="testimonials-viewport full-bleed">
       <div class="testimonials-slider">
         <div class="testimonial-slide">
-          <img src="https://picsum.photos/480/320?random=21" alt="roofing job">
+          <img loading="lazy" src="https://picsum.photos/480/320?random=21" alt="roofing job">
           <h4>"5-star lead flow for our roofing business"</h4>
           <p>Purely Advertising delivered a steady stream of roofing leads that converted into three large jobs in 30 days.</p>
           <div class="by">— Mike, Roofing Contractor</div>
         </div>
 
         <div class="testimonial-slide">
-          <img src="https://picsum.photos/480/320?random=22" alt="sealcoating crew">
+          <img loading="lazy" src="https://picsum.photos/480/320?random=22" alt="sealcoating crew">
           <h4>"Booked more sealcoating work than expected"</h4>
           <p>Targeted local ads filled our calendar for the whole season. Great ROI and fast results.</p>
           <div class="by">— Linda, Sealcoating</div>
         </div>
 
         <div class="testimonial-slide">
-          <img src="https://picsum.photos/480/320?random=23" alt="landscaping project">
+          <img loading="lazy" src="https://picsum.photos/480/320?random=23" alt="landscaping project">
           <h4>"Landscaping leads that convert"</h4>
           <p>We doubled our local inquiries and got higher-quality leads with conversion-focused creatives.</p>
           <div class="by">— Sarah, Landscaping</div>
         </div>
 
         <div class="testimonial-slide">
-          <img src="https://picsum.photos/480/320?random=24" alt="home repair work">
+          <img loading="lazy" src="https://picsum.photos/480/320?random=24" alt="home repair work">
           <h4>"Reliable bookings for home repair"</h4>
           <p>The team at Purely Advertising helped us optimize ads and landing pages for consistent bookings.</p>
           <div class="by">— Kevin, Home Repair</div>
         </div>
 
           <div class="testimonial-slide">
-            <img src="https://picsum.photos/250/150?random=1" alt="roofing job">
+            <img loading="lazy" src="https://picsum.photos/250/150?random=1" alt="roofing job">
             <h4>"This 5,000 roofing job was brought to us by Purely Advertising"</h4>
             <p>"This 5,000 roofing job was brought to us by Purely Advertising"</p>
             <div class="by">— Mike Wilson, Roofing</div>
           </div>
 
           <div class="testimonial-slide">
-            <img src="https://picsum.photos/250/150?random=2" alt="sealcoating job">
+            <img loading="lazy" src="https://picsum.photos/250/150?random=2" alt="sealcoating job">
             <h4>"Large sealcoating contract secured through ads"</h4>
             <p>"Large sealcoating contract secured through ads"</p>
             <div class="by">— Linda Green, Sealcoating</div>
@@ -327,6 +492,110 @@ const pSlider=document.querySelector('.project-slider');
 if(pSlider && pSlider.children.length){
   pSlider.innerHTML += pSlider.innerHTML;
 }
+
+// Google Form silent submit handling: show success message when hidden iframe loads after submit
+const contactForm=document.querySelector('form.form[action*="docs.google.com"]');
+if(contactForm){
+  const iframe=document.getElementById('hidden_iframe');
+  let submitted=false;
+  contactForm.addEventListener('submit',()=>{ submitted=true; });
+  iframe.addEventListener('load',()=>{
+    if(!submitted) return;
+    submitted=false;
+    // show inline success message
+    const msg=document.getElementById('form-success');
+    if(msg){ msg.style.display='block'; }
+    // optionally clear the form
+    contactForm.reset();
+    // hide message after a few seconds
+    setTimeout(()=>{ if(msg) msg.style.display='none'; },5000);
+  });
+}
+
+// Modal open/close and modal form handling
+const openBtn=document.getElementById('open-form-btn');
+const modal=document.getElementById('form-modal');
+const modalClose=document.getElementById('modal-close');
+const modalForm=document.querySelector('.modal-form');
+const modalSuccess=document.getElementById('modal-success');
+if(openBtn && modal){
+  openBtn.addEventListener('click',()=>{
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    // focus first input
+    const first=modal.querySelector('input,input[type],select');
+    if(first) first.focus();
+  });
+  modalClose.addEventListener('click',closeModal);
+  modal.addEventListener('click',(e)=>{ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeModal(); });
+}
+
+// Hero CTA opens the same form modal
+const heroCta=document.getElementById('hero-cta');
+if(heroCta && modal){ heroCta.addEventListener('click',()=>{ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); const first=modal.querySelector('input'); if(first) first.focus(); }); }
+
+// no demo button — focusing on lead form
+
+// KPI count-up animation
+function animateKpis(){
+  document.querySelectorAll('.kpi-item .num').forEach(el=>{
+    const target=Number(el.dataset.target)||0;
+    const isMoney=String(el.textContent||'').trim().startsWith('$');
+    let start=0;const duration=1500;const stepTime=25;const steps=Math.ceil(duration/stepTime);let current=0;
+    const increment=(target-start)/steps;
+    const ticker=setInterval(()=>{
+      current+=increment;current=Math.min(current,target);
+      el.textContent=isMoney?('$'+Math.round(current).toLocaleString()):((target%1!==0)?current.toFixed(1):Math.round(current).toLocaleString());
+      if(current>=target-0.0001){ clearInterval(ticker); }
+    },stepTime);
+  });
+}
+// trigger when hero comes into view
+const heroEl=document.querySelector('.hero-left');
+if(heroEl){ const obs=new IntersectionObserver((entries)=>{ entries.forEach(en=>{ if(en.isIntersecting){ animateKpis(); obs.disconnect(); } }); },{threshold:0.3}); obs.observe(heroEl); }
+function closeModal(){
+  if(!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+  // reset modal success if present
+  if(modalSuccess) modalSuccess.style.display='none';
+}
+
+// Handle modal form submit similar to sidebar form: show inline modal success on iframe load
+if(modalForm){
+  let submittedModal=false;
+  modalForm.addEventListener('submit',()=>{ submittedModal=true; });
+  const iframe=document.getElementById('hidden_iframe');
+  if(iframe){
+    iframe.addEventListener('load',()=>{
+      if(!submittedModal) return;
+      submittedModal=false;
+      if(modalSuccess) modalSuccess.style.display='block';
+      modalForm.reset();
+      // close modal after short delay
+      setTimeout(()=>{ closeModal(); },1400);
+    });
+  }
+}
+
+// subtle parallax for the full-page pattern layer
+(function(){
+  const layer=document.querySelector('.pattern-layer');
+  if(!layer) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let latestY=0, ticking=false;
+  function update(){
+    const y = window.scrollY || window.pageYOffset;
+    // small translate to create parallax: 10% of scroll
+    layer.style.transform = `translate3d(0,${Math.round(y*0.06)}px,0)`;
+    ticking=false;
+  }
+  window.addEventListener('scroll',()=>{
+    latestY = window.scrollY || window.pageYOffset;
+    if(!ticking){ requestAnimationFrame(update); ticking=true; }
+  },{passive:true});
+})();
 </script>
 </body>
 </html>
