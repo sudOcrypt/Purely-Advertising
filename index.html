@@ -346,6 +346,30 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-overflow-scrolling:touch}
   .acc-item button{padding:14px 16px;font-size:16px}
   .acc-item .content{font-size:15px;padding:10px 14px}
 
+  /* Force strict vertical flow on phones: hero -> kpi -> form -> services (2-up grid) -> certifications -> carousel -> FAQ */
+  .hero{display:block;padding:1.2rem 0}
+  .hero-left{width:100%;display:block}
+  .kpi-strip{display:flex;gap:0.6rem;margin-top:0.8rem;flex-wrap:wrap}
+  .kpi-item{flex:1 1 48%;min-width:48%}
+  .container-form{width:100%;margin:12px 0 0;padding:16px;border-radius:12px}
+  /* ensure form sits below hero content */
+  .hero-left, .container-form, .services, .awards-strip, .testimonials-section, #insights{box-sizing:border-box}
+
+  /* 2-up services grid, three rows expected */
+  .services{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+  .services .card{width:100%;max-width:none;height:auto;padding:12px}
+  .card .heading{font-size:15px}
+
+  /* certifications block should be full width and sit after services */
+  .awards-strip{width:100%;margin-top:12px}
+  .certs{margin-top:10px}
+
+  /* testimonials carousel full width and contained */
+  .testimonials-viewport{overflow:hidden;width:100%;box-sizing:border-box}
+
+  /* FAQ sits at the end; ensure full width */
+  #insights{margin-top:14px}
+
   /* footer stack and full-width CTA */
   .site-footer .footer-inner{padding:0.8rem;flex-direction:column;align-items:stretch}
   .footer-bottom{flex-direction:column;align-items:flex-start;gap:10px}
