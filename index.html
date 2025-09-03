@@ -9,20 +9,16 @@
 *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,sans-serif;}
 body{background:#111;color:#eee;overflow-x:hidden;}
 a{color:inherit;text-decoration:none;}
-
-/* --- Colors --- */
 :root{
   --primary:#1a73e8;
   --secondary:#1a1a1a;
   --accent:#00ff75;
-  --light:#ddd;
+  --light:#eee;
   --dark:#111;
 }
-
 /* --- Topbar --- */
 .topbar{background:var(--secondary);padding:.5rem 1rem;display:flex;justify-content:space-between;align-items:center;font-size:.95rem;color:var(--light);}
 .topbar .phone{font-weight:600;}
-
 /* --- Navigation --- */
 nav.nav{background:#1b1b1b;color:var(--light);padding:.75rem 1rem;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.05);}
 .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
@@ -31,43 +27,53 @@ nav.nav{background:#1b1b1b;color:var(--light);padding:.75rem 1rem;position:stick
 .brand h1{font-size:1rem;margin:0;}
 .nav-links{display:flex;gap:1rem;align-items:center;}
 .nav-links a{color:#ddd;padding:.25rem .6rem;border-radius:6px;}
+/* 3D Header Button */
 .btn-container{padding:2px;background:linear-gradient(180deg,#f3aefe,#8d35d3);border-radius:12px;transition:all .4s;}
-.btn-container .button{color:white;cursor:pointer;padding:8px 14px;font-size:.95rem;font-weight:600;border-radius:10px;border:none;background:linear-gradient(180deg,#d28dff,#8533c6);}
-
+.btn-container .button{color:white;cursor:pointer;padding:8px 14px;font-size:.95rem;font-weight:600;border-radius:10px;border:none;background:linear-gradient(180deg,#d28dff,#8533c6);transition:.3s;position:relative;transform-style:preserve-3d;}
+.btn-container .button::before{content:'';position:absolute;inset:0;background:#fff;opacity:0;transform:translateZ(-10px);transition:.3s;z-index:-1;border-radius:10px;}
+.btn-container .button:hover{transform:rotateX(15deg) rotateY(15deg);}
 /* --- Hero --- */
 .hero{background:linear-gradient(180deg,#1b1b1b,#111);color:var(--light);padding:4rem 1rem;}
-.hero .inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:center;}
+.hero .inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:start;}
 .hero h2{margin:0 0 1rem;font-size:2rem;line-height:1.05;}
 .hero p.lead{margin:0 0 1.5rem;color:#ccc;}
 .hero .mini-logos{display:flex;gap:.6rem;flex-wrap:wrap;}
 .hero .mini-logos div{background:var(--secondary);color:var(--light);padding:.5rem 1rem;border-radius:6px;font-weight:700;}
 
-/* --- Features / Tiles --- */
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:1rem;}
-.feature{background:#1a1a1a;padding:1rem;border-radius:20px;box-shadow: 4px 4px 10px #0a0a0a, -4px -4px 10px #222; text-align:center;color:var(--light);transition:all .3s;}
-.feature:hover{box-shadow: inset 4px 4px 10px #0a0a0a, inset -4px -4px 10px #222; transform:scale(1.02);}
-.feature h3{margin:.5rem 0;font-size:1.1rem;}
-.feature p{margin:0;font-size:.9rem;}
+/* --- Service Cards --- */
+.services{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;justify-content:start;}
+.card{position:relative;width:190px;height:254px;background-color:#000;display:flex;flex-direction:column;justify-content:end;padding:12px;gap:12px;border-radius:8px;cursor:pointer;transition:all .3s;}
+.card::before{content:'';position:absolute;inset:0;left:-5px;margin:auto;width:200px;height:264px;border-radius:10px;background:linear-gradient(-45deg,#e81cff 0%,#40c9ff 100%);z-index:-10;pointer-events:none;transition:all .6s cubic-bezier(0.175,0.885,0.32,1.275);}
+.card::after{content:"";z-index:-1;position:absolute;inset:0;background:linear-gradient(-45deg,#fc00ff 0%,#00dbde 100%);transform:translate3d(0,0,0) scale(0.95);filter:blur(20px);}
+.card .heading{font-size:20px;text-transform:capitalize;font-weight:700;}
+.card p:not(.heading){font-size:14px;}
+.card p:last-child{color:#e81cff;font-weight:600;}
+.card:hover::after{filter:blur(30px);}
+.card:hover::before{transform:rotate(-90deg) scaleX(1.34) scaleY(0.77);}
 
-/* --- Project slider --- */
-.project-slider-container{overflow:hidden;margin-top:2rem;padding:1rem;border-radius:10px;}
-.project-slider{display:flex;gap:1rem;animation:scroll 60s linear infinite;}
-.project-slide{flex:0 0 auto;width:250px;background:#1a1a1a;padding:.5rem;border-radius:10px;box-shadow:4px 4px 10px #000, -4px -4px 10px #222;text-align:center;font-size:.85rem;}
-.project-slide img{width:100%;height:150px;object-fit:cover;border-radius:6px;margin-bottom:.4rem;}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* --- Form styles (neumorphic dark) --- */
-.form-box{background:#1a1a1a;padding:2rem;border-radius:20px;box-shadow:4px 4px 10px #000, -4px -4px 10px #222;}
-.form-box input, .form-box select{width:100%;padding:12px 10px;margin-bottom:1rem;border-radius:10px;background:#111;color:#eee;border:none;box-shadow: inset 4px 4px 8px #000, inset -4px -4px 8px #222;}
-.form-box label{display:block;margin-bottom:.3rem;color:#eee;font-weight:600;}
-.form-box button{background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:20px;border:none;cursor:pointer;box-shadow:4px 4px 10px #000, -4px -4px 10px #222;transition:.3s;width:100%;}
-.form-box button:hover{box-shadow: inset 4px 4px 10px #000, inset -4px -4px 10px #222;}
+/* --- Form Styles (from Smit-Prajapati) --- */
+.container-form{max-width:350px;background:linear-gradient(0deg,#fff,#f4f7fb);border-radius:40px;padding:25px 35px;border:5px solid #fff;box-shadow:rgba(133,189,215,0.88) 0px 30px 30px -20px;margin:20px;}
+.container-form .heading{text-align:center;font-weight:900;font-size:30px;color:rgb(16,137,211);}
+.container-form .form{margin-top:20px;}
+.container-form .form .input{width:100%;background:white;border:none;padding:15px 20px;border-radius:20px;margin-top:15px;box-shadow:#cff0ff 0px 10px 10px -5px;border-inline:2px solid transparent;}
+.container-form .form .input::placeholder{color:rgb(170,170,170);}
+.container-form .form .input:focus{outline:none;border-inline:2px solid #12b1d1;}
+.container-form .form .login-button{display:block;width:100%;font-weight:bold;background:linear-gradient(45deg,#1089d3 0%,#12b1d1 100%);color:white;padding-block:15px;margin:20px auto;border-radius:20px;box-shadow:rgba(133,189,215,0.878) 0px 20px 10px -15px;border:none;transition:all .2s ease-in-out;}
+.container-form .form .login-button:hover{transform:scale(1.03);box-shadow:rgba(133,189,215,0.878) 0px 23px 10px -20px;}
+.container-form .form .login-button:active{transform:scale(0.95);box-shadow:rgba(133,189,215,0.878) 0px 15px 10px -10px;}
 
 /* --- FAQ --- */
-.accordion{margin-top:1rem;}
+.accordion{margin-top:2rem;}
 .acc-item{border-bottom:1px solid #222;padding:.8rem 0;}
-.acc-item button{background:none;border:0;padding:0;font-weight:700;display:flex;justify-content:space-between;width:100%;color:#eee;cursor:pointer;}
-.acc-item .content{display:none;margin-top:.6rem;color:#ccc;}
+.acc-item button{background:none;border:0;padding:0;font-weight:700;display:flex;justify-content:space-between;width:100%;color:#eee;cursor:pointer;transition:.3s;}
+.acc-item .content{display:none;margin-top:.6rem;color:#ccc;transition:max-height .3s ease;overflow:hidden;}
+
+/* --- Project Slider --- */
+.project-slider-container{overflow:hidden;margin-top:2rem;padding:1rem;border-radius:10px;}
+.project-slider{display:flex;gap:1rem;animation:scroll 60s linear infinite;}
+.project-slide{flex:0 0 auto;width:250px;background:#1a1a1a;padding:.5rem;border-radius:10px;box-shadow:4px 4px 10px #000,-4px -4px 10px #222;text-align:center;font-size:.85rem;}
+.project-slide img{width:100%;height:150px;object-fit:cover;border-radius:6px;margin-bottom:.4rem;}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* --- Footer --- */
 footer.site-footer{background:#1b1b1b;color:#ccc;padding:2rem 1rem;margin-top:3rem;}
@@ -121,55 +127,42 @@ footer.site-footer{background:#1b1b1b;color:#ccc;padding:2rem 1rem;margin-top:3r
         <div>Boosting Local Businesses Since 2020</div>
         <div>Experts in Roofing & Home Services Advertising</div>
       </div>
-      <!-- Tiles -->
-      <div class="features" style="margin-top:2rem;">
-        <div class="feature">
-          <h3>Roofing Services</h3>
-          <p>Expert campaigns for maximum leads.</p>
-        </div>
-        <div class="feature">
-          <h3>Sealcoating</h3>
-          <p>Drive more clients to your sealcoating business.</p>
-        </div>
-        <div class="feature">
-          <h3>Home Repair</h3>
-          <p>Increase bookings for home repair and renovations efficiently.</p>
-        </div>
-        <div class="feature">
-          <h3>Landscaping</h3>
-          <p>Get more local landscaping clients.</p>
-        </div>
+
+      <!-- Service Cards -->
+      <div class="services">
+        <div class="card"><p class="heading">Roofing Services</p><p>Expert campaigns for maximum leads.</p><p>Mike, Roofing</p></div>
+        <div class="card"><p class="heading">Sealcoating</p><p>Drive more clients to your sealcoating business.</p><p>Linda, Sealcoating</p></div>
+        <div class="card"><p class="heading">Home Repair</p><p>Increase bookings for home repair and renovations efficiently.</p><p>Kevin, Home Repair</p></div>
+        <div class="card"><p class="heading">Landscaping</p><p>Get more local landscaping clients.</p><p>Sarah, Landscaping</p></div>
       </div>
     </div>
+
     <!-- Form -->
-    <aside class="form-box">
-      <h3 style="text-align:center;margin-bottom:1rem;">Get Your Free Marketing Plan</h3>
-      <form>
-        <label>Full Name</label>
-        <input type="text" required>
-        <label>Phone Number</label>
-        <input type="text" required>
-        <label>Email</label>
-        <input type="email" required>
-        <label>How soon do you need digital advertising?</label>
-        <select required>
+    <aside class="container-form">
+      <div class="heading">Get Your Free Marketing Plan</div>
+      <form class="form">
+        <input class="input" type="text" placeholder="Full Name" required>
+        <input class="input" type="text" placeholder="Phone Number" required>
+        <input class="input" type="email" placeholder="Email" required>
+        <select class="input" required>
+          <option disabled selected>How soon do you need digital advertising?</option>
           <option>YESTERDAY!</option>
           <option>This week</option>
           <option>Some other time in the future</option>
         </select>
-        <label>Does your company specialize in seal coating?</label>
-        <select required>
+        <select class="input" required>
+          <option disabled selected>Does your company specialize in seal coating?</option>
           <option>Yes</option>
           <option>No</option>
         </select>
-        <label>How much are you producing in profit each month?</label>
-        <select required>
+        <select class="input" required>
+          <option disabled selected>How much are you producing in profit each month?</option>
           <option>$0 - $10,000</option>
           <option>$10,000 - $15,000</option>
           <option>$15,000 - $20,000</option>
           <option>$20,000+</option>
         </select>
-        <button type="submit">Submit</button>
+        <input class="login-button" type="submit" value="Submit">
       </form>
     </aside>
   </div>
@@ -185,7 +178,7 @@ footer.site-footer{background:#1b1b1b;color:#ccc;padding:2rem 1rem;margin-top:3r
 </section>
 
 <!-- FAQ -->
-<section id="insights" class="section">
+<section id="insights">
   <h3>Commonly Asked Questions</h3>
   <div class="accordion">
     <div class="acc-item">
@@ -199,10 +192,6 @@ footer.site-footer{background:#1b1b1b;color:#ccc;padding:2rem 1rem;margin-top:3r
     <div class="acc-item">
       <button aria-expanded="false">How much does it cost?<span>+</span></button>
       <div class="content">Costs depend on ad spend, competition, and services offered. We provide tailored proposals.</div>
-    </div>
-    <div class="acc-item">
-      <button aria-expanded="false">Do you offer reporting?<span>+</span></button>
-      <div class="content">Absolutely. We provide dashboards and monthly reporting on ad performance and ROI.</div>
     </div>
   </div>
 </section>
@@ -231,56 +220,29 @@ footer.site-footer{background:#1b1b1b;color:#ccc;padding:2rem 1rem;margin-top:3r
 <div id="modal">
   <div class="modal-content">
     <button id="modal-close">✕</button>
-    <h3 style="text-align:center;margin-bottom:1rem;">Get Your Free Marketing Plan</h3>
-    <form>
-      <label>Full Name</label>
-      <input type="text" required>
-      <label>Phone Number</label>
-      <input type="text" required>
-      <label>Email</label>
-      <input type="email" required>
-      <label>How soon do you need digital advertising?</label>
-      <select required>
-        <option>YESTERDAY!</option>
-        <option>This week</option>
-        <option>Some other time in the future</option>
-      </select>
-      <label>Does your company specialize in seal coating?</label>
-      <select required>
-        <option>Yes</option>
-        <option>No</option>
-      </select>
-      <label>How much are you producing in profit each month?</label>
-      <select required>
-        <option>$0 - $10,000</option>
-        <option>$10,000 - $15,000</option>
-        <option>$15,000 - $20,000</option>
-        <option>$20,000+</option>
-      </select>
-      <button type="submit">Submit</button>
-    </form>
+    <iframe src="YOUR_GOOGLE_FORM_URL_HERE" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
   </div>
 </div>
 
 <script>
 // Modal
-const modal = document.getElementById('modal');
-document.getElementById('top-btn').addEventListener('click', ()=>{modal.style.display='flex';document.body.style.overflow='hidden';});
-document.getElementById('modal-close').addEventListener('click', ()=>{modal.style.display='none';document.body.style.overflow='auto';});
-modal.addEventListener('click', (e)=>{if(e.target===modal){modal.style.display='none';document.body.style.overflow='auto';}});
-
+const modal=document.getElementById('modal');
+document.getElementById('top-btn').addEventListener('click',()=>{modal.style.display='flex';document.body.style.overflow='hidden';});
+document.getElementById('modal-close').addEventListener('click',()=>{modal.style.display='none';document.body.style.overflow='auto';});
+modal.addEventListener('click',(e)=>{if(e.target===modal){modal.style.display='none';document.body.style.overflow='auto';}});
 // Accordion
 document.querySelectorAll('.acc-item button').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
+  btn.addEventListener('click',()=>{
     const expanded=btn.getAttribute('aria-expanded')==='true';
-    btn.setAttribute('aria-expanded', String(!expanded));
-    btn.nextElementSibling.style.display=expanded?'none':'block';
+    btn.setAttribute('aria-expanded',String(!expanded));
+    const content=btn.nextElementSibling;
+    if(expanded){content.style.maxHeight=null;} else {content.style.maxHeight=content.scrollHeight+'px';}
   });
 });
-
 // Duplicate slider for infinite scroll
 const slider=document.querySelector('.project-slider');
-slider.innerHTML += slider.innerHTML;
+slider.innerHTML+=slider.innerHTML;
 </script>
+
 </body>
 </html>
