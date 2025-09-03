@@ -7,94 +7,59 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <style>
-/* ========== Global Styles ========== */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', sans-serif; color: #222; background: #f5f7fa; line-height: 1.6; }
+/* ====== Global Styles ====== */
+body { font-family: 'Inter', sans-serif; color: #222; background: #f5f7fa; line-height: 1.6; margin:0; }
+* { box-sizing: border-box; }
 
-/* ========== Header Section ========== */
-header {
-  text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-  color: white;
-  position: relative;
-  overflow: hidden;
-}
+/* ====== Header ====== */
+header { text-align: center; padding: 100px 20px; background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; }
 header h1 { font-size: 3rem; font-weight: 800; margin-bottom: 20px; }
-header p { font-size: 1.4rem; margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto; }
-header h2 { font-size: 1.6rem; font-weight: 600; margin-top: 30px; color: #fbbf24; }
-.btn {
-  display: inline-block; margin-top: 25px; padding: 16px 35px; font-weight: 600;
-  background: #fbbf24; color: #111; border-radius: 10px; cursor: pointer;
-  transition: all 0.3s ease; font-size: 1.1rem;
-}
+header p { font-size: 1.4rem; max-width: 700px; margin: 0 auto 30px; }
+header h2 { font-size: 1.6rem; margin-top: 30px; color: #fbbf24; }
+.btn { display: inline-block; margin-top: 25px; padding: 16px 35px; font-weight: 600; background: #fbbf24; color: #111; border-radius: 10px; cursor: pointer; transition: 0.3s; font-size:1.1rem;}
 .btn:hover { background: #f59e0b; transform: translateY(-2px); }
 
-/* ========== Sections ========== */
+/* ====== Sections ====== */
 section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
 section h2 { text-align: center; font-weight: 700; color: #1e3a8a; margin-bottom: 50px; font-size: 2rem; }
 p { max-width: 700px; margin: 0 auto 20px auto; font-size: 1.1rem; color: #444; }
 
-/* ========== Columns ========== */
+/* ====== Columns ====== */
 .columns { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; }
-.col { flex: 1; min-width: 280px; background: white; padding: 30px; border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08); text-align: center; transition: all 0.3s ease; }
+.col { flex: 1; min-width: 280px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); text-align:center; transition: 0.3s; }
 .col:hover { transform: translateY(-5px); }
 .col img { width: 100%; border-radius: 12px; margin-bottom: 15px; }
-.col strong { display: block; font-size: 1.3rem; margin-bottom: 10px; }
+.col strong { display:block; font-size:1.3rem; margin-bottom:10px; }
 
-/* ========== Testimonials ========== */
-.testimonial {
-  background: white; padding: 35px; margin: 25px auto; border-radius: 15px;
-  max-width: 800px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); font-style: italic;
-  font-size: 1.1rem; line-height: 1.6; transition: all 0.3s ease;
-}
+/* ====== Testimonials ====== */
+.testimonial { background: white; padding: 35px; margin: 25px auto; border-radius: 15px; max-width: 800px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); font-style: italic; font-size:1.1rem; line-height:1.6; transition:0.3s;}
 .testimonial:hover { transform: translateY(-5px); }
 
-/* ========== Calendly Section ========== */
-.calendly-section {
-  background: white; padding: 70px 30px; border-radius: 15px; text-align: center;
-  margin: 60px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-.calendly-inline-widget { margin-top: 30px; height: 650px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+/* ====== Calendly ====== */
+.calendly-section { background:white; padding:70px 30px; border-radius:15px; text-align:center; margin:60px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);}
+.calendly-inline-widget { margin-top:30px; height:650px; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.1); }
 
-/* ========== Footer ========== */
-footer { background: #111; color: #ccc; padding: 50px 20px; text-align: center; }
-footer a { color: #fbbf24; text-decoration: none; }
-footer a:hover { text-decoration: underline; }
+/* ====== Footer ====== */
+footer { background:#111; color:#ccc; padding:50px 20px; text-align:center; }
+footer a { color:#fbbf24; text-decoration:none; }
+footer a:hover { text-decoration:underline; }
 
-/* ========== Popup Styling ========== */
-.popup-overlay {
-  display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.75); justify-content: center; align-items: center;
-  animation: fadeIn 0.3s ease forwards;
-}
-.popup { background: white; margin: 5% auto; padding: 40px 35px; border-radius: 15px;
-  max-width: 780px; width: 95%; max-height: 90vh; overflow-y: auto;
-  position: relative; box-shadow: 0 12px 35px rgba(0,0,0,0.25); }
-.close-btn { position: absolute; top: 15px; right: 20px; font-size: 26px; font-weight: bold; color: #333; cursor: pointer; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* ====== Popup ====== */
+.popup-overlay { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.75); justify-content:center; align-items:center; animation:fadeIn 0.3s forwards; }
+.popup { background:white; margin:5% auto; padding:40px 35px; border-radius:15px; max-width:780px; width:95%; max-height:90vh; overflow-y:auto; position:relative; box-shadow:0 12px 35px rgba(0,0,0,0.25);}
+.close-btn { position:absolute; top:15px; right:20px; font-size:26px; font-weight:bold; color:#333; cursor:pointer;}
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
 
-/* ========== Custom Form Styling ========== */
-.custom-form { display: flex; flex-direction: column; gap: 20px; margin-top: 20px; }
-.custom-form label { font-weight: 600; font-size: 1.1rem; }
-.custom-form input, .custom-form select, .custom-form textarea {
-  padding: 12px 15px; border-radius: 10px; border: 1px solid #ccc; font-size: 1rem;
-  width: 100%; transition: 0.3s ease;
-}
-.custom-form input:focus, .custom-form select:focus, .custom-form textarea:focus { border-color: #2563eb; outline: none; box-shadow: 0 0 8px rgba(37,99,235,0.3); }
-.custom-form button {
-  padding: 15px 30px; font-weight: 600; border-radius: 10px; border: none; background: #fbbf24;
-  color: #111; font-size: 1.1rem; cursor: pointer; transition: 0.3s ease;
-}
-.custom-form button:hover { background: #f59e0b; transform: translateY(-2px); }
+/* ====== Custom Form ====== */
+.custom-form { display:flex; flex-direction:column; gap:20px; margin-top:20px; }
+.custom-form label { font-weight:600; font-size:1.1rem; }
+.custom-form input, .custom-form select, .custom-form textarea { padding:12px 15px; border-radius:10px; border:1px solid #ccc; font-size:1rem; width:100%; transition:0.3s;}
+.custom-form input:focus, .custom-form select:focus, .custom-form textarea:focus { border-color:#2563eb; outline:none; box-shadow:0 0 8px rgba(37,99,235,0.3);}
+.custom-form button { padding:15px 30px; font-weight:600; border-radius:10px; border:none; background:#fbbf24; color:#111; font-size:1.1rem; cursor:pointer; transition:0.3s;}
+.custom-form button:hover { background:#f59e0b; transform:translateY(-2px);}
 
-/* ========== Responsive ========== */
-@media(max-width: 768px){
-  header h1 { font-size: 2.2rem; } header h2 { font-size: 1.3rem; }
-  .btn { padding: 14px 28px; font-size: 1rem; } section { padding: 60px 15px; }
-  .columns { gap: 20px; } .col { padding: 25px; } .testimonial { padding: 25px; }
-}
+/* ====== Thank You Animation ====== */
+.thank-you { display:none; text-align:center; padding:40px; font-size:1.3rem; color:#1e3a8a; font-weight:700; }
 </style>
 </head>
 <body>
@@ -138,42 +103,70 @@ footer a:hover { text-decoration: underline; }
   <p>© 2025 Purely Advertising | <a href="#" id="footerCall">Book a Call</a></p>
 </footer>
 
-<!-- Popup overlay with custom form -->
+<!-- Popup overlay -->
 <div class="popup-overlay" id="popup">
   <div class="popup">
     <span class="close-btn" id="closePopup">✖</span>
     <h2>Book a Call Now</h2>
-    <form class="custom-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" method="POST" target="hidden_iframe">
+
+    <!-- Custom form -->
+    <form class="custom-form" id="customForm" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" method="POST" target="hidden_iframe">
       <label for="name">Full Name</label>
-      <input type="text" name="entry.2005620554" id="name" required>
+      <input type="text" name="entry.1895950474" id="name" required>
       <label for="company">Company Name</label>
-      <input type="text" name="entry.1045781291" id="company" required>
-      <label for="service">Service Type</label>
-      <select name="entry.1166974658" id="service" required>
-        <option value="">Select a Service</option>
-        <option value="Roofing">Roofing</option>
-        <option value="Landscaping">Landscaping</option>
-        <option value="Seal Coating">Seal Coating</option>
-      </select>
-      <label for="phone">Phone</label>
-      <input type="tel" name="entry.839337160" id="phone" required>
+      <input type="text" name="entry.306218684" id="company" required>
+      <label for="service">What does your company specialize in</label>
+      <input type="text" name="entry.739887506" id="service" required>
+      <label for="phone">Phone number</label>
+      <input type="tel" name="entry.1848460539" id="phone" required>
+      <label for="email">Email</label>
+      <input type="email" name="entry.1417314964" id="email" required>
       <button type="submit">Submit & Book Call</button>
     </form>
+
+    <!-- Thank You message -->
+    <div class="thank-you" id="thankYouMessage">✅ Thanks! Your request has been submitted. We'll contact you shortly.</div>
+
+    <!-- Hidden iframe to submit without leaving page -->
     <iframe name="hidden_iframe" style="display:none;"></iframe>
   </div>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const popup = document.getElementById("popup");
-  const openBtns = [document.getElementById("openModal"), document.getElementById("footerCall")];
-  const closeBtn = document.getElementById("closePopup");
+const openModal = document.getElementById('openModal');
+const footerCall = document.getElementById('footerCall');
+const popup = document.getElementById('popup');
+const closeModal = document.getElementById('closePopup');
+const form = document.getElementById('customForm');
+const thankYou = document.getElementById('thankYouMessage');
 
-  openBtns.forEach(btn => { btn.addEventListener("click", () => { popup.style.display = "flex"; }); });
-  closeBtn.addEventListener("click", () => { popup.style.display = "none"; });
-  window.addEventListener("click", e => { if(e.target === popup) popup.style.display = "none"; });
-  setTimeout(() => { popup.style.display = "flex"; }, 5000);
+// Open popup
+[openModal, footerCall].forEach(btn => {
+  btn.addEventListener('click', (e)=> {
+    e.preventDefault();
+    popup.style.display = 'flex';
+  });
+});
+
+// Close popup
+closeModal.addEventListener('click', ()=> { popup.style.display='none'; });
+
+// Close clicking outside
+window.addEventListener('click', (e)=> { if(e.target===popup) popup.style.display='none'; });
+
+// Auto popup after 5 seconds
+setTimeout(()=>{ popup.style.display='flex'; }, 5000);
+
+// Handle submission
+form.addEventListener('submit', (e)=> {
+  e.preventDefault();
+  // Submit to hidden iframe
+  form.submit();
+  // Show Thank You message
+  form.style.display='none';
+  thankYou.style.display='block';
 });
 </script>
+
 </body>
 </html>
