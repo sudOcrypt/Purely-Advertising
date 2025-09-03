@@ -23,13 +23,13 @@ header h2 { font-size: 1.6rem; margin-top: 30px; color: #fbbf24; }
 /* ====== Sections ====== */
 section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
 section h2 { text-align: center; font-weight: 700; color: #1e3a8a; margin-bottom: 50px; font-size: 2rem; }
-p { max-width: 700px; margin: 0 auto 20px auto; font-size: 1.1rem; color: #fff; }
+p { max-width: 700px; margin: 0 auto 20px auto; font-size: 1.1rem; color: #333; }
 
 /* ====== Columns ====== */
 .columns { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; }
 .col { flex: 1; min-width: 280px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); text-align:center; transition: 0.3s; }
 .col:hover { transform: translateY(-5px); }
-.col img { width: 100%; border-radius: 12px; margin-bottom: 15px; }
+.col img { width: 100px; height: 100px; object-fit: contain; margin-bottom: 15px; }
 .col strong { display:block; font-size:1.3rem; margin-bottom:10px; }
 
 /* ====== Testimonials ====== */
@@ -48,7 +48,7 @@ footer a:hover { text-decoration:underline; }
 
 /* ====== Popup ====== */
 .popup-overlay { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.75); justify-content:center; align-items:center; animation:fadeIn 0.3s forwards; }
-.popup { background:white; margin:5% auto; padding:40px 35px; border-radius:15px; max-width:780px; width:95%; max-height:90vh; overflow-y:auto; position:relative; box-shadow:0 12px 35px rgba(0,0,0,0.25);}
+.popup { background:white; margin:5% auto; padding:40px 35px; border-radius:15px; max-width:780px; width:95%; max-height: calc(90vh - 40px); overflow-y:auto; position:relative; box-shadow:0 12px 35px rgba(0,0,0,0.25);}
 .close-btn { position:absolute; top:15px; right:20px; font-size:26px; font-weight:bold; color:#333; cursor:pointer;}
 @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
 
@@ -80,14 +80,21 @@ footer a:hover { text-decoration:underline; }
 <section>
   <h2>Why Choose Us?</h2>
   <div class="columns">
-    <div class="col"><strong>📅 Full Calendars</strong>Stop worrying about empty slots. We deliver high-intent leads ready to book.</div>
-    <div class="col"><strong>💸 Max ROI Ads</strong>Only pay for ads that convert. Every dollar is tracked for maximum results.</div>
-    <div class="col"><strong>🤝 Hassle-Free Scheduling</strong>Leads are automatically routed to your calendar—no missed calls or emails.</div>
-  </div>
-  <div class="columns" style="margin-top:50px;">
-    <div class="col"><img src="https://via.placeholder.com/250x150" alt="Ad Example"><p>Example of a high-performing ad creative</p></div>
-    <div class="col"><img src="https://via.placeholder.com/250x150" alt="Landing Page"><p>Landing page that converts visitors into leads</p></div>
-    <div class="col"><img src="https://via.placeholder.com/250x150" alt="Client Dashboard"><p>Easy-to-read dashboard showing results</p></div>
+    <div class="col">
+      <img src="https://via.placeholder.com/150" alt="Full Calendars">
+      <strong>📅 Full Calendars</strong>
+      Stop worrying about empty slots. We deliver high-intent leads ready to book.
+    </div>
+    <div class="col">
+      <img src="https://via.placeholder.com/150" alt="Max ROI Ads">
+      <strong>💸 Max ROI Ads</strong>
+      Only pay for ads that convert. Every dollar is tracked for maximum results.
+    </div>
+    <div class="col">
+      <img src="https://via.placeholder.com/150" alt="Hassle-Free Scheduling">
+      <strong>🤝 Hassle-Free Scheduling</strong>
+      Leads are automatically routed to your calendar—no missed calls or emails.
+    </div>
   </div>
 </section>
 
@@ -98,7 +105,7 @@ footer a:hover { text-decoration:underline; }
     <div class="calendly-inline-widget" data-url="https://calendly.com/jaredmatthewaigner/advertising-consultation" style="min-width:300px;height:650px;"></div>
   </div>
   <div>
-    <h2>Book a Call</h2>
+    <h2>Book a Call Form</h2>
     <form class="custom-form" id="customForm" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" method="POST" target="hidden_iframe">
       <label for="name">Full Name</label>
       <input type="text" name="entry.1895950474" id="name" required>
@@ -118,23 +125,25 @@ footer a:hover { text-decoration:underline; }
 
 <section>
   <h2>What Our Clients Say</h2>
-  <div class="testimonial">"After working with this team for just one month, our roofing business saw a 65% increase in booked jobs. They handle all the advertising, so I can focus on managing my crew." – Mike R., Roofing Contractor</div>
-  <div class="testimonial">"We struggled for years with inconsistent leads. In the first three weeks, we received multiple high-intent inquiries every day. The team’s ad targeting is spot-on." – Sarah L., Landscaping</div>
-  <div class="testimonial">"I was skeptical at first, but their automated scheduling system has saved us countless hours. No more missed calls and our calendar is always full." – James T., Seal Coating</div>
+  <div class="testimonial">
+    "After working with this team for just one month, our roofing business saw a 65% increase in booked jobs. They handle all the advertising, so I can focus on managing my crew." – Mike R., Roofing Contractor
+  </div>
+  <div class="testimonial">
+    "We struggled for years with inconsistent leads. In the first three weeks, we received multiple high-intent inquiries every day. The team’s ad targeting is spot-on." – Sarah L., Landscaping
+  </div>
+  <div class="testimonial">
+    "I was skeptical at first, but their automated scheduling system has saved us countless hours. No more missed calls and our calendar is always full." – James T., Seal Coating
+  </div>
 </section>
 
 <footer>
   <p>© 2025 Purely Advertising | <a href="#" id="footerCall">Book a Call</a></p>
 </footer>
 
-<!-- Hidden iframe for Google Form submission -->
-<iframe name="hidden_iframe" style="display:none;"></iframe>
-
-<!-- Popup overlay with fixed-size form -->
+<!-- Popup overlay -->
 <div class="popup-overlay" id="popup">
   <div class="popup">
     <span class="close-btn" id="closePopup">✖</span>
-    <h2>Book a Call Now</h2>
     <form class="custom-form" id="popupForm" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" method="POST" target="hidden_iframe">
       <label for="popupName">Full Name</label>
       <input type="text" name="entry.1895950474" id="popupName" required>
@@ -152,29 +161,37 @@ footer a:hover { text-decoration:underline; }
   </div>
 </div>
 
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
 <script>
 // Elements
 const openModal = document.getElementById('openModal');
-const closeModal = document.getElementById('closePopup');
-const popup = document.getElementById('popup');
 const footerCall = document.getElementById('footerCall');
+const popup = document.getElementById('popup');
+const closeModal = document.getElementById('closePopup');
 const popupForm = document.getElementById('popupForm');
 const popupThankYou = document.getElementById('popupThankYou');
 const customForm = document.getElementById('customForm');
 const thankYou = document.getElementById('thankYouMessage');
 
-// Popup open/close
-[openModal, footerCall].forEach(btn => {
-  btn.addEventListener('click', e => {
+// Open popup
+[openModal, footerCall].forEach(btn=>{
+  btn.addEventListener('click', e=>{
     e.preventDefault();
-    popup.style.display = 'flex';
+    popup.style.display='flex';
   });
 });
+
+// Close popup
 closeModal.addEventListener('click', ()=>{popup.style.display='none';});
 window.addEventListener('click', e=>{if(e.target===popup) popup.style.display='none';});
+
+// Auto popup after 5 seconds
 setTimeout(()=>{popup.style.display='flex';},5000);
 
-// Popup form submission
+// Popup form submit
 popupForm.addEventListener('submit', e=>{
   e.preventDefault();
   popupForm.submit();
@@ -182,7 +199,7 @@ popupForm.addEventListener('submit', e=>{
   popupThankYou.style.display='block';
 });
 
-// Inline form submission
+// Inline form submit
 customForm.addEventListener('submit', e=>{
   e.preventDefault();
   customForm.submit();
@@ -190,10 +207,5 @@ customForm.addEventListener('submit', e=>{
   thankYou.style.display='block';
 });
 </script>
-
-<!-- Calendly widget script -->
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-
 </body>
 </html>
-
