@@ -29,7 +29,8 @@ p { max-width: 700px; margin: 0 auto 20px auto; font-size: 1.1rem; color: #333; 
 .columns { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; }
 .col { flex: 1; min-width: 280px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); text-align:center; transition: 0.3s; }
 .col:hover { transform: translateY(-5px); }
-.col img { width: 100px; height: 100px; object-fit: contain; margin-bottom: 15px; }
+/* Increased image size */
+.col img { width: 150px; height: 150px; object-fit: contain; margin-bottom: 15px; }
 .col strong { display:block; font-size:1.3rem; margin-bottom:10px; }
 
 /* ====== Testimonials ====== */
@@ -64,7 +65,10 @@ footer a:hover { text-decoration:underline; }
 .thank-you { display:none; text-align:center; padding:40px; font-size:1.3rem; color:#1e3a8a; font-weight:700; }
 
 /* ====== Responsive ====== */
-@media(max-width:900px){ .calendly-section{flex-direction:column;} }
+@media(max-width:900px){ 
+  .calendly-section{flex-direction:column;} 
+  .col img { width: 120px; height: 120px; } /* smaller on narrow screens */
+}
 </style>
 </head>
 <body>
