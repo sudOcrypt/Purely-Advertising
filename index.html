@@ -2,120 +2,145 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Purely Advertising | Home Services Marketing</title>
 <meta name="description" content="We help home service businesses grow with advertising, SEO, and paid media. Contact us for your free growth plan.">
+
 <style>
-/* =======================
-   Base Styles
-======================= */
-* {box-sizing:border-box;}
-html, body {height:100%; margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#111; color:#eee;}
-a {color:inherit; text-decoration:none;}
-img {max-width:100%; display:block;}
+/* Global */
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+body{background:#111;color:#eee;line-height:1.6;scroll-behavior:smooth;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;height:auto;display:block;}
 
 /* Colors */
 :root {
   --primary:#1a73e8;
   --secondary:#222;
-  --light-bg:#1c1c1c;
-  --text-dark:#eee;
+  --accent:#8d35d3;
+  --light-bg:#1b1b1b;
+  --text-light:#eee;
 }
 
 /* Topbar */
-.topbar{background:#111; padding:.5rem 1rem; display:flex; justify-content:space-between; align-items:center; font-size:.95rem;}
+.topbar{background:var(--secondary);padding:.5rem 1rem;color:var(--text-light);display:flex;justify-content:space-between;align-items:center;font-size:.95rem}
 .topbar .phone{font-weight:600}
 
 /* Navigation */
-nav.nav{background:var(--secondary); padding:.75rem 1rem; position:sticky; top:0; z-index:50; border-bottom:1px solid rgba(255,255,255,.05);}
-.nav-inner{max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:1rem;}
-.brand{display:flex; align-items:center; gap:.6rem;}
-.brand .logo-mark{width:44px; height:44px; background:var(--primary); border-radius:6px; display:inline-block;}
-.brand h1{font-size:1rem; margin:0;}
-.nav-links{display:flex; gap:1rem; align-items:center;}
-.nav-links a{color:#ddd; padding:.25rem .6rem; border-radius:6px;}
-.cta-btn{background-color: #1c1c1c; border-radius: 30px; color: #eee; cursor: pointer; font-size:16px; font-weight:700; padding:12px 30px; border:none; box-shadow: 4px 4px 8px #0f0f0f, -4px -4px 8px #2a2a2a; transition: all 0.2s ease-in-out;}
-.cta-btn:hover{box-shadow: inset 2px 2px 6px #0f0f0f, inset -2px -2px 6px #2a2a2a, 4px 4px 8px #0f0f0f, -4px -4px 8px #2a2a2a;}
+nav.nav{background:var(--secondary);color:var(--text-light);padding:.75rem 1rem;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:flex;align-items:center;gap:.6rem}
+.brand .logo-mark{width:44px;height:44px;background:var(--primary);border-radius:6px;display:inline-block}
+.brand h1{font-size:1rem;margin:0}
+.nav-links{display:flex;gap:1rem;align-items:center}
+.nav-links a{color:#ddd;padding:.25rem .6rem;border-radius:6px;transition:0.3s;}
+.nav-links a:hover{color:#fff;}
+
+/* Topbar Gradient Button */
+.btn-container {
+  padding: 3px;
+  border-radius: 19px;
+  color: white;
+  background: linear-gradient(180deg, #f3aefe, #8d35d3);
+  box-shadow:
+    -4px 4px 0px #5d2b82,
+    -5px 7px 8px #4d1e7491,
+    -10px 13px 18px #4d1e7450,
+    -20px 20px 40px #4d1e74a8;
+  transition: all 0.4s ease;
+}
+.btn-container:hover {transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);}
+.button {
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 15px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(180deg, #d28dff, #8533c6);
+  box-shadow: inset 0px -6px 10px #3114494b;
+  text-shadow: -1px 1px 3px #2a0f3fbb;
+  transition: all 0.3s ease;
+}
+.button:active{transform:scale(0.95);}
 
 /* Hero */
-.hero{background:linear-gradient(180deg,#111,#1b1b1b); padding:4rem 1rem; color:#eee;}
-.hero .inner{max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 420px; gap:2rem; align-items:center;}
-.hero h2{margin:0 0 1rem; font-size:2rem; line-height:1.05;}
-.hero p.lead{margin:0 0 1.5rem; color:#ccc;}
+.hero{background:var(--light-bg);color:var(--text-light);padding:4rem 1rem}
+.hero .inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:center}
+.hero h2{margin:0 0 1rem;font-size:2rem;line-height:1.2}
+.hero p.lead{margin:0 0 1.5rem;color:#ccc}
 
-/* Mini Logos */
-.hero .mini-logos{display:flex; gap:.6rem; flex-wrap:wrap;}
-.hero .mini-logos div{background:var(--light-bg); color:var(--text-dark); padding:.5rem 1rem; border-radius:6px; font-weight:700;}
-
-/* =======================
-   Neumorphic Form Styles
-======================= */
-.neu-form {
-  background: var(--light-bg);
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 8px 8px 15px #0f0f0f, -8px -8px 15px #2a2a2a;
-  color:#eee;
-}
-.neu-form h3 {margin-top:0; text-align:center; margin-bottom:1rem;}
-.neu-form .form-group {position:relative; margin-bottom:25px;}
-.neu-form input, .neu-form select {
-  width:100%; padding:12px 15px; border:none; border-radius:10px;
-  background: var(--light-bg); color:#eee; font-size:16px;
-  box-shadow: inset 4px 4px 8px #0f0f0f, inset -4px -4px 8px #2a2a2a;
-  transition: all 0.2s ease-in-out;
-}
-.neu-form input:focus, .neu-form select:focus {outline:none; box-shadow: inset 2px 2px 6px #0f0f0f, inset -2px -2px 6px #2a2a2a, 4px 4px 8px #0f0f0f, -4px -4px 8px #2a2a2a;}
-.neu-form label {
-  position:absolute; top:12px; left:15px; font-size:16px; color:#aaa; pointer-events:none; transition:0.3s;
-}
-.neu-form input:focus + label, .neu-form input:not(:placeholder-shown) + label,
-.neu-form select:focus + label, .neu-form select:not([value=""]) + label {
-  top:-10px; left:12px; font-size:12px; color:#1a73e8;
-}
-.neu-form .submit-btn {
-  width:100%; text-align:center; padding:15px; font-size:16px; font-weight:bold;
-  border:none; border-radius:50px; margin-top:10px;
-  background: var(--light-bg); color:#eee;
-  cursor:pointer; box-shadow: 4px 4px 8px #0f0f0f, -4px -4px 8px #2a2a2a;
-  transition: all 0.2s ease-in-out;
-}
-.neu-form .submit-btn:hover {
-  box-shadow: inset 2px 2px 6px #0f0f0f, inset -2px -2px 6px #2a2a2a, 4px 4px 8px #0f0f0f, -4px -4px 8px #2a2a2a;
-}
-
-/* =======================
-   Features / services
-======================= */
-.section{max-width:1200px;margin:3rem auto;padding:0 1rem;}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem;}
-.feature{background:var(--light-bg);padding:1rem;border-radius:8px;box-shadow:8px 8px 15px #0f0f0f, -8px -8px 15px #2a2a2a; text-align:center; color:#eee; transition:transform .3s;}
-.feature:hover{transform:translateY(-5px);}
-.feature h3{margin:.2rem 0 .6rem;font-size:1rem;}
+/* Features / services */
+.section{max-width:1200px;margin:3rem auto;padding:0 1rem}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem}
+.feature{background:var(--secondary);padding:1rem;border-radius:10px;box-shadow: inset 4px 4px 8px #0f0f0f, inset -4px -4px 8px #2a2a2a; text-align:center;color:var(--text-light); transition:transform .3s}
+.feature:hover{transform:translateY(-5px)}
+.feature h3{margin:.2rem 0 .6rem;font-size:1rem}
 .feature p{margin:0;}
 
-/* Project slider */
-.project-slider-container{overflow:hidden;margin-top:2rem;background:var(--light-bg);padding:1rem;border-radius:10px;position:relative; box-shadow:8px 8px 15px #0f0f0f, -8px -8px 15px #2a2a2a;}
-.project-slider{display:flex;gap:1rem;animation:scroll 60s linear infinite;}
-.project-slide{flex:0 0 auto;width:250px;background:var(--secondary);padding:.5rem;border-radius:8px;box-shadow:4px 4px 10px #0f0f0f, -4px -4px 10px #2a2a2a;text-align:center;font-size:.85rem;}
-.project-slide img{width:100%;height:150px;object-fit:cover;border-radius:6px;margin-bottom:.4rem;}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* Neumorphic Form */
+.neu-form{background:var(--light-bg);padding:2rem;border-radius:12px;box-shadow: inset 6px 6px 15px #0f0f0f, inset -6px -6px 15px #2a2a2a;}
+.neu-form .form-group{position:relative;margin-bottom:25px;}
+.neu-form input, .neu-form select{
+  width:100%; 
+  padding:16px 15px; 
+  border:none; 
+  border-radius:10px;
+  background: var(--secondary); 
+  color:#eee; 
+  font-size:16px;
+  box-shadow: inset 4px 4px 8px #0f0f0f, inset -4px -4px 8px #2a2a2a;
+}
+.neu-form label{
+  position:absolute; 
+  top:16px; 
+  left:15px; 
+  font-size:16px; 
+  color:#aaa; 
+  pointer-events:none; 
+  transition:0.3s;
+}
+.neu-form input:focus + label,
+.neu-form input:not(:placeholder-shown) + label,
+.neu-form select:focus + label,
+.neu-form select:not([value=""]) + label {
+  top:-10px; 
+  left:12px; 
+  font-size:12px; 
+  color:#eee;
+}
 
-/* FAQ accordion */
-.accordion{margin-top:1rem}
-.acc-item{border-bottom:1px solid #333;padding:.8rem 0}
-.acc-item button{background:none;border:0;padding:0;font-weight:700;display:flex;justify-content:space-between;width:100%;cursor:pointer;color:#eee}
-.acc-item .content{display:none;margin-top:.6rem;color:#ccc}
+/* Neumorphic Buttons */
+.neu-button {
+  background-color: #1b1b1b;
+  border-radius: 50px;
+  box-shadow: inset 4px 4px 10px #0f0f0f, inset -4px -4px 10px #2a2a2a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 15px 40px;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid #222;
+}
+.neu-button:hover {
+  box-shadow: inset 2px 2px 5px #0f0f0f, inset -2px -2px 5px #2a2a2a, 2px 2px 5px #0f0f0f, -2px -2px 5px #2a2a2a;
+}
+.neu-button:focus {outline:none;}
 
 /* Footer */
-footer.site-footer{background:var(--secondary);color:#ddd;padding:2rem 1rem;margin-top:3rem}
+footer.site-footer{background:var(--secondary);color:#ccc;padding:2rem 1rem;margin-top:3rem}
 .footer-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:flex-start}
 .footer-col{min-width:200px}
 .small{font-size:.9rem;color:#999;margin-top:.6rem}
 
 /* Responsive */
-@media (max-width:880px){
-.hero .inner{grid-template-columns:1fr}
+@media(max-width:880px){
+.hero .inner{grid-template-columns:1fr;}
 .nav-links{display:none}
 .nav-toggle{display:inline-block;background:#222;padding:.4rem;border-radius:6px;color:#fff}
 }
@@ -141,9 +166,15 @@ footer.site-footer{background:var(--secondary);color:#ddd;padding:2rem 1rem;marg
       <a href="#work">Projects</a>
       <a href="#insights">FAQ</a>
       <a href="#contact">Contact</a>
+      <div class="btn-container">
+        <button class="button" id="scroll-form">Get Free Marketing Plan
+          <svg viewBox="0 0 48 48" height="1.2em" width="1.2em" class="svg" xmlns="http://www.w3.org/2000/svg">
+            <path d="M42 24H6m24-12l12 12l-12 12" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="none"></path>
+          </svg>
+        </button>
+      </div>
     </div>
     <div style="display:flex;gap:.6rem;align-items:center">
-      <button class="cta-btn" id="open-modal">Get a Free Marketing Plan</button>
       <button class="nav-toggle" id="mobile-toggle" aria-label="Open menu" style="display:none">☰</button>
     </div>
   </div>
@@ -151,60 +182,52 @@ footer.site-footer{background:var(--secondary);color:#ddd;padding:2rem 1rem;marg
 
 <!-- Hero -->
 <header class="hero">
-  <div class="inner">
+  <div class="inner" id="form-section">
     <div>
       <h2>Grow Your Home Service Business with Purely Advertising</h2>
       <p class="lead">We bring contractors and local service businesses more leads through targeted digital marketing and paid media.</p>
-      <div class="mini-logos">
-        <div>Boosting Local Businesses Since 2020</div>
-        <div>Experts in Roofing & Home Services Advertising</div>
-      </div>
     </div>
-    <aside class="card">
-      <!-- Custom Neumorphic Form -->
-      <form class="neu-form" id="marketingForm">
-        <h3>Get Your Free Growth Plan</h3>
-        <div class="form-group">
-          <input type="text" name="fullname" required placeholder=" ">
-          <label>Full Name</label>
-        </div>
-        <div class="form-group">
-          <input type="tel" name="phone" required placeholder=" ">
-          <label>Phone Number</label>
-        </div>
-        <div class="form-group">
-          <input type="email" name="email" required placeholder=" ">
-          <label>Email</label>
-        </div>
-        <div class="form-group">
-          <select name="timeframe" required>
-            <option value="" disabled selected hidden></option>
-            <option>YESTERDAY!</option>
-            <option>This week</option>
-            <option>Some other time in the future</option>
-          </select>
-          <label>How soon do you need digital advertising?</label>
-        </div>
-        <div class="form-group">
-          <select name="sealcoating" required>
-            <option value="" disabled selected hidden></option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-          <label>Does your company specialize in seal coating?</label>
-        </div>
-        <div class="form-group">
-          <select name="profit" required>
-            <option value="" disabled selected hidden></option>
-            <option>$0 - $10,000</option>
-            <option>$10,000 - $15,000</option>
-            <option>$15,000 - $20,000</option>
-            <option>$20,000+</option>
-          </select>
-          <label>How much are you producing in profit each month?</label>
-        </div>
-        <button type="submit" class="submit-btn">Get My Free Plan</button>
-      </form>
+    <aside class="neu-form">
+      <div class="form-group">
+        <input type="text" placeholder=" " required>
+        <label>Full Name</label>
+      </div>
+      <div class="form-group">
+        <input type="text" placeholder=" " required>
+        <label>Phone Number</label>
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder=" " required>
+        <label>Email</label>
+      </div>
+      <div class="form-group">
+        <select required>
+          <option value="" disabled selected hidden></option>
+          <option>YESTERDAY!</option>
+          <option>This week</option>
+          <option>Some other time in the future</option>
+        </select>
+        <label>How soon do you need digital advertising?</label>
+      </div>
+      <div class="form-group">
+        <select required>
+          <option value="" disabled selected hidden></option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+        <label>Does your company specialize in seal coating?</label>
+      </div>
+      <div class="form-group">
+        <select required>
+          <option value="" disabled selected hidden></option>
+          <option>$0 - $10,000</option>
+          <option>$10,000 - $15,000</option>
+          <option>$15,000 - $20,000</option>
+          <option>$20,000+</option>
+        </select>
+        <label>How much are you producing in profit each month?</label>
+      </div>
+      <button class="neu-button">Get Your Free Marketing Plan</button>
     </aside>
   </div>
 </header>
@@ -217,35 +240,6 @@ footer.site-footer{background:var(--secondary);color:#ddd;padding:2rem 1rem;marg
     <div class="feature"><h3>Sealcoating</h3><p>Drive more clients to your sealcoating business.</p></div>
     <div class="feature"><h3>Home Repair</h3><p>Increase bookings for home repair and renovations efficiently.</p></div>
     <div class="feature"><h3>Landscaping</h3><p>Get more local landscaping clients.</p></div>
-  </div>
-</section>
-
-<!-- Project Slider -->
-<section class="project-slider-container">
-  <div class="project-slider" id="project-slider">
-    <div class="project-slide"><img src="https://picsum.photos/250/150?random=1"><p>"This 5,000 roofing job was brought to us by Purely Advertising"</p><strong>Mike Wilson, Roofing</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/250/150?random=2"><p>"Large sealcoating contract secured through ads"</p><strong>Linda Green, Sealcoating</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/250/150?random=3"><p>"Home repair bookings skyrocketed"</p><strong>Kevin Lee, Home Repair</strong></div>
-    <div class="project-slide"><img src="https://picsum.photos/250/150?random=4"><p>"Landscaping leads grew quickly"</p><strong>Rachel Adams, Landscaping</strong></div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="insights" class="section">
-  <h3>Commonly Asked Questions</h3>
-  <div class="accordion">
-    <div class="acc-item">
-      <button aria-expanded="false">What is Digital Marketing?<span>+</span></button>
-      <div class="content">Digital marketing for home services includes ads, SEO, and local campaigns to get more leads.</div>
-    </div>
-    <div class="acc-item">
-      <button aria-expanded="false">How long to see results?<span>+</span></button>
-      <div class="content">Paid ads can show results immediately; SEO is longer-term but effective for lasting leads.</div>
-    </div>
-    <div class="acc-item">
-      <button aria-expanded="false">How much does it cost?<span>+</span></button>
-      <div class="content">Costs depend on ad spend, competition, and services offered. We provide tailored proposals.</div>
-    </div>
   </div>
 </section>
 
@@ -270,31 +264,17 @@ footer.site-footer{background:var(--secondary);color:#ddd;padding:2rem 1rem;marg
 </footer>
 
 <script>
-// Accordion
-document.querySelectorAll('.acc-item button').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const expanded=btn.getAttribute('aria-expanded')==='true';
-    btn.setAttribute('aria-expanded', String(!expanded));
-    btn.nextElementSibling.style.display=expanded?'none':'block';
-  });
-});
-
 // Mobile nav
 const mobileToggle=document.getElementById('mobile-toggle');
 const navLinks=document.querySelector('.nav-links');
 function setMobileView(){ if(window.innerWidth<=880){ mobileToggle.style.display='inline-block'; navLinks.style.display='none'; }else{ mobileToggle.style.display='none'; navLinks.style.display='flex'; }}
 setMobileView();
-window.addEventListener('resize', setMobileView);
+window.addEventListener('resize',setMobileView);
 mobileToggle.addEventListener('click',()=>{ navLinks.style.display=navLinks.style.display==='flex'?'none':'flex'; });
 
-// Duplicate slider content for infinite scroll
-const slider=document.getElementById('project-slider');
-slider.innerHTML += slider.innerHTML;
-
-// Form submission (example: just prevent default)
-document.getElementById('marketingForm').addEventListener('submit', e=>{
-  e.preventDefault();
-  alert('Form submitted! Integrate with Google Sheets or backend as needed.');
+// Smooth scroll for top button
+document.getElementById('scroll-form').addEventListener('click',()=>{
+  document.getElementById('form-section').scrollIntoView({behavior:'smooth'});
 });
 </script>
 
