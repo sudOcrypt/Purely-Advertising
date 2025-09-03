@@ -13,8 +13,9 @@ body { font-family: 'Inter', sans-serif; color: #222; background: #f5f7fa; line-
 
 /* ====== Header ====== */
 header { text-align: center; padding: 100px 20px; background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; }
+header .site-name { font-weight:800; font-size:1.2rem; margin-bottom:20px; display:block; }
 header h1 { font-size: 3rem; font-weight: 800; margin-bottom: 20px; }
-header p { font-size: 1.4rem; max-width: 700px; margin: 0 auto 30px; }
+header p { font-size: 1.4rem; max-width: 700px; margin: 0 auto 30px; color:white; }
 header h2 { font-size: 1.6rem; margin-top: 30px; color: #fbbf24; }
 .btn { display: inline-block; margin-top: 25px; padding: 16px 35px; font-weight: 600; background: #fbbf24; color: #111; border-radius: 10px; cursor: pointer; transition: 0.3s; font-size:1.1rem;}
 .btn:hover { background: #f59e0b; transform: translateY(-2px); }
@@ -35,8 +36,9 @@ p { max-width: 700px; margin: 0 auto 20px auto; font-size: 1.1rem; color: #444; 
 .testimonial { background: white; padding: 35px; margin: 25px auto; border-radius: 15px; max-width: 800px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); font-style: italic; font-size:1.1rem; line-height:1.6; transition:0.3s;}
 .testimonial:hover { transform: translateY(-5px); }
 
-/* ====== Calendly ====== */
-.calendly-section { background:white; padding:70px 30px; border-radius:15px; text-align:center; margin:60px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);}
+/* ====== Calendly + Form ====== */
+.calendly-section { background:white; padding:70px 30px; border-radius:15px; text-align:center; margin:60px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display:flex; flex-wrap:wrap; gap:40px; justify-content:center; align-items:flex-start;}
+.calendly-section > div { flex:1; min-width:300px; }
 .calendly-inline-widget { margin-top:30px; height:650px; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.1); }
 
 /* ====== Footer ====== */
@@ -58,13 +60,17 @@ footer a:hover { text-decoration:underline; }
 .custom-form button { padding:15px 30px; font-weight:600; border-radius:10px; border:none; background:#fbbf24; color:#111; font-size:1.1rem; cursor:pointer; transition:0.3s;}
 .custom-form button:hover { background:#f59e0b; transform:translateY(-2px);}
 
-/* ====== Thank You Animation ====== */
+/* ====== Thank You ====== */
 .thank-you { display:none; text-align:center; padding:40px; font-size:1.3rem; color:#1e3a8a; font-weight:700; }
+
+/* ====== Responsive ====== */
+@media(max-width:900px){ .calendly-section{flex-direction:column;} }
 </style>
 </head>
 <body>
 
 <header>
+  <span class="site-name">Purely Advertising</span>
   <h1>We Help YOUR Home Service Business Book More Jobs</h1>
   <p>From roofing to seal coating, we bring you high-intent local clients ready to book.</p>
   <span class="btn" id="openModal">Book a Free Call</span>
@@ -86,30 +92,13 @@ footer a:hover { text-decoration:underline; }
 </section>
 
 <section class="calendly-section">
-  <h2>Schedule a Call at Your Convenience</h2>
-  <p>Use our simple online scheduler to pick a date and time that works best for you:</p>
-  <div class="calendly-inline-widget" data-url="https://calendly.com/jaredmatthewaigner/advertising-consultation"></div>
-  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-</section>
-
-<section>
-  <h2>What Our Clients Say</h2>
-  <div class="testimonial">"After working with this team for just one month, our roofing business saw a 65% increase in booked jobs. They handle all the advertising, so I can focus on managing my crew." – Mike R., Roofing Contractor</div>
-  <div class="testimonial">"We struggled for years with inconsistent leads. In the first three weeks, we received multiple high-intent inquiries every day. The team’s ad targeting is spot-on." – Sarah L., Landscaping</div>
-  <div class="testimonial">"I was skeptical at first, but their automated scheduling system has saved us countless hours. No more missed calls and our calendar is always full." – James T., Seal Coating</div>
-</section>
-
-<footer>
-  <p>© 2025 Purely Advertising | <a href="#" id="footerCall">Book a Call</a></p>
-</footer>
-
-<!-- Popup overlay -->
-<div class="popup-overlay" id="popup">
-  <div class="popup">
-    <span class="close-btn" id="closePopup">✖</span>
-    <h2>Book a Call Now</h2>
-
-    <!-- Custom form -->
+  <div>
+    <h2>Schedule a Call at Your Convenience</h2>
+    <p>Use our simple online scheduler to pick a date and time that works best for you:</p>
+    <div class="calendly-inline-widget" data-url="https://calendly.com/jaredmatthewaigner/advertising-consultation"></div>
+  </div>
+  <div>
+    <h2>Book a Call Form</h2>
     <form class="custom-form" id="customForm" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" method="POST" target="hidden_iframe">
       <label for="name">Full Name</label>
       <input type="text" name="entry.1895950474" id="name" required>
@@ -123,16 +112,37 @@ footer a:hover { text-decoration:underline; }
       <input type="email" name="entry.1417314964" id="email" required>
       <button type="submit">Submit & Book Call</button>
     </form>
-
-    <!-- Thank You message -->
     <div class="thank-you" id="thankYouMessage">✅ Thanks! Your request has been submitted. We'll contact you shortly.</div>
+  </div>
+</section>
 
-    <!-- Hidden iframe to submit without leaving page -->
-    <iframe name="hidden_iframe" style="display:none;"></iframe>
+<section>
+  <h2>What Our Clients Say</h2>
+  <div class="testimonial">"After working with this team for just one month, our roofing business saw a 65% increase in booked jobs. They handle all the advertising, so I can focus on managing my crew." – Mike R., Roofing Contractor</div>
+  <div class="testimonial">"We struggled for years with inconsistent leads. In the first three weeks, we received multiple high-intent inquiries every day. The team’s ad targeting is spot-on." – Sarah L., Landscaping</div>
+  <div class="testimonial">"I was skeptical at first, but their automated scheduling system has saved us countless hours. No more missed calls and our calendar is always full." – James T., Seal Coating</div>
+</section>
+
+<footer>
+  <p>© 2025 Purely Advertising | <a href="#" id="footerCall">Book a Call</a></p>
+</footer>
+
+<!-- Hidden iframe for Google Form submission -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+<!-- Popup overlay -->
+<div class="popup-overlay" id="popup">
+  <div class="popup">
+    <span class="close-btn" id="closePopup">✖</span>
+    <h2>Book a Call Now</h2>
+    <div class="iframe-container">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/viewform?embedded=true"></iframe>
+    </div>
   </div>
 </div>
 
 <script>
+// Popup handlers
 const openModal = document.getElementById('openModal');
 const footerCall = document.getElementById('footerCall');
 const popup = document.getElementById('popup');
@@ -140,29 +150,21 @@ const closeModal = document.getElementById('closePopup');
 const form = document.getElementById('customForm');
 const thankYou = document.getElementById('thankYouMessage');
 
-// Open popup
 [openModal, footerCall].forEach(btn => {
   btn.addEventListener('click', (e)=> {
     e.preventDefault();
     popup.style.display = 'flex';
   });
 });
-
-// Close popup
 closeModal.addEventListener('click', ()=> { popup.style.display='none'; });
-
-// Close clicking outside
 window.addEventListener('click', (e)=> { if(e.target===popup) popup.style.display='none'; });
-
-// Auto popup after 5 seconds
 setTimeout(()=>{ popup.style.display='flex'; }, 5000);
 
-// Handle submission
+// Form submission
 form.addEventListener('submit', (e)=> {
   e.preventDefault();
-  // Submit to hidden iframe
   form.submit();
-  // Show Thank You message
+  form.previousElementSibling && (form.previousElementSibling.style.display='none'); // hide heading above form
   form.style.display='none';
   thankYou.style.display='block';
 });
