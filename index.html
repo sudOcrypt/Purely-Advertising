@@ -39,16 +39,23 @@ body{min-height:100%}
 /* awards banner */
 .cert-banner{padding:8px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.00));border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,23,0.45)}
 
-/* awards strip styling (magenta gradient + white logo silhouettes) */
-.awards-strip{border-radius:12px;overflow:hidden}
-.awards-inner{background:linear-gradient(90deg,#4b0b2f 0%,#ff2f7d 50%,#9f1e6a 100%);padding:12px;border-radius:10px;display:flex;align-items:center}
-.awards-logos{display:flex;gap:18px;align-items:center;justify-content:center;width:100%}
-.award-logo{width:140px;height:36px;opacity:0.95;display:inline-block}
-.award-logo rect{fill:transparent}
-/* constrain awards strip logos so they don't render oversized */
-.awards-logos{display:flex;gap:18px;align-items:center;justify-content:center;width:100%;flex-wrap:wrap}
-.award-item{width:120px;height:64px;display:flex;align-items:center;justify-content:center}
-.award-logo-img{max-height:56px;width:auto;object-fit:contain;display:block;background:transparent}
+.awards-strip{border-radius:12px;overflow:hidden;margin-bottom:8px}
+.awards-inner{background:linear-gradient(90deg,#2a0b3f 0%,#ff4da6 50%,#7b1e57 100%);padding:14px 16px;border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.04)}
+/* keep logos in one row; allow horizontal scroll on small screens */
+.awards-logos{display:flex;gap:18px;align-items:center;justify-content:flex-start;width:100%;flex-wrap:nowrap;overflow-x:auto;padding:6px 4px;-webkit-overflow-scrolling:touch}
+/* consistent slot for each logo */
+.award-item{flex:0 0 140px;height:64px;display:flex;align-items:center;justify-content:center}
+.award-logo-img{max-height:56px;width:auto;object-fit:contain;display:block;background:transparent;filter:none;transition:transform .18s ease}
+.award-logo-img:hover{transform:translateY(-4px)}
+/* small scrollbar styling for better visibility on desktop */
+.awards-logos::-webkit-scrollbar{height:8px}
+.awards-logos::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12);border-radius:6px}
+
+@media(min-width:980px){
+  .awards-logos{justify-content:center;overflow-x:visible;padding:0}
+  .award-item{width:120px;height:64px}
+  .award-logo-img{max-height:56px}
+}
 /* don't invert uploaded full-color logos by default; use transparent PNGs/SVGs for best result */
 .cert-icon img{width:28px;height:28px;display:block;object-fit:contain}
 
