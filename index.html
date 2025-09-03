@@ -122,6 +122,33 @@ body::before,body::after{z-index:-3}
 .modal-card{width:100%;max-width:640px;background:linear-gradient(180deg,#071025 0%,#071827 100%);border-radius:14px;padding:20px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 20px 60px rgba(2,6,23,0.6);color:var(--muted)}
 .modal-close{position:absolute;right:18px;top:14px;background:transparent;border:0;color:#9fb0c8;font-weight:700;cursor:pointer}
 
+/* Modal-specific form lead styles (reuse main form styles but scoped) */
+.modal-card .form-lead{text-align:center;margin:6px 0 14px}
+.modal-card .form-lead h3{color:#ff4da6;font-size:1.05rem;margin:0 0 6px;letter-spacing:0.4px;font-weight:900}
+.modal-card .form-lead p{color:#cfe3ff;margin:0 0 10px;font-size:0.92rem}
+.modal-card .features{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;align-items:start;max-width:380px;margin:0 auto}
+.modal-card .feature{display:flex;gap:8px;align-items:flex-start;color:#e6f6ff;font-weight:700}
+.modal-card .feature .check{width:20px;height:20px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;color:white;background:linear-gradient(90deg,#ff5ea6,#7c3aed);box-shadow:0 6px 18px rgba(124,58,237,0.12);flex:0 0 20px;font-size:12px}
+.modal-card .feature small{display:block;color:#9fb0c8;font-weight:600;font-size:11px;margin-top:3px}
+
+/* Modal form spacing: more generous gaps so fields don't touch */
+.modal-card .form{display:flex;flex-direction:column;gap:14px}
+.modal-card .input{padding:14px 16px;border-radius:12px}
+.modal-card select{padding:14px 16px}
+.modal-card .login-button{margin-top:6px;align-self:flex-start}
+
+/* improved select appearance inside modal */
+.modal-card select{appearance:none;-webkit-appearance:none;-moz-appearance:none;padding-right:42px;background-color:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpolyline points='6 8 10 12 14 8' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:16px 16px;color:#e6f6ff;padding:12px 14px;border-radius:10px}
+.modal-card .input{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04)}
+
+/* Global select improvements for readability */
+select,input[type="text"],input[type="email"],.input{color:#e6f6ff}
+select{background-color:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);padding:12px 14px;border-radius:10px;appearance:none}
+select:focus{outline:none;box-shadow:0 6px 20px rgba(124,58,237,0.12)}
+/* Style the native options where supported */
+select option{background:#071827;color:#e6f6ff;padding:8px}
+/* fallbacks for browsers that ignore option styles: add a darker dropdown surface via -webkit-scrollbar track for webkit if needed */
+
 /* small tweak so modal form looks like the right-side form */
 .modal-card .heading{font-size:18px;text-align:left;color:white;margin-bottom:12px}
 .hero{display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:start;padding:3rem 0}
@@ -159,6 +186,18 @@ body::before,body::after{z-index:-3}
 .container-form::before{content:'';position:absolute;width:220px;height:110px;right:8px;top:-40px;background:radial-gradient(circle at 30% 30%, rgba(255,77,166,0.9) 0%, rgba(255,77,166,0.45) 20%, rgba(255,77,166,0.05) 40%, rgba(255,77,166,0) 60%);filter:blur(30px);z-index:0;border-radius:50%}
 .container-form::after{content:'';position:absolute;width:160px;height:160px;right:-20px;top:-70px;background:radial-gradient(circle at 40% 40%, rgba(124,58,237,0.95) 0%, rgba(124,58,237,0.45) 20%, rgba(124,58,237,0.08) 40%, rgba(124,58,237,0) 60%);filter:blur(30px);z-index:0;border-radius:50%}
 .container-form .heading{position:relative;z-index:1;color:white;font-size:20px;font-weight:800;text-align:center;margin-bottom:12px}
+.form-lead{text-align:center;margin:4px 0 12px}
+.form-lead h3{color:#ff4da6;font-size:1.15rem;margin:0 0 6px;letter-spacing:0.6px;font-weight:900}
+.form-lead p{color:#cfe3ff;margin:0 0 10px;font-size:0.95rem}
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;align-items:start;max-width:440px;margin:0 auto}
+.feature{display:flex;gap:10px;align-items:flex-start;color:#e6f6ff;font-weight:700}
+.feature .check{width:22px;height:22px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;color:white;background:linear-gradient(90deg,#ff5ea6,#7c3aed);box-shadow:0 6px 18px rgba(124,58,237,0.12);flex:0 0 22px;font-size:13px}
+.feature small{display:block;color:#9fb0c8;font-weight:600;font-size:12px;margin-top:3px}
+
+@media(max-width:520px){
+  .features{grid-template-columns:1fr}
+  .form-lead h3{font-size:1.05rem}
+}
 .container-form .form{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
 .input{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);padding:12px 14px;border-radius:12px;color:var(--muted);font-size:14px}
 .input::placeholder{color:#89a0bd}
@@ -213,12 +252,15 @@ body::before,body::after{z-index:-3}
 
 /* --- FAQ (revamped) --- */
 .accordion{margin-top:2rem;display:grid;gap:12px}
-.acc-item{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;border:1px solid rgba(255,255,255,0.04);overflow:hidden;box-shadow:0 6px 20px rgba(2,6,23,0.45)}
-.acc-item button{background:none;border:0;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#e6eef8;font-weight:700;cursor:pointer;width:100%;font-size:15px}
+  .acc-item button{background:none;border:0;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#e6eef8;font-weight:700;cursor:pointer;width:100%;font-size:15px}
 .acc-item button .label{flex:1;text-align:left}
 .acc-item button .icon{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.02);display:inline-flex;align-items:center;justify-content:center;color:#9fb0c8;transition:transform .28s ease,background .28s ease}
-.acc-item .content{max-height:0;overflow:hidden;padding:0 16px;transition:max-height .34s ease,padding .28s ease;color:#cbd5e1;font-size:14px}
-.acc-item.open .content{padding:12px 16px 16px}
+  .acc-item{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;border:1px solid rgba(255,255,255,0.04);overflow:hidden;box-shadow:0 6px 20px rgba(2,6,23,0.45)}
+
+  /* collapsed state: keep small vertical padding so content appears higher in the card */
+  .acc-item .content{max-height:0;overflow:hidden;padding:6px 16px;transition:max-height .34s ease,padding .22s ease,color .2s ease;color:#cbd5e1;font-size:15px;line-height:1.6}
+  /* open state: slightly reduced top padding so the answer sits higher; rely on JS to set explicit max-height to avoid scrollbars */
+  .acc-item.open .content{padding:8px 18px 12px;overflow:hidden}
 .acc-item.open button .icon{transform:rotate(45deg);background:linear-gradient(45deg,var(--accent),var(--accent-2));color:white;box-shadow:0 8px 20px rgba(124,58,237,0.18)}
 .acc-item .answer-list{margin:6px 0 0;padding-left:18px}
 .faq-cta{margin-top:10px;background:transparent;border-radius:10px;padding:12px 14px;border:1px dashed rgba(255,255,255,0.03);color:#cfe3ff}
@@ -243,7 +285,69 @@ body::before,body::after{z-index:-3}
 .socials a{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.02);display:inline-flex;align-items:center;justify-content:center;color:#9fb0c8;text-decoration:none}
 .site-footer small{color:#90a8bf}
 /* responsive */
-@media(max-width:980px){.hero{grid-template-columns:1fr;}.nav a{display:none}.container{padding:1rem}.services{justify-content:center}}
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr;}
+  .nav a{display:none}
+  .container{padding:1rem}
+  .services{justify-content:center}
+  /* make hero CTAs stack nicely on narrow tablets */
+  .hero-ctas{flex-direction:column;align-items:stretch}
+  .container-form{margin-top:18px}
+}
+
+/* Mobile (small screens) improvements: readability & touch targets */
+@media(max-width:520px){
+  /* base sizing */
+  html,body{font-size:15px}
+  .container{padding:0.9rem}
+  .hero{padding:1.8rem 0}
+  .hero-left h2{font-size:1.5rem;line-height:1.12}
+  .hero-sub{font-size:0.98rem}
+  .lead{font-size:0.98rem}
+
+  /* CTAs full width for easy tapping */
+  .hero-ctas{gap:12px}
+  .hero-ctas .btn-primary, .button, .cta-btn, .login-button{width:100%;display:block;padding:12px 14px;box-sizing:border-box}
+
+  /* form and modal adjustments */
+  .container-form{padding:16px;border-radius:12px}
+  .container-form .heading{font-size:18px}
+  .modal-backdrop{padding:12px}
+  .modal-card{padding:14px;max-width:100%;border-radius:12px}
+  .modal-card .form{gap:12px}
+  .modal-card .features{max-width:100%;grid-template-columns:1fr}
+
+  /* make inputs easier to tap */
+  .input, select, .login-button{min-height:44px;font-size:15px}
+
+  /* awards strip scales down */
+  .awards-logos{gap:12px;padding:6px}
+  .award-item{flex:0 0 90px;height:48px}
+  .award-logo-img{max-height:44px}
+
+  /* features stack */
+  .features{grid-template-columns:1fr;gap:8px}
+
+  /* testimonials: slightly smaller slides for mobile viewport */
+  .testimonial-slide{width:240px}
+
+  /* FAQ: larger touch targets and less vertical gap so answers appear higher */
+  .acc-item button{padding:14px 16px;font-size:16px}
+  .acc-item .content{font-size:15px;padding:10px 16px}
+
+  /* footer stack and full-width CTA */
+  .site-footer .footer-inner{padding:0.8rem;flex-direction:column;align-items:stretch}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:10px}
+  .footer-cta .cta-btn{width:100%;text-align:center}
+
+  /* reduce animation pressure on very small devices */
+  @media (prefers-reduced-motion: reduce){
+    .testimonials-slider{animation:none}
+  }
+
+  /* better tap highlight for interactive elements */
+  a,button,input,select{ -webkit-tap-highlight-color: rgba(255,255,255,0.06); }
+}
 </style>
 </head>
 <body>
@@ -273,6 +377,16 @@ body::before,body::after{z-index:-3}
   <div class="modal-card" role="document">
     <button class="modal-close" id="modal-close">Close ✕</button>
     <div class="heading">Get Your Free Marketing Plan</div>
+    <div class="form-lead" aria-hidden="false">
+      <h3>Unlock Your Free Growth Strategy</h3>
+      <p>Custom, no-fluff guidance to turn ad spend into booked jobs.</p>
+      <div class="features" role="list">
+        <div class="feature" role="listitem"><span class="check" aria-hidden="true">✓</span><div>Custom Growth Strategy<small>Built for your market</small></div></div>
+        <div class="feature" role="listitem"><span class="check" aria-hidden="true">✓</span><div>ROI & Forecasted Sales<small>Realistic projections</small></div></div>
+        <div class="feature" role="listitem"><span class="check" aria-hidden="true">✓</span><div>Free Audit & Recommendations<small>Quick wins + roadmap</small></div></div>
+        <div class="feature" role="listitem"><span class="check" aria-hidden="true">✓</span><div>Access to Proprietary Tech<small>Automation & reporting</small></div></div>
+      </div>
+    </div>
     <!-- duplicate form in modal (posts to same Google Form) -->
     <form class="form modal-form" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" target="hidden_iframe">
       <input class="input" name="entry.1895950474" type="text" placeholder="Full Name" required>
@@ -312,6 +426,8 @@ body::before,body::after{z-index:-3}
         <button class="btn-primary" id="hero-cta">Get your free plan</button>
       </div>
 
+
+
       <div class="kpi-strip" aria-hidden="true">
         <div class="kpi-item"><div class="num" data-target="2100000">$2.1M</div><div class="kpi-note">Revenue driven</div></div>
         <div class="kpi-item"><div class="num" data-target="3400">3,400</div><div class="kpi-note">Leads generated</div></div>
@@ -329,6 +445,16 @@ body::before,body::after{z-index:-3}
 
     <aside class="container-form" id="contact">
       <div class="heading">Get Your Free Marketing Plan</div>
+      <div class="form-lead" aria-hidden="false">
+        <h3>Unlock Your Free Growth Strategy</h3>
+        <p>Custom, no-fluff guidance to turn ad spend into booked jobs.</p>
+        <div class="features" role="list">
+          <div class="feature" role="listitem"><span class="check" aria-hidden="true">✓</span><div>Custom Growth Strategy<small>Built for your market</small></div></div>
+          <div class="feature" role="listitem"><span class="check" aria-hidden="true">✓</span><div>ROI & Forecasted Sales<small>Realistic projections</small></div></div>
+          <div class="feature" role="listitem"><span class="check" aria-hidden="true">✓</span><div>Free Audit & Recommendations<small>Quick wins + roadmap</small></div></div>
+          <div class="feature" role="listitem"><span class="check" aria-hidden="true">✓</span><div>Access to Proprietary Tech<small>Automation & reporting</small></div></div>
+        </div>
+      </div>
       <!-- hidden iframe target for silent Google Form submission -->
       <iframe name="hidden_iframe" id="hidden_iframe" style="display:none"></iframe>
       <!-- form posts to Google Forms formResponse endpoint so entries land in your Sheet -->
@@ -590,31 +716,42 @@ body::before,body::after{z-index:-3}
 <script>
 // Accordion (revamped)
 document.querySelectorAll('.acc-item').forEach(item=>{
-  const btn=item.querySelector('button');
-  const content=item.querySelector('.content');
-  btn.addEventListener('click',()=>{
-    const isOpen=item.classList.contains('open');
+  const btn = item.querySelector('button');
+  const content = item.querySelector('.content');
+  const BUFFER = 18; // extra space to avoid tight clipping
+  btn.addEventListener('click', ()=>{
+    const isOpen = item.classList.contains('open');
     if(isOpen){
+      // collapse this item
       item.classList.remove('open');
       btn.setAttribute('aria-expanded','false');
-      // collapse smoothly
+      // set explicit height then collapse to 0 so transition runs
       content.style.maxHeight = content.scrollHeight + 'px';
-      // allow the browser to apply the explicit height then null it to trigger transition
-      requestAnimationFrame(()=>{ content.style.maxHeight = null; });
+      requestAnimationFrame(()=>{ content.style.maxHeight = '0px'; });
     } else {
-      // close others
+      // close any other open items
       document.querySelectorAll('.acc-item.open').forEach(openItem=>{
         openItem.classList.remove('open');
         openItem.querySelector('button').setAttribute('aria-expanded','false');
-        // collapse others smoothly
         const otherContent = openItem.querySelector('.content');
         otherContent.style.maxHeight = otherContent.scrollHeight + 'px';
-        requestAnimationFrame(()=>{ otherContent.style.maxHeight = null; });
+        requestAnimationFrame(()=>{ otherContent.style.maxHeight = '0px'; });
       });
+      // open this one
       item.classList.add('open');
       btn.setAttribute('aria-expanded','true');
-      // ensure the open class styles are applied before measuring
-      requestAnimationFrame(()=>{ content.style.maxHeight = content.scrollHeight + 'px'; });
+      // measure and apply height with a small buffer to prevent clipping
+      requestAnimationFrame(()=>{
+        content.style.maxHeight = (content.scrollHeight + BUFFER) + 'px';
+      });
+      // once transition ends, clear maxHeight so content can grow naturally if needed
+      const onEnd = (ev)=>{
+        if(ev.propertyName === 'max-height' && item.classList.contains('open')){
+          content.style.maxHeight = 'none';
+        }
+        content.removeEventListener('transitionend', onEnd);
+      };
+      content.addEventListener('transitionend', onEnd);
     }
   });
 });
@@ -676,6 +813,16 @@ if(openBtn && modal){
 // Hero CTA opens the same form modal
 const heroCta=document.getElementById('hero-cta');
 if(heroCta && modal){ heroCta.addEventListener('click',()=>{ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); const first=modal.querySelector('input'); if(first) first.focus(); }); }
+
+// Make all primary CTAs and header CTA open the modal for the exact form
+document.querySelectorAll('.btn-primary, .button, .cta-btn').forEach(el=>{
+  el.addEventListener('click',(e)=>{
+    // avoid intercepting actual form submits
+    if(e.target && e.target.tagName==='INPUT' && e.target.type==='submit') return;
+    e.preventDefault();
+    if(modal){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); const first = modal.querySelector('input,select,textarea'); if(first) first.focus(); }
+  });
+});
 
 // no demo button — focusing on lead form
 
