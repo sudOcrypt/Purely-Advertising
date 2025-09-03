@@ -2,151 +2,90 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Purely Advertising | Home Services Marketing</title>
-<meta name="description" content="We help home service businesses grow with advertising, SEO, and paid media. Contact us for your free growth plan.">
 <style>
-/* Base */
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
-html,body{height:100%;background:#111;color:#fff;}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;height:auto;display:block}
+/* --- Base Styles --- */
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,sans-serif;}
+body{background:#111;color:#eee;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
 
-/* Colors */
-:root {
+/* --- Colors --- */
+:root{
   --primary:#1a73e8;
-  --secondary:#1f1f1f;
-  --light-bg:#222;
-  --dark-bg:#111;
-  --text-dark:#fff;
-  --text-light:#ddd;
+  --secondary:#1a1a1a;
+  --accent:#00ff75;
+  --light:#ddd;
+  --dark:#111;
 }
 
-/* Topbar */
-.topbar{background:var(--dark-bg);padding:.5rem 1rem;color:var(--text-light);display:flex;justify-content:space-between;align-items:center;font-size:.95rem}
-.topbar .phone{font-weight:600}
+/* --- Topbar --- */
+.topbar{background:var(--secondary);padding:.5rem 1rem;display:flex;justify-content:space-between;align-items:center;font-size:.95rem;color:var(--light);}
+.topbar .phone{font-weight:600;}
 
-/* Navigation */
-nav.nav{background:var(--secondary);color:var(--text-light);padding:.75rem 1rem;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.05)}
-.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.brand{display:flex;align-items:center;gap:.6rem}
-.brand .logo-mark{width:44px;height:44px;background:var(--primary);border-radius:6px;display:inline-block}
-.brand h1{font-size:1rem;margin:0}
-.nav-links{display:flex;gap:1rem;align-items:center}
-.nav-links a{color:#ddd;padding:.25rem .6rem;border-radius:6px}
-.nav-toggle{display:none;background:#222;padding:.4rem;border-radius:6px;color:#fff;cursor:pointer}
+/* --- Navigation --- */
+nav.nav{background:#1b1b1b;color:var(--light);padding:.75rem 1rem;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.05);}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.brand{display:flex;align-items:center;gap:.6rem;}
+.brand .logo-mark{width:44px;height:44px;background:var(--primary);border-radius:6px;display:inline-block;}
+.brand h1{font-size:1rem;margin:0;}
+.nav-links{display:flex;gap:1rem;align-items:center;}
+.nav-links a{color:#ddd;padding:.25rem .6rem;border-radius:6px;}
+.cta-btn{background:var(--primary);color:#fff;padding:.6rem 1rem;border-radius:999px;font-weight:700;border:none;cursor:pointer;transition:all .3s;}
+.cta-btn:hover{background:#155ab6;}
 
-/* Spacious74 Button - smaller */
-.btn-container {
-  padding: 2px;
-  border-radius: 16px;
-  background: linear-gradient(180deg, #f3aefe, #8d35d3);
-  transform: perspective(850px) rotateX(12deg) rotateY(6deg) rotateZ(-8deg);
-  color: white;
-  box-shadow: -3px 3px 0px #5d2b82,-4px 5px 6px #4d1e7491,-8px 10px 14px #4d1e7450,-15px 15px 30px #4d1e74a8;
-  position: relative;
-  transition: all 0.4s ease;
-}
-.btn-container:hover{transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);box-shadow:0px 3px 4px #5d2b82,0px 5px 6px #4d1e7491,0px 10px 14px #4d1e7450,0px 15px 30px #4d1e74a8;}
-.btn-container:active{box-shadow:0px 3px 4px #5c2b82c7,0px 5px 6px #4d1e745b,0px 3px 10px #4d1e7434,0px 7px 20px #4d1e746e;}
-.btn-container:active > .button{box-shadow: inset 0px 4px 8px #3114494b;}
-.button {
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  padding: 14px 18px;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(180deg, #d28dff, #8533c6);
-  box-shadow: inset 0px -4px 8px #3114494b;
-  text-shadow: -1px 1px 3px #2a0f3fbb;
-  transition: all 0.3s ease;
-}
-.button svg{margin-top:1px;filter: drop-shadow(-1px 1px 1px #2a0f3f6c);}
+/* --- Hero --- */
+.hero{background:linear-gradient(180deg,#1b1b1b,#111);color:var(--light);padding:4rem 1rem;}
+.hero .inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:center;}
+.hero h2{margin:0 0 1rem;font-size:2rem;line-height:1.05;}
+.hero p.lead{margin:0 0 1.5rem;color:#ccc;}
+.hero .mini-logos{display:flex;gap:.6rem;flex-wrap:wrap;}
+.hero .mini-logos div{background:var(--secondary);color:var(--light);padding:.5rem 1rem;border-radius:6px;font-weight:700;}
 
-/* Hero */
-.hero{background:linear-gradient(180deg,#1b1b1b,#111);color:var(--text-light);padding:4rem 1rem}
-.hero .inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:center}
-.hero h2{margin:0 0 1rem;font-size:2rem;line-height:1.05}
-.hero p.lead{margin:0 0 1.5rem;color:#ddd}
-.hero .mini-logos{display:flex;gap:.6rem;flex-wrap:wrap}
-.hero .mini-logos div{background:var(--light-bg);color:#fff;padding:.5rem 1rem;border-radius:6px;font-weight:700}
+/* --- Features / Tiles --- */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:1rem;}
+.feature{background:#1a1a1a;padding:1rem;border-radius:20px;box-shadow: 4px 4px 10px #0a0a0a, -4px -4px 10px #222; text-align:center;color:var(--light);transition:all .3s;}
+.feature:hover{box-shadow: inset 4px 4px 10px #0a0a0a, inset -4px -4px 10px #222; transform:scale(1.02);}
+.feature h3{margin:.5rem 0;font-size:1.1rem;}
+.feature p{margin:0;font-size:.9rem;}
 
-/* Cards - Tiagoadag */
-.card {
- width: 190px;
- height: 254px;
- background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
- border-radius: 20px;
- transition: all .3s;
- margin:1rem;
-}
-.card2 {
- width: 190px;
- height: 254px;
- background-color: #1a1a1a;
- border-radius:20px;
- transition: all .2s;
-}
-.card2:hover {transform: scale(0.98);border-radius:20px;}
-.card:hover {box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);}
+/* --- Project slider --- */
+.project-slider-container{overflow:hidden;margin-top:2rem;padding:1rem;border-radius:10px;}
+.project-slider{display:flex;gap:1rem;animation:scroll 60s linear infinite;}
+.project-slide{flex:0 0 auto;width:250px;background:#1a1a1a;padding:.5rem;border-radius:10px;box-shadow:4px 4px 10px #000, -4px -4px 10px #222;text-align:center;font-size:.85rem;}
+.project-slide img{width:100%;height:150px;object-fit:cover;border-radius:6px;margin-bottom:.4rem;}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* Section containers */
-.section{max-width:1200px;margin:3rem auto;padding:0 1rem;display:flex;flex-wrap:wrap;justify-content:center;}
+/* --- Form styles (neumorphic dark) --- */
+.form-box{background:#1a1a1a;padding:2rem;border-radius:20px;box-shadow:4px 4px 10px #000, -4px -4px 10px #222;}
+.form-box input, .form-box select{width:100%;padding:12px 10px;margin-bottom:1rem;border-radius:10px;background:#111;color:#eee;border:none;box-shadow: inset 4px 4px 8px #000, inset -4px -4px 8px #222;}
+.form-box label{display:block;margin-bottom:.3rem;color:#eee;font-weight:600;}
+.form-box button{background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:20px;border:none;cursor:pointer;box-shadow:4px 4px 10px #000, -4px -4px 10px #222;transition:.3s;width:100%;}
+.form-box button:hover{box-shadow: inset 4px 4px 10px #000, inset -4px -4px 10px #222;}
 
-/* Dark Neumorphic form */
-.login-box {
-  width:100%;
-  max-width:500px;
-  margin:1.5rem auto;
-}
-.login-box p:first-child{margin-bottom:1.5rem;font-size:1.5rem;text-align:center;color:#fff;font-weight:bold;}
-.login-box .user-box{position:relative;margin-bottom:20px;}
-.login-box .user-box input, .login-box .user-box select{
-  width:100%;padding:12px;font-size:16px;color:#fff;background:#222;border:none;border-radius:12px;box-shadow: inset 4px 4px 6px #111,inset -4px -4px 6px #333;outline:none;
-}
-.login-box .user-box label{position:absolute;top:50%;left:12px;transform:translateY(-50%);color:#aaa;transition:.3s;pointer-events:none;}
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label,
-.login-box .user-box select:focus ~ label,
-.login-box .user-box select:valid ~ label{
-  top:-10px;font-size:12px;color:#fff;
-}
+/* --- FAQ --- */
+.accordion{margin-top:1rem;}
+.acc-item{border-bottom:1px solid #222;padding:.8rem 0;}
+.acc-item button{background:none;border:0;padding:0;font-weight:700;display:flex;justify-content:space-between;width:100%;color:#eee;cursor:pointer;}
+.acc-item .content{display:none;margin-top:.6rem;color:#ccc;}
 
-/* Neumorphic submit button */
-.neu-button {
-  background-color: #222;
-  border-radius: 50px;
-  box-shadow: inset 4px 4px 8px #111, inset -4px -4px 8px #333;
-  color: #fff;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 12px 32px;
-  transition: all 0.2s ease-in-out;
-  border:none;
-  width:100%;
-}
-.neu-button:hover {
-  box-shadow: inset 2px 2px 5px #111, inset -2px -2px 5px #333, 2px 2px 5px #111, -2px -2px 5px #333;
-}
+/* --- Footer --- */
+footer.site-footer{background:#1b1b1b;color:#ccc;padding:2rem 1rem;margin-top:3rem;}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:flex-start;}
+.footer-col{min-width:200px;}
+.small{font-size:.9rem;color:#999;margin-top:.6rem;}
 
-/* Modal */
-#modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);align-items:center;justify-content:center;z-index:999}
-#modal .modal-content{background:var(--light-bg);max-width:680px;width:92%;padding:2rem;border-radius:20px;position:relative;box-shadow: 0 10px 40px rgba(0,0,0,.7);}
-#modal button{position:absolute;right:12px;top:12px;background:none;border:0;font-size:1.5rem;color:#fff;cursor:pointer}
+/* --- Modal --- */
+#modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);align-items:center;justify-content:center;z-index:999;}
+#modal .modal-content{background:#1a1a1a;max-width:680px;width:92%;padding:2rem;border-radius:20px;position:relative;}
+#modal button#modal-close{position:absolute;right:12px;top:12px;background:none;border:0;font-size:1.2rem;color:#eee;cursor:pointer;}
 
-/* Responsive */
-@media (max-width:880px){
-.hero .inner{grid-template-columns:1fr}
-.nav-links{display:none}
-.nav-toggle{display:inline-block}
-.section{justify-content:center;}
-}
+/* --- Button top nav --- */
+.btn-container{padding:3px;background:linear-gradient(180deg,#f3aefe,#8d35d3);border-radius:19px;color:white;transition:all .4s;}
+.btn-container .button{color:white;cursor:pointer;padding:12px 18px;font-size:1rem;font-weight:600;border-radius:12px;border:none;background:linear-gradient(180deg,#d28dff,#8533c6);}
+
+/* --- Responsive --- */
+@media(max-width:880px){.hero .inner{grid-template-columns:1fr;}.nav-links{display:none;}.nav-toggle{display:inline-block;background:#222;padding:.4rem;border-radius:6px;color:#fff;}}
 </style>
 </head>
 <body>
@@ -169,17 +108,9 @@ nav.nav{background:var(--secondary);color:var(--text-light);padding:.75rem 1rem;
       <a href="#work">Projects</a>
       <a href="#insights">FAQ</a>
       <a href="#contact">Contact</a>
-      <div class="btn-container" style="display:inline-block;margin-left:1rem;">
-        <button class="button" id="open-modal-btn">
-          <span>Get Free Marketing Plan</span>
-          <svg viewBox="0 0 48 48" height="1.2em" width="1.2em" class="svg" xmlns="http://www.w3.org/2000/svg">
-            <path d="M42 24H6m24-12l12 12l-12 12" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="none"></path>
-          </svg>
-        </button>
+      <div class="btn-container" style="margin-left:10px;">
+        <button class="button" id="top-btn">Get Free Marketing Plan</button>
       </div>
-    </div>
-    <div style="display:flex;gap:.6rem;align-items:center">
-      <button class="nav-toggle" id="mobile-toggle" aria-label="Open menu">☰</button>
     </div>
   </div>
 </nav>
@@ -194,112 +125,166 @@ nav.nav{background:var(--secondary);color:var(--text-light);padding:.75rem 1rem;
         <div>Boosting Local Businesses Since 2020</div>
         <div>Experts in Roofing & Home Services Advertising</div>
       </div>
+      <!-- Tiles -->
+      <div class="features" style="margin-top:2rem;">
+        <div class="feature">
+          <h3>Roofing Services</h3>
+          <p>Expert campaigns for maximum leads.</p>
+        </div>
+        <div class="feature">
+          <h3>Sealcoating</h3>
+          <p>Drive more clients to your sealcoating business.</p>
+        </div>
+        <div class="feature">
+          <h3>Home Repair</h3>
+          <p>Increase bookings for home repair and renovations efficiently.</p>
+        </div>
+        <div class="feature">
+          <h3>Landscaping</h3>
+          <p>Get more local landscaping clients.</p>
+        </div>
+      </div>
     </div>
+    <!-- Form -->
+    <aside class="form-box">
+      <h3 style="text-align:center;margin-bottom:1rem;">Get Your Free Marketing Plan</h3>
+      <form>
+        <label>Full Name</label>
+        <input type="text" required>
+        <label>Phone Number</label>
+        <input type="text" required>
+        <label>Email</label>
+        <input type="email" required>
+        <label>How soon do you need digital advertising?</label>
+        <select required>
+          <option>YESTERDAY!</option>
+          <option>This week</option>
+          <option>Some other time in the future</option>
+        </select>
+        <label>Does your company specialize in seal coating?</label>
+        <select required>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+        <label>How much are you producing in profit each month?</label>
+        <select required>
+          <option>$0 - $10,000</option>
+          <option>$10,000 - $15,000</option>
+          <option>$15,000 - $20,000</option>
+          <option>$20,000+</option>
+        </select>
+        <button type="submit">Submit</button>
+      </form>
+    </aside>
   </div>
 </header>
 
-<!-- Services Section with Tiagoadag Cards -->
-<section id="services" class="section">
-  <div class="card"><div class="card2"><h3 style="color:#fff;padding:1rem">Roofing Services</h3></div></div>
-  <div class="card"><div class="card2"><h3 style="color:#fff;padding:1rem">Sealcoating</h3></div></div>
-  <div class="card"><div class="card2"><h3 style="color:#fff;padding:1rem">Home Repair</h3></div></div>
-  <div class="card"><div class="card2"><h3 style="color:#fff;padding:1rem">Landscaping</h3></div></div>
+<!-- Project Slider -->
+<section class="project-slider-container">
+  <div class="project-slider">
+    <div class="project-slide"><img src="https://picsum.photos/250/150?random=1"><p>"This 5,000 roofing job was brought to us by Purely Advertising"</p><strong>Mike Wilson, Roofing</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/250/150?random=2"><p>"Large sealcoating contract secured through ads"</p><strong>Linda Green, Sealcoating</strong></div>
+    <div class="project-slide"><img src="https://picsum.photos/250/150?random=3"><p>"Home repair bookings skyrocketed"</p><strong>Kevin Lee, Home Repair</strong></div>
+  </div>
 </section>
 
-<!-- Form visible on page -->
-<div class="login-box">
-  <p>Get Your Free Marketing Plan</p>
-  <form>
-    <div class="user-box"><input type="text" required name="fullname"><label>Full Name</label></div>
-    <div class="user-box"><input type="tel" required name="phone"><label>Phone Number</label></div>
-    <div class="user-box"><input type="email" required name="email"><label>Email</label></div>
-    <div class="user-box">
-      <select required name="timeframe">
-        <option value="" disabled selected></option>
+<!-- FAQ -->
+<section id="insights" class="section">
+  <h3>Commonly Asked Questions</h3>
+  <div class="accordion">
+    <div class="acc-item">
+      <button aria-expanded="false">What is Digital Marketing?<span>+</span></button>
+      <div class="content">Digital marketing for home services includes ads, SEO, and local campaigns to get more leads.</div>
+    </div>
+    <div class="acc-item">
+      <button aria-expanded="false">How long to see results?<span>+</span></button>
+      <div class="content">Paid ads can show results immediately; SEO is longer-term but effective for lasting leads.</div>
+    </div>
+    <div class="acc-item">
+      <button aria-expanded="false">How much does it cost?<span>+</span></button>
+      <div class="content">Costs depend on ad spend, competition, and services offered. We provide tailored proposals.</div>
+    </div>
+    <div class="acc-item">
+      <button aria-expanded="false">Do you offer reporting?<span>+</span></button>
+      <div class="content">Absolutely. We provide dashboards and monthly reporting on ad performance and ROI.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer" id="contact">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <strong>Purely Advertising</strong>
+      <p class="small">LET’S CREATE SOMETHING IMPRESSIVE</p>
+      <p class="small">© Purely Advertising 2025</p>
+    </div>
+    <div class="footer-col">
+      <strong>Agency</strong>
+      <p class="small"><a href="#work">Projects</a> · <a href="#insights">FAQ</a></p>
+    </div>
+    <div class="footer-col">
+      <strong>Contact</strong>
+      <p class="small">Say Hello +1 267-981-5104</p>
+      <p class="small"><a href="mailto:info@purelyadvertising.com">info@purelyadvertising.com</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- Modal -->
+<div id="modal">
+  <div class="modal-content">
+    <button id="modal-close">✕</button>
+    <h3 style="text-align:center;margin-bottom:1rem;">Get Your Free Marketing Plan</h3>
+    <form>
+      <label>Full Name</label>
+      <input type="text" required>
+      <label>Phone Number</label>
+      <input type="text" required>
+      <label>Email</label>
+      <input type="email" required>
+      <label>How soon do you need digital advertising?</label>
+      <select required>
         <option>YESTERDAY!</option>
         <option>This week</option>
         <option>Some other time in the future</option>
       </select>
-      <label>How soon do you need digital advertising?</label>
-    </div>
-    <div class="user-box">
-      <select required name="specialize">
-        <option value="" disabled selected></option>
+      <label>Does your company specialize in seal coating?</label>
+      <select required>
         <option>Yes</option>
         <option>No</option>
       </select>
-      <label>Does your company specialize in seal coating?</label>
-    </div>
-    <div class="user-box">
-      <select required name="profit">
-        <option value="" disabled selected></option>
+      <label>How much are you producing in profit each month?</label>
+      <select required>
         <option>$0 - $10,000</option>
         <option>$10,000 - $15,000</option>
         <option>$15,000 - $20,000</option>
         <option>$20,000+</option>
       </select>
-      <label>How much are you producing in profit each month?</label>
-    </div>
-    <button type="submit" class="neu-button">Submit</button>
-  </form>
-</div>
-
-<!-- Modal -->
-<div id="modal">
-  <div class="modal-content">
-    <button id="close-modal">&times;</button>
-    <!-- Form duplicated inside modal -->
-    <div class="login-box">
-      <p>Get Your Free Marketing Plan</p>
-      <form>
-        <div class="user-box"><input type="text" required name="fullname"><label>Full Name</label></div>
-        <div class="user-box"><input type="tel" required name="phone"><label>Phone Number</label></div>
-        <div class="user-box"><input type="email" required name="email"><label>Email</label></div>
-        <div class="user-box">
-          <select required name="timeframe">
-            <option value="" disabled selected></option>
-            <option>YESTERDAY!</option>
-            <option>This week</option>
-            <option>Some other time in the future</option>
-          </select>
-          <label>How soon do you need digital advertising?</label>
-        </div>
-        <div class="user-box">
-          <select required name="specialize">
-            <option value="" disabled selected></option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-          <label>Does your company specialize in seal coating?</label>
-        </div>
-        <div class="user-box">
-          <select required name="profit">
-            <option value="" disabled selected></option>
-            <option>$0 - $10,000</option>
-            <option>$10,000 - $15,000</option>
-            <option>$15,000 - $20,000</option>
-            <option>$20,000+</option>
-          </select>
-          <label>How much are you producing in profit each month?</label>
-        </div>
-        <button type="submit" class="neu-button">Submit</button>
-      </form>
-    </div>
+      <button type="submit">Submit</button>
+    </form>
   </div>
 </div>
 
 <script>
 // Modal
 const modal = document.getElementById('modal');
-document.getElementById('open-modal-btn').addEventListener('click', () => { modal.style.display = 'flex'; });
-document.getElementById('close-modal').addEventListener('click', () => { modal.style.display = 'none'; });
-window.addEventListener('click', e => { if(e.target == modal) modal.style.display = 'none'; });
+document.getElementById('top-btn').addEventListener('click', ()=>{modal.style.display='flex';document.body.style.overflow='hidden';});
+document.getElementById('modal-close').addEventListener('click', ()=>{modal.style.display='none';document.body.style.overflow='auto';});
+modal.addEventListener('click', (e)=>{if(e.target===modal){modal.style.display='none';document.body.style.overflow='auto';}});
 
-// Mobile nav toggle
-document.getElementById('mobile-toggle').addEventListener('click', () => {
-  const links=document.querySelector('.nav-links');
-  links.style.display = links.style.display==='flex'?'none':'flex';
+// Accordion
+document.querySelectorAll('.acc-item button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const expanded=btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    btn.nextElementSibling.style.display=expanded?'none':'block';
+  });
 });
+
+// Duplicate slider for infinite scroll
+const slider=document.querySelector('.project-slider');
+slider.innerHTML += slider.innerHTML;
 </script>
 </body>
 </html>
