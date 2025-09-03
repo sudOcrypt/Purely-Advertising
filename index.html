@@ -5,8 +5,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Purely Advertising</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
 <link rel="icon" href="favicon.ico" type="image/x-icon">
+<style>
+/* Global Styles */
+body { 
+  font-family: 'Inter', sans-serif; 
+  margin: 0; padding: 0; line-height: 1.6; color: #222; background: #f9f9f9; 
+}
+header { 
+  text-align: center; padding: 80px 20px; background: #1e3a8a; color: white; 
+}
+header h1 { font-size: 3rem; margin-bottom: 15px; font-weight: 800; }
+header p { font-size: 1.3rem; margin-bottom: 25px; font-weight: 400; }
+header h2 { font-size: 1.5rem; font-weight: 600; }
+.btn { 
+  background: #fbbf24; color: #111; padding: 15px 30px; font-weight: 600; border-radius: 8px; 
+  cursor: pointer; display: inline-block; margin-top: 20px; transition: 0.3s ease; 
+}
+.btn:hover { background: #f59e0b; }
+section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
+section h2 { text-align: center; margin-bottom: 30px; font-weight: 700; color: #1e3a8a; }
+p { max-width: 700px; margin: 0 auto 20px auto; }
+.columns { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; margin-top: 30px; }
+.col { 
+  flex: 1; min-width: 280px; background: white; padding: 25px; border-radius: 12px; 
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06); text-align: center; 
+}
+.col img { width: 100%; border-radius: 12px; }
+.testimonial { 
+  background: white; padding: 25px; margin: 20px auto; border-radius: 12px; max-width: 800px; 
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06); font-style: italic; 
+}
+footer { background: #111; color: #ccc; padding: 40px 20px; text-align: center; }
+footer a { color: #fbbf24; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+.calendly-section { 
+  background: white; padding: 60px 20px; border-radius: 12px; text-align: center; margin: 40px auto; 
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08); 
+}
+.calendly-inline-widget { 
+  margin-top: 25px; height: 600px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); 
+}
+
+/* Popup styling */
+.popup-overlay { 
+  display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; 
+  background: rgba(0,0,0,0.7); justify-content: center; align-items: center; 
+}
+.popup { 
+  background: #fdfdfd; margin: 5% auto; padding: 40px 30px; border-radius: 12px; 
+  max-width: 750px; width: 95%; max-height: 90vh; overflow-y: auto; 
+  position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.25); font-family: 'Inter', sans-serif;
+}
+.close-btn { 
+  position: absolute; top: 15px; right: 20px; font-size: 24px; font-weight: bold; color: #333; cursor: pointer; 
+}
+
+/* Styled iframe container */
+.iframe-container { 
+  width: 100%; min-height: 800px; max-height: 1200px; overflow: hidden; border-radius: 12px; 
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1); border: none; 
+}
+.iframe-container iframe {
+  width: 100% !important; height: 100% !important; min-height: 800px; border: none;
+  border-radius: 12px; background: #fdfdfd;
+  font-size: 1.1rem !important; /* makes text inside iframe bigger */
+}
+</style>
 </head>
 <body>
 
@@ -36,15 +101,15 @@
 
   <div class="columns" style="margin-top:40px;">
     <div class="col">
-      <img src="https://via.placeholder.com/250x150" alt="Ad Example" style="width:100%; border-radius:12px;">
+      <img src="https://via.placeholder.com/250x150" alt="Ad Example">
       <p>Example of a high-performing ad creative</p>
     </div>
     <div class="col">
-      <img src="https://via.placeholder.com/250x150" alt="Landing Page" style="width:100%; border-radius:12px;">
+      <img src="https://via.placeholder.com/250x150" alt="Landing Page">
       <p>Landing page that converts visitors into leads</p>
     </div>
     <div class="col">
-      <img src="https://via.placeholder.com/250x150" alt="Client Dashboard" style="width:100%; border-radius:12px;">
+      <img src="https://via.placeholder.com/250x150" alt="Client Dashboard">
       <p>Easy-to-read dashboard showing results</p>
     </div>
   </div>
@@ -74,7 +139,7 @@
   <p>© 2025 Purely Advertising | <a href="#" id="footerCall">Book a Call</a></p>
 </footer>
 
-<!-- Popup overlay with styled Google Form -->
+<!-- Popup overlay with Google Form -->
 <div class="popup-overlay" id="popup">
   <div class="popup">
     <span class="close-btn" id="closePopup">✖</span>
@@ -89,6 +154,25 @@
   </div>
 </div>
 
-<script src="script.js"></script>
+<script>
+  const openModal = document.getElementById('openModal');
+  const closeModal = document.getElementById('closePopup');
+  const popup = document.getElementById('popup');
+  const footerCall = document.getElementById('footerCall');
+
+  // Open popup
+  openModal.addEventListener('click', () => { popup.style.display = 'flex'; });
+  footerCall.addEventListener('click', (e) => { e.preventDefault(); popup.style.display = 'flex'; });
+
+  // Close popup
+  closeModal.addEventListener('click', () => { popup.style.display = 'none'; });
+
+  // Close if clicking outside popup
+  window.addEventListener('click', (e) => { if(e.target === popup) popup.style.display = 'none'; });
+
+  // Optional: auto-show after 5 seconds
+  setTimeout(() => { popup.style.display = 'flex'; }, 5000);
+</script>
+
 </body>
 </html>
