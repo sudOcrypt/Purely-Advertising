@@ -293,7 +293,16 @@ select option{background:#071827;color:#e6f6ff;padding:8px}
 .socials a{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.02);display:inline-flex;align-items:center;justify-content:center;color:#9fb0c8;text-decoration:none}
 .site-footer small{color:#90a8bf}
 /* responsive */
-/* prevent any accidental horizontal scrolling on small viewports */
+/* --- PERFORMANCE MODE OVERRIDES ---
+  Disable expensive visuals (blurs, large shadows, continuous animations)
+  and prevent heavy repaints/DOM growth. Toggle or remove these overrides
+  once performance concerns are resolved.
+*/
+body::before, body::after{display:none !important;filter:none !important;opacity:0 !important}
+.card::before, .card::after, .testimonial-badge, .container-form::before, .container-form::after, .awards-inner, .cert-badge{box-shadow:none !important;filter:none !important}
+.testimonials-slider, .testimonials-slider *{animation:none !important;transition:none !important}
+*{transition:none !important;will-change:auto !important}
+img{max-width:100%;height:auto;display:block}
 html,body{max-width:100%;overflow-x:hidden;-webkit-overflow-scrolling:touch}
 
 @media(max-width:980px){
@@ -797,33 +806,9 @@ document.querySelectorAll('.acc-item').forEach(item=>{
   });
 });
 
-// Simple duplication for infinite CSS-driven testimonials (conservative)
-const tSlider=document.querySelector('.testimonials-slider');
-if(tSlider && !tSlider.dataset.cloned){
-  try{
-    const childrenCount = tSlider.children.length || 0;
-    // don't duplicate if already large
-    if(childrenCount > 12){
-      tSlider.dataset.cloned = 'true';
-    } else {
-      // only duplicate when viewport is wide enough or the slider width is too small
-      const MIN_VIEWPORT = 1200; // only auto-duplicate on large screens by default
-      const sliderFits = tSlider.scrollWidth > document.documentElement.clientWidth * 1.05;
-      const shouldDuplicate = window.innerWidth >= MIN_VIEWPORT || !sliderFits;
-      if(shouldDuplicate){
-        const nodes = Array.from(tSlider.children);
-        const frag = document.createDocumentFragment();
-        nodes.forEach(n=>{ frag.appendChild(n.cloneNode(true)); });
-        tSlider.appendChild(frag);
-        tSlider.dataset.cloned = 'true';
-      }
-    }
-  }catch(e){
-    // fallback: don't crash - mark cloned to avoid retries
-    tSlider.dataset.cloned = 'true';
-    console.warn('testimonial duplication skipped', e);
-  }
-}
+// Testimonial duplication disabled for performance (avoids large DOM growth)
+const tSlider = document.querySelector('.testimonials-slider');
+if(tSlider){ tSlider.dataset.cloned = 'true'; }
 
 // Ensure project slider duplicates (if present)
 const pSlider=document.querySelector('.project-slider');
