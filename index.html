@@ -23,7 +23,7 @@ header h2 { font-size: 1.6rem; margin-top: 30px; color: #fbbf24; }
 /* ====== Sections ====== */
 section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
 section h2 { text-align: center; font-weight: 700; color: #1e3a8a; margin-bottom: 50px; font-size: 2rem; }
-p { max-width: 700px; margin: 0 auto 20px auto; font-size: 1.1rem; color: #444; }
+p { max-width: 700px; margin: 0 auto 20px auto; font-size: 1.1rem; color: #fff; }
 
 /* ====== Columns ====== */
 .columns { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; }
@@ -55,10 +55,10 @@ footer a:hover { text-decoration:underline; }
 /* ====== Custom Form ====== */
 .custom-form { display:flex; flex-direction:column; gap:20px; margin-top:20px; }
 .custom-form label { font-weight:600; font-size:1.1rem; }
-.custom-form input, .custom-form select, .custom-form textarea { padding:12px 15px; border-radius:10px; border:1px solid #ccc; font-size:1rem; width:100%; transition:0.3s;}
-.custom-form input:focus, .custom-form select:focus, .custom-form textarea:focus { border-color:#2563eb; outline:none; box-shadow:0 0 8px rgba(37,99,235,0.3);}
-.custom-form button { padding:15px 30px; font-weight:600; border-radius:10px; border:none; background:#fbbf24; color:#111; font-size:1.1rem; cursor:pointer; transition:0.3s;}
-.custom-form button:hover { background:#f59e0b; transform:translateY(-2px);}
+.custom-form input, .custom-form select, .custom-form textarea { padding:15px 15px; border-radius:10px; border:1px solid #ccc; font-size:1rem; width:100%; transition:0.3s; }
+.custom-form input:focus, .custom-form select:focus, .custom-form textarea:focus { border-color:#2563eb; outline:none; box-shadow:0 0 10px rgba(37,99,235,0.3);}
+.custom-form button { padding:16px 35px; font-weight:600; border-radius:10px; border:none; background:#fbbf24; color:#111; font-size:1.1rem; cursor:pointer; transition:0.3s;}
+.custom-form button:hover { background:#f59e0b; transform:translateY(-2px); font-weight:700; }
 
 /* ====== Thank You ====== */
 .thank-you { display:none; text-align:center; padding:40px; font-size:1.3rem; color:#1e3a8a; font-weight:700; }
@@ -130,25 +130,37 @@ footer a:hover { text-decoration:underline; }
 <!-- Hidden iframe for Google Form submission -->
 <iframe name="hidden_iframe" style="display:none;"></iframe>
 
-<!-- Popup overlay -->
+<!-- Popup overlay with fixed-size form -->
 <div class="popup-overlay" id="popup">
   <div class="popup">
     <span class="close-btn" id="closePopup">✖</span>
     <h2>Book a Call Now</h2>
-    <div class="iframe-container">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/viewform?embedded=true"></iframe>
-    </div>
+    <form class="custom-form" id="popupForm" action="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse" method="POST" target="hidden_iframe">
+      <label for="popupName">Full Name</label>
+      <input type="text" name="entry.1895950474" id="popupName" required>
+      <label for="popupCompany">Company Name</label>
+      <input type="text" name="entry.306218684" id="popupCompany" required>
+      <label for="popupService">What does your company specialize in</label>
+      <input type="text" name="entry.739887506" id="popupService" required>
+      <label for="popupPhone">Phone number</label>
+      <input type="tel" name="entry.1848460539" id="popupPhone" required>
+      <label for="popupEmail">Email</label>
+      <input type="email" name="entry.1417314964" id="popupEmail" required>
+      <button type="submit">Submit & Book Call</button>
+    </form>
+    <div class="thank-you" id="popupThankYou">✅ Thanks! Your request has been submitted. We'll contact you shortly.</div>
   </div>
 </div>
 
-<!-- Scripts -->
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script>
+// Elements
 const openModal = document.getElementById('openModal');
-const footerCall = document.getElementById('footerCall');
-const popup = document.getElementById('popup');
 const closeModal = document.getElementById('closePopup');
-const form = document.getElementById('customForm');
+const popup = document.getElementById('popup');
+const footerCall = document.getElementById('footerCall');
+const popupForm = document.getElementById('popupForm');
+const popupThankYou = document.getElementById('popupThankYou');
+const customForm = document.getElementById('customForm');
 const thankYou = document.getElementById('thankYouMessage');
 
 // Popup open/close
@@ -162,14 +174,25 @@ closeModal.addEventListener('click', ()=>{popup.style.display='none';});
 window.addEventListener('click', e=>{if(e.target===popup) popup.style.display='none';});
 setTimeout(()=>{popup.style.display='flex';},5000);
 
-// Form submission
-form.addEventListener('submit', e=>{
+// Popup form submission
+popupForm.addEventListener('submit', e=>{
   e.preventDefault();
-  form.submit();
-  form.style.display='none';
+  popupForm.submit();
+  popupForm.style.display='none';
+  popupThankYou.style.display='block';
+});
+
+// Inline form submission
+customForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  customForm.submit();
+  customForm.style.display='none';
   thankYou.style.display='block';
 });
 </script>
+
+<!-- Calendly widget script -->
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 </body>
 </html>
