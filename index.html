@@ -8,7 +8,7 @@
 /* Reset & base */
 :root{--bg:#0f1720;--card:#0b1220;--muted:#cbd5e1;--accent:#7c3aed;--accent-2:#ff4da6}
 *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
-body{background:linear-gradient(120deg,#071023 0%,#071827 55%,#05273a 100%);background-size:400% 400%;animation:bgShift 18s ease infinite;color:var(--muted);line-height:1.4;position:relative;overflow-x:hidden}
+body{background:linear-gradient(120deg,#071023 0%,#071827 55%,#05273a 100%);background-size:400% 400%;/* animation disabled by default for performance */color:var(--muted);line-height:1.4;position:relative;overflow-x:hidden}
 
 /* animated gradient */
 @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
@@ -212,7 +212,7 @@ select option{background:#071827;color:#e6f6ff;padding:8px}
 .testimonials-viewport{overflow:hidden;padding:1rem 0}
 /* full-bleed helper: when the viewport should span the whole screen */
 .testimonials-viewport.full-bleed{position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;width:100vw;box-sizing:border-box;padding:1rem 0}
-.testimonials-slider{display:flex;gap:1rem;align-items:stretch;animation:testimonial-scroll 28s linear infinite}
+.testimonials-slider{display:flex;gap:1rem;align-items:stretch;/* animation disabled by default for performance */}
 .testimonial-slide{flex:0 0 auto;width:280px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:12px;box-shadow:0 8px 30px rgba(2,6,23,0.45);border:1px solid rgba(255,255,255,0.03);color:#dbeafe}
 .testimonial-slide img{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px}
 .testimonial-slide h4{margin:0 0 6px;color:white;font-size:16px}
@@ -223,6 +223,12 @@ select option{background:#071827;color:#e6f6ff;padding:8px}
 
 @media (prefers-reduced-motion: reduce){
   .testimonials-slider{animation:none}
+}
+
+/* Enable background and testimonial animation only on large viewports where performance budget is higher */
+@media (min-width:1200px) and (prefers-reduced-motion: no-preference){
+  body{animation:bgShift 18s ease infinite}
+  .testimonials-slider{animation:testimonial-scroll 28s linear infinite}
 }
 
 /* Testimonial badges & modal */
@@ -791,13 +797,31 @@ document.querySelectorAll('.acc-item').forEach(item=>{
   });
 });
 
-// Simple duplication for infinite CSS-driven testimonials
+// Simple duplication for infinite CSS-driven testimonials (conservative)
 const tSlider=document.querySelector('.testimonials-slider');
-if(tSlider){
-  // avoid duplicating multiple times
-  if(!tSlider.dataset.cloned){
-    tSlider.innerHTML += tSlider.innerHTML;
+if(tSlider && !tSlider.dataset.cloned){
+  try{
+    const childrenCount = tSlider.children.length || 0;
+    // don't duplicate if already large
+    if(childrenCount > 12){
+      tSlider.dataset.cloned = 'true';
+    } else {
+      // only duplicate when viewport is wide enough or the slider width is too small
+      const MIN_VIEWPORT = 1200; // only auto-duplicate on large screens by default
+      const sliderFits = tSlider.scrollWidth > document.documentElement.clientWidth * 1.05;
+      const shouldDuplicate = window.innerWidth >= MIN_VIEWPORT || !sliderFits;
+      if(shouldDuplicate){
+        const nodes = Array.from(tSlider.children);
+        const frag = document.createDocumentFragment();
+        nodes.forEach(n=>{ frag.appendChild(n.cloneNode(true)); });
+        tSlider.appendChild(frag);
+        tSlider.dataset.cloned = 'true';
+      }
+    }
+  }catch(e){
+    // fallback: don't crash - mark cloned to avoid retries
     tSlider.dataset.cloned = 'true';
+    console.warn('testimonial duplication skipped', e);
   }
 }
 
