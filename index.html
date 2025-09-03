@@ -15,7 +15,7 @@ body { font-family: 'Inter', sans-serif; color: #222; background: #f5f7fa; line-
 header { text-align: center; padding: 100px 20px; background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; }
 header .site-name { font-weight:800; font-size:1.2rem; margin-bottom:20px; display:block; }
 header h1 { font-size: 3rem; font-weight: 800; margin-bottom: 20px; }
-header p { font-size: 1.4rem; max-width: 700px; margin: 0 auto 30px; color:white; }
+header p { font-size: 1.4rem; max-width: 700px; margin: 0 auto 30px; color:#fff; }
 header h2 { font-size: 1.6rem; margin-top: 30px; color: #fbbf24; }
 .btn { display: inline-block; margin-top: 25px; padding: 16px 35px; font-weight: 600; background: #fbbf24; color: #111; border-radius: 10px; cursor: pointer; transition: 0.3s; font-size:1.1rem;}
 .btn:hover { background: #f59e0b; transform: translateY(-2px); }
@@ -95,7 +95,7 @@ footer a:hover { text-decoration:underline; }
   <div>
     <h2>Schedule a Call at Your Convenience</h2>
     <p>Use our simple online scheduler to pick a date and time that works best for you:</p>
-    <div class="calendly-inline-widget" data-url="https://calendly.com/jaredmatthewaigner/advertising-consultation"></div>
+    <div class="calendly-inline-widget" data-url="https://calendly.com/jaredmatthewaigner/advertising-consultation" style="min-width:300px;height:650px;"></div>
   </div>
   <div>
     <h2>Book a Call Form</h2>
@@ -141,8 +141,9 @@ footer a:hover { text-decoration:underline; }
   </div>
 </div>
 
+<!-- Scripts -->
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script>
-// Popup handlers
 const openModal = document.getElementById('openModal');
 const footerCall = document.getElementById('footerCall');
 const popup = document.getElementById('popup');
@@ -150,21 +151,21 @@ const closeModal = document.getElementById('closePopup');
 const form = document.getElementById('customForm');
 const thankYou = document.getElementById('thankYouMessage');
 
+// Popup open/close
 [openModal, footerCall].forEach(btn => {
-  btn.addEventListener('click', (e)=> {
+  btn.addEventListener('click', e => {
     e.preventDefault();
     popup.style.display = 'flex';
   });
 });
-closeModal.addEventListener('click', ()=> { popup.style.display='none'; });
-window.addEventListener('click', (e)=> { if(e.target===popup) popup.style.display='none'; });
-setTimeout(()=>{ popup.style.display='flex'; }, 5000);
+closeModal.addEventListener('click', ()=>{popup.style.display='none';});
+window.addEventListener('click', e=>{if(e.target===popup) popup.style.display='none';});
+setTimeout(()=>{popup.style.display='flex';},5000);
 
 // Form submission
-form.addEventListener('submit', (e)=> {
+form.addEventListener('submit', e=>{
   e.preventDefault();
   form.submit();
-  form.previousElementSibling && (form.previousElementSibling.style.display='none'); // hide heading above form
   form.style.display='none';
   thankYou.style.display='block';
 });
