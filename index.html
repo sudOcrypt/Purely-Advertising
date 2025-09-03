@@ -298,8 +298,8 @@ select option{background:#071827;color:#e6f6ff;padding:8px}
   and prevent heavy repaints/DOM growth. Toggle or remove these overrides
   once performance concerns are resolved.
 */
-body::before, body::after{display:none !important;filter:none !important;opacity:0 !important}
-.card::before, .card::after, .testimonial-badge, .container-form::before, .container-form::after, .awards-inner, .cert-badge{box-shadow:none !important;filter:none !important}
+.card::before, .card::after, .testimonial-badge, .container-form::before, .container-form::after, .awards-inner, .cert-badge{/* restore a lightweight, efficient shadow (no blur/filter) */
+  box-shadow:0 8px 20px rgba(2,6,23,0.25) !important;filter:none !important}
 .testimonials-slider, .testimonials-slider *{animation:none !important;transition:none !important}
 *{transition:none !important;will-change:auto !important}
 img{max-width:100%;height:auto;display:block}
