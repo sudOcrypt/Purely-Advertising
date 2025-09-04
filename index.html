@@ -817,224 +817,285 @@ body::after{
   box-shadow: 0 30px 90px rgba(2,6,23,0.14), 0 10px 30px rgba(2,6,23,0.08);
 }
 
-/* Subtle floating animation applied to hero visuals and featured cards */
-@keyframes floaty {
-  0%{ transform: translateY(0px); }
-  50%{ transform: translateY(-8px); }
-  100%{ transform: translateY(0px); }
+/* Blue blurred glow behind service cards */
+.services .service-card {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+.services .service-card::before {
+  content: "";
+  position: absolute;
+  inset: auto -10% -18% -10%; /* extend beyond card */
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(59,130,246,0.18), rgba(59,130,246,0.06) 50%, transparent 65%);
+  filter: blur(40px);
+  transform: translateY(6px) scale(1.05);
+  border-radius: 14px;
+  pointer-events: none;
+  transition: opacity 300ms ease, transform 300ms ease;
+  opacity: 1;
+}
+.services .service-card:hover::before{
+  transform: translateY(0px) scale(1.08);
+    opacity: 1;
 }
 
-.hero-left, .hero-visual, .card--float, .card.hero-card {
-  animation: floaty 6s ease-in-out infinite;
+/* Restore richer shadows for service cards specifically */
+.services .service-card,
+.services .service-card .card-inner {
+  box-shadow: 0 18px 48px rgba(2,6,23,0.10), 0 6px 18px rgba(2,6,23,0.06);
+  transition: box-shadow 260ms ease, transform 260ms ease;
 }
 
-/* Bring back the dot/SVG pattern visibility slightly */
-.site-bg-pattern { opacity: 0.18 !important; }
+/* Testimonials carousel marquee */
+.testimonials-viewport, .testimonials-slider { position: relative; overflow: hidden; }
+.testimonials-slider .testimonial-track { display: flex; gap: 20px; align-items: stretch; }
+.testimonials-slider .testimonial-slide { flex: 0 0 auto; }
+
+@keyframes marquee-horizontal {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Applied dynamically when JS prepares the track */
+.testimonials-slider.running .testimonial-track {
+  animation: marquee-horizontal linear infinite;
+  animation-duration: 26s;
+  will-change: transform;
+}
+
+/* Make sure the duplicated area hides nicely */
+.testimonials-slider .testimonial-track > .testimonial-slide { backface-visibility: hidden; }
+
+/* FAQ expansion animation */
+.acc-item .content {
+  overflow: hidden;
+  max-height: 0px;
+  transition: max-height 420ms cubic-bezier(.22,.9,.25,1), padding 360ms ease;
+  padding: 0 18px; /* collapsed padding: vertical 0 */
+}
+.acc-item.open .content {
+  padding: 16px 18px;
+}
+.acc-item .header { cursor: pointer; }
+
+/* Request plan CTA animation */
+@keyframes cta-pulse {
+  0% { transform: translateY(0) scale(1); box-shadow: 0 8px 30px rgba(59,130,246,0.12); }
+  50% { transform: translateY(-3px) scale(1.02); box-shadow: 0 18px 50px rgba(59,130,246,0.16); }
+  100% { transform: translateY(0) scale(1); box-shadow: 0 8px 30px rgba(59,130,246,0.12); }
+}
+.pulse-cta {
+  animation: cta-pulse 2.6s ease-in-out infinite;
+}
 
 </style>
 <script>
-// Accordion (revamped)
-document.querySelectorAll('.acc-item').forEach(item=>{
-  const btn = item.querySelector('button');
-  const content = item.querySelector('.content');
-  const BUFFER = 18; // extra space to avoid tight clipping
-  btn.addEventListener('click', ()=>{
-    const isOpen = item.classList.contains('open');
-    if(isOpen){
-      // collapse this item
-      item.classList.remove('open');
-      btn.setAttribute('aria-expanded','false');
-      // set explicit height then collapse to 0 so transition runs
-      content.style.maxHeight = content.scrollHeight + 'px';
-      requestAnimationFrame(()=>{ content.style.maxHeight = '0px'; });
-    } else {
-      // close any other open items
-      document.querySelectorAll('.acc-item.open').forEach(openItem=>{
-        openItem.classList.remove('open');
-        openItem.querySelector('button').setAttribute('aria-expanded','false');
-        const otherContent = openItem.querySelector('.content');
-        otherContent.style.maxHeight = otherContent.scrollHeight + 'px';
-        requestAnimationFrame(()=>{ otherContent.style.maxHeight = '0px'; });
-      });
-      // open this one
-      item.classList.add('open');
-      btn.setAttribute('aria-expanded','true');
-      // measure and apply height with a small buffer to prevent clipping
-      requestAnimationFrame(()=>{
-        content.style.maxHeight = (content.scrollHeight + BUFFER) + 'px';
-      });
-      // once transition ends, clear maxHeight so content can grow naturally if needed
-      const onEnd = (ev)=>{
-        if(ev.propertyName === 'max-height' && item.classList.contains('open')){
-          content.style.maxHeight = 'none';
-        }
-        content.removeEventListener('transitionend', onEnd);
-      };
-      content.addEventListener('transitionend', onEnd);
+// Re-enable testimonials infinite marquee by duplicating slides until track >= 2x viewport width
+(function(){
+  try {
+    const container = document.querySelector('.testimonials-slider');
+    if (!container) return;
+    // Create or find the track wrapper
+    let track = container.querySelector('.testimonial-track');
+    const slides = Array.from(container.querySelectorAll('.testimonial-slide'));
+    if (!track) {
+      track = document.createElement('div');
+      track.className = 'testimonial-track';
+      // move existing slides into track
+      slides.forEach(s => track.appendChild(s));
+      container.appendChild(track);
     }
-  });
-});
 
-// Testimonial duplication disabled for performance (avoids large DOM growth)
-const tSlider = document.querySelector('.testimonials-slider');
-if(tSlider){ tSlider.dataset.cloned = 'true'; }
+    // Duplicate slides until track scrollWidth >= container.clientWidth * 2 for smooth loop
+    const ensureDup = () => {
+      const needed = container.clientWidth * 2;
+      // guard to avoid infinite loop
+      let loops = 0;
+      while (track.scrollWidth < needed && loops < 6) {
+        slides.forEach(s => track.appendChild(s.cloneNode(true)));
+        loops++;
+      }
+      // Give a small delay then add running class to start animation
+      setTimeout(() => container.classList.add('running'), 50);
+    };
 
-// Ensure project slider duplicates (if present)
-const pSlider=document.querySelector('.project-slider');
-if(pSlider && pSlider.children.length){
-  pSlider.innerHTML += pSlider.innerHTML;
-}
-
-// Google Form silent submit handling: show success message when hidden iframe loads after submit
-const contactForm=document.querySelector('form.form[action*="docs.google.com"]');
-if(contactForm){
-  const iframe=document.getElementById('hidden_iframe');
-  let submitted=false;
-  contactForm.addEventListener('submit',()=>{ submitted=true; });
-  iframe.addEventListener('load',()=>{
-    if(!submitted) return;
-    submitted=false;
-    // show inline success message
-    const msg=document.getElementById('form-success');
-    if(msg){ msg.style.display='block'; }
-    // optionally clear the form
-    contactForm.reset();
-    // hide message after a few seconds
-    setTimeout(()=>{ if(msg) msg.style.display='none'; },5000);
-  });
-}
-
-// Modal open/close and modal form handling
-const openBtn=document.getElementById('open-form-btn');
-const modal=document.getElementById('form-modal');
-const modalClose=document.getElementById('modal-close');
-const modalForm=document.querySelector('.modal-form');
-const modalSuccess=document.getElementById('modal-success');
-if(openBtn && modal){
-  openBtn.addEventListener('click',()=>{
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden','false');
-    // focus first input
-    const first=modal.querySelector('input,input[type],select');
-    if(first) first.focus();
-  });
-  modalClose.addEventListener('click',closeModal);
-  modal.addEventListener('click',(e)=>{ if(e.target===modal) closeModal(); });
-  document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeModal(); });
-}
-
-// Hero CTA opens the same form modal
-const heroCta=document.getElementById('hero-cta');
-if(heroCta && modal){ heroCta.addEventListener('click',()=>{ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); const first=modal.querySelector('input'); if(first) first.focus(); }); }
-
-// Make all primary CTAs and header CTA open the modal for the exact form
-document.querySelectorAll('.btn-primary, .button, .cta-btn').forEach(el=>{
-  el.addEventListener('click',(e)=>{
-    // avoid intercepting actual form submits
-    if(e.target && e.target.tagName==='INPUT' && e.target.type==='submit') return;
-    e.preventDefault();
-    if(modal){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); const first = modal.querySelector('input,select,textarea'); if(first) first.focus(); }
-  });
-});
-
-// no demo button — focusing on lead form
-
-// KPI count-up animation
-function animateKpis(){
-  document.querySelectorAll('.kpi-item .num').forEach(el=>{
-    const target=Number(el.dataset.target)||0;
-    const isMoney=String(el.textContent||'').trim().startsWith('$');
-    let start=0;const duration=1500;const stepTime=25;const steps=Math.ceil(duration/stepTime);let current=0;
-    const increment=(target-start)/steps;
-    const ticker=setInterval(()=>{
-      current+=increment;current=Math.min(current,target);
-      el.textContent=isMoney?('$'+Math.round(current).toLocaleString()):((target%1!==0)?current.toFixed(1):Math.round(current).toLocaleString());
-      if(current>=target-0.0001){ clearInterval(ticker); }
-    },stepTime);
-  });
-}
-// trigger when hero comes into view
-const heroEl=document.querySelector('.hero-left');
-if(heroEl){ const obs=new IntersectionObserver((entries)=>{ entries.forEach(en=>{ if(en.isIntersecting){ animateKpis(); obs.disconnect(); } }); },{threshold:0.3}); obs.observe(heroEl); }
-function closeModal(){
-  if(!modal) return;
-  modal.classList.remove('open');
-  modal.setAttribute('aria-hidden','true');
-  // reset modal success if present
-  if(modalSuccess) modalSuccess.style.display='none';
-}
-
-// Handle modal form submit similar to sidebar form: show inline modal success on iframe load
-if(modalForm){
-  let submittedModal=false;
-  modalForm.addEventListener('submit',()=>{ submittedModal=true; });
-  const iframe=document.getElementById('hidden_iframe');
-  if(iframe){
-    iframe.addEventListener('load',()=>{
-      if(!submittedModal) return;
-      submittedModal=false;
-      if(modalSuccess) modalSuccess.style.display='block';
-      modalForm.reset();
-      // close modal after short delay
-      setTimeout(()=>{ closeModal(); },1400);
+    // Wait for fonts/images to load a bit
+    if (document.readyState === 'complete') ensureDup();
+    else window.addEventListener('load', ensureDup);
+    window.addEventListener('resize', () => {
+      // throttle
+      if (this.__resizeTimer) clearTimeout(this.__resizeTimer);
+      this.__resizeTimer = setTimeout(() => {
+        // remove existing duplicates and re-run conservative duplication
+        // keep first N originals
+        const originals = Array.from(container.querySelectorAll('.testimonial-slide')).slice(0, slides.length);
+        track.innerHTML = '';
+        originals.forEach(s => track.appendChild(s));
+        ensureDup();
+      }, 220);
     });
+  } catch (e) { console.warn('carousel marquee setup failed', e); }
+})();
+
+// Smooth FAQ expand/collapse using measured heights
+(function(){
+  try {
+    const items = document.querySelectorAll('.acc-item');
+    items.forEach(item => {
+      const header = item.querySelector('.header') || item.querySelector('summary') || item.querySelector('.acc-title');
+      const content = item.querySelector('.content');
+      if (!header || !content) return;
+      header.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        const isOpen = item.classList.contains('open');
+        if (isOpen) {
+          // collapse
+          content.style.maxHeight = content.scrollHeight + 'px';
+          // force repaint then set to 0
+          requestAnimationFrame(() => {
+            content.style.maxHeight = '0px';
+          });
+          item.classList.remove('open');
+          item.setAttribute('aria-expanded', 'false');
+        } else {
+          // expand: set to measured height
+          const measured = content.scrollHeight;
+          content.style.maxHeight = measured + 'px';
+          item.classList.add('open');
+          item.setAttribute('aria-expanded', 'true');
+          // after transition, clear maxHeight so it can grow naturally
+          const onEnd = (e) => {
+            if (e.propertyName && e.propertyName.indexOf('max-height') === -1) return;
+            content.style.maxHeight = 'none';
+            content.removeEventListener('transitionend', onEnd);
+          };
+          content.addEventListener('transitionend', onEnd);
+        }
+      });
+    });
+  } catch (e) { console.warn('FAQ expand script failed', e); }
+})();
+
+// Attach pulse animation class to request plan CTA(s) by common selectors or by text fallback
+(function(){
+  try {
+    const selectors = [
+      '.btn-request-plan', '.request-plan', '.request-plan-btn', '#request-plan', '.cta-request-plan', '[data-action="request-plan"]'
+    ];
+    let found = [];
+    selectors.forEach(sel => found = found.concat(Array.from(document.querySelectorAll(sel))));
+    // fallback: find buttons/links with innerText containing 'Request Plan' (case-insensitive)
+    if (found.length === 0) {
+      const candidates = Array.from(document.querySelectorAll('a,button'));
+      candidates.forEach(el => {
+        if (el.innerText && /request plan/i.test(el.innerText)) found.push(el);
+      });
+    }
+    found.forEach(el => el.classList.add('pulse-cta'));
+  } catch (e) { console.warn('attach CTA pulse failed', e); }
+})();
+</script>
+
+<!-- Uiverse.io button glow applied globally to buttons and common button-like elements -->
+<style>
+button,
+.button,
+.btn,
+a.button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+.btn-request-plan,
+.request-plan,
+.request-plan-btn
+{
+  --glow-color: rgb(217, 176, 255);
+  --glow-spread-color: rgba(191, 123, 255, 0.781);
+  --enhanced-glow-color: rgb(231, 206, 255);
+  --btn-color: rgb(100, 61, 136);
+  border: .25em solid var(--glow-color);
+  padding: 0.6em 1.2em; /* slightly reduced for compact UI */
+  color: var(--glow-color);
+  font-size: 0.95rem;
+  font-weight: 700;
+  background-color: var(--btn-color);
+  border-radius: 12px;
+  outline: none;
+  box-shadow: 0 0 1em .25em var(--glow-color),
+              0 0 4em 1em var(--glow-spread-color),
+              inset 0 0 .75em .25em var(--glow-color);
+  text-shadow: 0 0 .5em var(--glow-color);
+  position: relative;
+  transition: all 0.28s ease;
+  cursor: pointer;
+}
+
+/* Provide consistent focus style */
+button:focus, .btn:focus, a.button:focus, input[type="submit"]:focus {
+  box-shadow: 0 0 1.2em .3em var(--enhanced-glow-color), 0 0 4.2em 1.1em var(--glow-spread-color);
+}
+
+/* Pseudo-element reflection for elements that support it */
+button::after,
+.button::after,
+.btn::after,
+a.button::after,
+.request-plan-btn::after,
+.btn-request-plan::after
+{
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 120%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--glow-spread-color);
+  filter: blur(2em);
+  opacity: .7;
+  transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
+}
+
+button:hover,
+.button:hover,
+.btn:hover,
+a.button:hover,
+.request-plan-btn:hover,
+.btn-request-plan:hover
+{
+  color: var(--btn-color);
+  background-color: var(--glow-color);
+  box-shadow: 0 0 1em .25em var(--glow-color),
+              0 0 4em 2em var(--glow-spread-color),
+              inset 0 0 .75em .25em var(--glow-color);
+}
+
+button:active,
+.button:active,
+.btn:active,
+a.button:active,
+.request-plan-btn:active,
+.btn-request-plan:active
+{
+  box-shadow: 0 0 0.6em .25em var(--glow-color),
+              0 0 2.5em 2em var(--glow-spread-color),
+              inset 0 0 .5em .25em var(--glow-color);
+  transform: translateY(1px) scale(.998);
+}
+
+/* Fallback for input[type] elements (they don't support ::after reliably) */
+input[type="submit"], input[type="button"], input[type="reset"] {
+  padding: 0.6em 1.2em;
+  box-shadow: 0 0 1em .25em var(--glow-color), 0 0 3.2em .8em var(--glow-spread-color);
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  button, .btn, .button, a.button, input[type="submit"] {
+    transition: none !important;
+    animation: none !important;
   }
 }
-
-// subtle parallax for the full-page pattern layer
-// pattern/parallax removed to improve performance
-
-// insert case modal HTML and bind handlers (fixed binding order)
-const modalHtml = `
-<div class="case-modal" id="case-modal" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="case-card" role="document">
-    <button class="case-close" id="case-close">Close ✕</button>
-    <img id="case-img" src="" alt="Case image">
-    <h4 id="case-title"></h4>
-    <p id="case-copy"></p>
-    <div style="margin-top:12px"><button class="btn-primary" id="case-cta">Get a plan like this</button></div>
-  </div>
-</div>`;
-document.body.insertAdjacentHTML('beforeend', modalHtml);
-
-// now query the modal elements (after insertion)
-const caseModal = document.getElementById('case-modal');
-const caseImg = document.getElementById('case-img');
-const caseTitle = document.getElementById('case-title');
-const caseCopy = document.getElementById('case-copy');
-const caseClose = document.getElementById('case-close');
-const caseCta = document.getElementById('case-cta');
-
-if(caseClose){
-  caseClose.addEventListener('click',()=>{
-    caseModal.classList.remove('open');
-    caseModal.setAttribute('aria-hidden','true');
-  });
-}
-
-// open modal when clicking a slide (rebind freshly)
-document.querySelectorAll('.testimonial-slide').forEach(slide=>{
-  slide.addEventListener('click',()=>{
-    const img=slide.dataset.caseImg||slide.querySelector('img')?.src||'';
-    const title=slide.dataset.caseTitle||slide.querySelector('h4')?.textContent||'';
-    const copy=slide.dataset.caseCopy||slide.querySelector('p')?.textContent||'';
-    if(caseImg) caseImg.src=img;
-    if(caseTitle) caseTitle.textContent=title;
-    if(caseCopy) caseCopy.textContent=copy;
-    if(caseModal){ caseModal.classList.add('open'); caseModal.setAttribute('aria-hidden','false'); }
-  });
-});
-
-// CTA inside case modal opens the contact/form modal
-if(caseCta){
-  caseCta.addEventListener('click',()=>{
-    // close case modal
-    if(caseModal){ caseModal.classList.remove('open'); caseModal.setAttribute('aria-hidden','true'); }
-    // open form modal (uses existing `modal` variable defined earlier)
-    const contactModal = document.getElementById('form-modal');
-    if(contactModal){ contactModal.classList.add('open'); contactModal.setAttribute('aria-hidden','false'); const first = contactModal.querySelector('input,select,textarea'); if(first) first.focus(); }
-  });
-}
-</script>
-</body>
-</html>
+</style>
