@@ -176,8 +176,8 @@ select option{background:#071827;color:#e6f6ff;padding:8px}
 /* allow cards to form up to three columns on wider tablets */
 .services .card{flex:0 0 calc(33.333% - 0.66rem);max-width:190px}
 .card{position:relative;width:190px;height:254px;background-color:#000;display:flex;flex-direction:column;justify-content:end;padding:12px;gap:12px;border-radius:12px;cursor:pointer;overflow:visible;z-index:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02), 0 10px 30px rgba(2,6,23,0.6)}
-.card::before{content:'';position:absolute;top:-6px;left:-6px;right:-6px;bottom:-6px;background:linear-gradient(-45deg,#e81cff 0%,#40c9ff 100%);border-radius:14px;z-index:-1;transition:transform .6s cubic-bezier(.17,.89,.32,1.28);transform-origin:center}
-.card::after{content:'';position:absolute;inset:0;background:linear-gradient(-45deg,#fc00ff 0%,#00dbde 100%);filter:blur(18px);z-index:-2;transition:filter .6s,transform .6s;transform:scale(.97)}
+.card::before{content:'';position:absolute;top:-6px;left:-6px;right:-6px;bottom:-6px;background:linear-gradient(-45deg,#ff4da6 0%,#3b82f6 100%);border-radius:14px;z-index:-1;transition:transform .6s cubic-bezier(.17,.89,.32,1.28);transform-origin:center}
+.card::after{content:'';position:absolute;inset:0;background:linear-gradient(-45deg,#ff4da6 0%,#00b4ff 100%);filter:blur(36px);opacity:0.95;transform:scale(1.02);z-index:-2;transition:filter .6s,transform .6s;transform:scale(.97)}
 .card .heading{font-size:18px;color:white;font-weight:800}
 .card p{margin:0;color:#cbd5e1}
 .card p.meta{color:var(--accent);font-weight:700}
@@ -300,7 +300,8 @@ select option{background:#071827;color:#e6f6ff;padding:8px}
 /* Enable background and testimonial animation only on large viewports where performance budget is higher */
 @media (min-width:1200px) and (prefers-reduced-motion: no-preference){
   body{animation:bgShift 18s ease infinite}
-  .testimonials-slider{animation:testimonial-scroll 28s linear infinite}
+  /* slow horizontal testimonial scroll */
+  .testimonials-slider{animation:testimonial-scroll 48s linear infinite}
 }
 
 /* Testimonial badges & modal */
@@ -337,10 +338,10 @@ select option{background:#071827;color:#e6f6ff;padding:8px}
 .acc-item button .icon{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.02);display:inline-flex;align-items:center;justify-content:center;color:#9fb0c8;transition:transform .28s ease,background .28s ease}
   .acc-item{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;border:1px solid rgba(255,255,255,0.04);overflow:hidden;box-shadow:0 6px 20px rgba(2,6,23,0.45)}
 
-  /* collapsed state: keep small vertical padding so content appears higher in the card */
-  .acc-item .content{max-height:0;overflow:hidden;padding:6px 16px;transition:max-height .34s ease,padding .22s ease,color .2s ease;color:#cbd5e1;font-size:15px;line-height:1.6}
-  /* open state: slightly reduced top padding so the answer sits higher; rely on JS to set explicit max-height to avoid scrollbars */
-  .acc-item.open .content{padding:8px 18px 12px;overflow:hidden}
+  /* collapsed state: hide content until opened (use display for full, reliable expansion) */
+  .acc-item .content{display:none;padding:6px 16px;color:#cbd5e1;font-size:15px;line-height:1.6}
+  /* open state: reveal the full content block so all text displays */
+  .acc-item.open .content{display:block;padding:16px 18px;color:#cbd5e1;font-size:15px;line-height:1.6}
 .acc-item.open button .icon{transform:rotate(45deg);background:linear-gradient(45deg,var(--accent),var(--accent-2));color:white;box-shadow:0 8px 20px rgba(124,58,237,0.18)}
 .acc-item .answer-list{margin:6px 0 0;padding-left:18px}
 .faq-cta{margin-top:10px;background:transparent;border-radius:10px;padding:12px 14px;border:1px dashed rgba(255,255,255,0.03);color:#cfe3ff}
@@ -476,6 +477,57 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-overflow-scrolling:touch}
   /* better tap highlight for interactive elements */
   a,button,input,select{ -webkit-tap-highlight-color: rgba(255,255,255,0.06); }
 }
+
+/* Uiverse.io "Pravins01" inspired card theme (scoped to the services row) */
+.services .card {
+  position: relative;
+  width: 190px;
+  height: 254px;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 12px;
+  gap: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  overflow: visible;
+}
+
+.services .card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -5px;
+  margin: auto;
+  width: 200px;
+  height: 264px;
+  border-radius: 10px;
+  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
+  z-index: -10;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.services .card::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
+  transform: translate3d(0, 0, 0) scale(0.95);
+  filter: blur(20px);
+  transition: filter 0.6s ease, transform 0.6s ease;
+}
+
+.services .card .heading { font-size: 20px; text-transform: capitalize; font-weight: 700; color: white; margin:0 }
+.services .card p:not(.heading) { font-size: 14px; margin:0 }
+.services .card p:last-child { color: #000; font-weight: 600; margin:0 }
+
+.services .card:hover::after { filter: blur(30px); transform: translate3d(0,-4px,0) scale(1.02); }
+.services .card:hover::before { transform: rotate(-90deg) scaleX(1.34) scaleY(0.77); }
+
 </style>
 </head>
 <body>
@@ -562,12 +614,12 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-overflow-scrolling:touch}
       </div>
 
       <div class="services" id="services">
-        <div class="card"><p class="heading">Roofing Services</p><p>Expert campaigns for maximum leads.</p><p class="meta">Mike, Roofing</p></div>
-        <div class="card"><p class="heading">Sealcoating</p><p>Drive more clients to your sealcoating business.</p><p class="meta">Linda, Sealcoating</p></div>
-        <div class="card"><p class="heading">Home Repair</p><p>Increase bookings for home repair and renovations efficiently.</p><p class="meta">Kevin, Home Repair</p></div>
-        <div class="card"><p class="heading">Landscaping</p><p>Get more local landscaping clients.</p><p class="meta">Sarah, Landscaping</p></div>
-        <div class="card"><p class="heading">HVAC Services</p><p>Drive service calls and maintenance leads for HVAC companies.</p><p class="meta">Tom, HVAC</p></div>
-        <div class="card"><p class="heading">Exterior Painting</p><p>Attract local painting jobs with conversion-focused campaigns.</p><p class="meta">Jill, Painting</p></div>
+        <div class="card"><p class="heading">Roofing Services</p><p>Expert campaigns for maximum leads.</p><p class="meta">Localized search & high-intent ad funnels</p></div>
+        <div class="card"><p class="heading">Sealcoating</p><p>Drive more clients to your sealcoating business.</p><p class="meta">Seasonal geo-targeting & promo-driven creatives</p></div>
+        <div class="card"><p class="heading">Home Repair</p><p>Increase bookings for home repair and renovations efficiently.</p><p class="meta">Conversion-focused landing pages & call tracking</p></div>
+        <div class="card"><p class="heading">Landscaping</p><p>Get more local landscaping clients.</p><p class="meta">Local ads with seasonal offers & appointment CTR lift</p></div>
+        <div class="card"><p class="heading">HVAC Services</p><p>Drive service calls and maintenance leads for HVAC companies.</p><p class="meta">Service-call optimized campaigns & remarketing</p></div>
+        <div class="card"><p class="heading">Exterior Painting</p><p>Attract local painting jobs with conversion-focused campaigns.</p><p class="meta">High-value job targeting & A/B tested creatives</p></div>
       </div>
     </div>
 
@@ -701,7 +753,7 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-overflow-scrolling:touch}
           <p style="color:#cfe3ff;margin:6px 0 0">Case studies: campaigns that turn ad spend into booked jobs and measurable revenue.</p>
         </div>
         <div style="margin-left:auto;align-self:center">
-          <a class="btn-primary" href="#work">See case studies</a>
+          <a class="btn-primary pulse-cta" href="#work">See case studies</a>
         </div>
       </div>
     </div>
@@ -921,33 +973,45 @@ body::after{
 }
 
 /* Testimonials carousel marquee */
+
 .testimonials-viewport, .testimonials-slider { position: relative; overflow: hidden; }
-.testimonials-slider .testimonial-track { display: flex; gap: 20px; align-items: stretch; }
+.testimonials-slider .testimonial-track { display: flex; gap: 20px; align-items: stretch; flex-wrap: nowrap; }
 .testimonials-slider .testimonial-slide { flex: 0 0 auto; }
 
+/* marquee that moves the track from right -> left (0 to -50% when content is duplicated to 2x) */
 @keyframes marquee-horizontal {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-/* Applied dynamically when JS prepares the track */
+/* Applied dynamically when JS prepares the track: explicit direction and timing for reliable R->L motion */
 .testimonials-slider.running .testimonial-track {
-  animation: marquee-horizontal linear infinite;
-  animation-duration: 26s;
+  /* Use shorthand with !important so this wins over earlier performance-mode rules that set animation:none !important */
+  animation: marquee-horizontal 48s linear infinite !important; /* adjust speed here (larger = slower) */
+  animation-direction: normal !important; /* ensure forward (right-to-left) movement */
   will-change: transform;
+  transform-origin: 0 0;
 }
 
-/* Make sure the duplicated area hides nicely */
-.testimonials-slider .testimonial-track > .testimonial-slide { backface-visibility: hidden; }
+/* Pause marquee on hover so users can read slides */
+.testimonials-slider:hover .testimonial-track,
+.testimonials-slider.running:hover .testimonial-track {
+  animation-play-state: paused;
+}
 
-/* FAQ expansion animation */
+/* Make sure the duplicated area hides nicely and prevent subpixel blurring */
+.testimonials-slider .testimonial-track > .testimonial-slide { backface-visibility: hidden; transform: translateZ(0); }
+
+/* FAQ expansion animation: use display to reliably show full content when opened */
 .acc-item .content {
-  overflow: hidden;
-  max-height: 0px;
-  transition: max-height 420ms cubic-bezier(.22,.9,.25,1), padding 360ms ease;
-  padding: 0 18px; /* collapsed padding: vertical 0 */
+  display: none;
+  padding: 0 18px;
+  color: #cbd5e1;
+  font-size: 15px;
+  line-height: 1.6;
 }
 .acc-item.open .content {
+  display: block;
   padding: 16px 18px;
 }
 .acc-item .header { cursor: pointer; }
@@ -1011,43 +1075,132 @@ body::after{
   } catch (e) { console.warn('carousel marquee setup failed', e); }
 })();
 
-// Smooth FAQ expand/collapse using measured heights
+// Smooth FAQ expand/collapse with animated height (prefers-reduced-motion respected)
 (function(){
   try {
-    const items = document.querySelectorAll('.acc-item');
-    items.forEach(item => {
-      const header = item.querySelector('.header') || item.querySelector('summary') || item.querySelector('.acc-title');
-      const content = item.querySelector('.content');
-      if (!header || !content) return;
-      header.addEventListener('click', (ev) => {
-        ev.preventDefault();
-        const isOpen = item.classList.contains('open');
-        if (isOpen) {
-          // collapse
-          content.style.maxHeight = content.scrollHeight + 'px';
-          // force repaint then set to 0
-          requestAnimationFrame(() => {
-            content.style.maxHeight = '0px';
-          });
-          item.classList.remove('open');
-          item.setAttribute('aria-expanded', 'false');
-        } else {
-          // expand: set to measured height
-          const measured = content.scrollHeight;
-          content.style.maxHeight = measured + 'px';
-          item.classList.add('open');
-          item.setAttribute('aria-expanded', 'true');
-          // after transition, clear maxHeight so it can grow naturally
-          const onEnd = (e) => {
-            if (e.propertyName && e.propertyName.indexOf('max-height') === -1) return;
-            content.style.maxHeight = 'none';
-            content.removeEventListener('transitionend', onEnd);
-          };
-          content.addEventListener('transitionend', onEnd);
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function clearInline(el){
+      el.style.removeProperty('max-height');
+      el.style.removeProperty('overflow');
+      el.style.removeProperty('transition');
+    }
+
+    // JS-driven rAF animator for open/close (works even if CSS transitions are globally disabled)
+    function cancelAnim(content){
+      if (content.__faqAnim) {
+        cancelAnimationFrame(content.__faqAnim.frame);
+        delete content.__faqAnim;
+      }
+    }
+
+    function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+
+    function animateOpen(item, content){
+      if (reduce){ content.style.display = 'block'; item.classList.add('open'); item.setAttribute('aria-expanded','true'); return; }
+      cancelAnim(content);
+      // ensure visible for measurement
+      // Make element visible first, then measure on the next frame so
+      // scrollHeight is accurate (avoids reading 0 and jumping open).
+      content.style.display = 'block';
+      content.style.overflow = 'hidden';
+      // start from 0 height so growth can be animated
+      content.style.height = '0px';
+      const duration = 420;
+
+      // Measure after a paint to get correct scrollHeight, then start the rAF loop
+      requestAnimationFrame(() => {
+        const target = content.scrollHeight;
+        const start = performance.now();
+
+        function step(ts){
+          const elapsed = ts - start;
+          const progress = Math.min(1, elapsed / duration);
+          const eased = easeOutCubic(progress);
+          content.style.height = Math.max(0, Math.round(target * eased)) + 'px';
+          if (progress < 1){
+            content.__faqAnim = { frame: requestAnimationFrame(step) };
+          } else {
+            // done
+            content.style.removeProperty('height');
+            content.style.removeProperty('overflow');
+            delete content.__faqAnim;
+            item.classList.add('open');
+            item.setAttribute('aria-expanded','true');
+          }
         }
+
+        // kick off first step
+        content.__faqAnim = { frame: requestAnimationFrame(step) };
       });
+    }
+
+    function animateClose(item, content){
+      if (reduce){ content.style.display = 'none'; item.classList.remove('open'); item.setAttribute('aria-expanded','false'); return; }
+      cancelAnim(content);
+      content.style.overflow = 'hidden';
+      const start = performance.now();
+      const duration = 420;
+      const initial = content.scrollHeight;
+
+      // start from current height
+      content.style.height = initial + 'px';
+
+      function step(ts){
+        const elapsed = ts - start;
+        const progress = Math.min(1, elapsed / duration);
+        const eased = easeOutCubic(progress);
+        const current = Math.round(initial * (1 - eased));
+        content.style.height = Math.max(0, current) + 'px';
+        if (progress < 1){
+          content.__faqAnim = { frame: requestAnimationFrame(step) };
+        } else {
+          content.style.display = 'none';
+          content.style.removeProperty('height');
+          content.style.removeProperty('overflow');
+          delete content.__faqAnim;
+          item.classList.remove('open');
+          item.setAttribute('aria-expanded','false');
+        }
+      }
+      content.__faqAnim = { frame: requestAnimationFrame(step) };
+    }
+
+    // Find and replace the accordion with a clean clone (prevents duplicate handlers)
+    const old = document.querySelector('.accordion');
+    const root = old ? old.parentNode : document;
+    let accordion = old;
+    if (old){
+      accordion = old.cloneNode(true);
+      old.parentNode.replaceChild(accordion, old);
+    }
+
+    // initialize items
+    const items = (accordion || document).querySelectorAll('.acc-item');
+    items.forEach(item => {
+      const content = item.querySelector('.content');
+      const btn = item.querySelector('button');
+      if (!content || !btn) return;
+      const isOpen = item.classList.contains('open');
+      item.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      content.style.display = isOpen ? 'block' : 'none';
     });
-  } catch (e) { console.warn('FAQ expand script failed', e); }
+
+    // delegated click handler
+    if (accordion){
+      accordion.addEventListener('click', function(ev){
+        const btn = ev.target.closest('button');
+        if (!btn) return;
+        const item = btn.closest('.acc-item');
+        if (!item) return;
+        ev.preventDefault();
+        const content = item.querySelector('.content');
+        if (!content) return;
+        const isOpen = item.classList.contains('open');
+        if (isOpen) animateClose(item, content); else animateOpen(item, content);
+      }, false);
+    }
+  } catch (err) { console.warn('FAQ animated init failed', err); }
 })();
 
 // Attach pulse animation class to request plan CTA(s) by common selectors or by text fallback
@@ -1068,6 +1221,47 @@ body::after{
     found.forEach(el => el.classList.add('pulse-cta'));
   } catch (e) { console.warn('attach CTA pulse failed', e); }
 })();
+
+// (Removed duplicate DOMContentLoaded FAQ handler to allow animated JS to manage open/close)
+</script>
+
+<!-- Modal open/close wiring: open the form modal from multiple CTA targets -->
+<script>
+  (function(){
+    const modal = document.getElementById('form-modal');
+    const closeBtn = document.getElementById('modal-close');
+    if (!modal) return;
+
+    function openFormModal(e){
+      if (e) e.preventDefault();
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      const first = modal.querySelector('input,select,textarea,button');
+      if (first) first.focus();
+    }
+
+    function closeFormModal(e){
+      if (e) e.preventDefault();
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+
+    // Close handlers
+    if (closeBtn) closeBtn.addEventListener('click', closeFormModal);
+    modal.addEventListener('click', function(ev){ if (ev.target === modal) closeFormModal(); });
+    document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape' && modal.classList.contains('open')) closeFormModal(); });
+
+    // Attach openers: existing open-form button, hero CTA, and FAQ projection link
+    const triggers = [].slice.call(document.querySelectorAll('#open-form-btn, #hero-cta, .faq-cta a, .request-plan, .request-plan-btn, .btn-request-plan'));
+    triggers.forEach(el => el && el.addEventListener('click', openFormModal));
+
+    // Prevent default anchor jumps for contact anchors and open modal instead
+    document.querySelectorAll('.faq-cta a, a[href="#contact"]').forEach(a=>{
+      a.addEventListener('click', function(ev){ ev.preventDefault(); openFormModal(); });
+    });
+  })();
 </script>
 
 <!-- Uiverse.io button glow applied globally to buttons and common button-like elements -->
@@ -1170,4 +1364,26 @@ input[type="submit"], input[type="button"], input[type="reset"] {
     animation: none !important;
   }
 }
+</style>
+
+<!-- FAQ animated dropdown: allow JS-measured max-height transitions -->
+<style>
+  /* Start hidden; JS will set display and inline max-height during animation */
+  .acc-item .content{
+    display: none;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 420ms cubic-bezier(.22,.9,.25,1);
+    will-change: max-height;
+  }
+
+  /* Keep a permissive open state in CSS as a fallback only */
+  .acc-item.open .content{
+    display: block;
+    max-height: 1200px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .acc-item .content{ transition: none; }
+  }
 </style>
