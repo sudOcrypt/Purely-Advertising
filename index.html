@@ -4,6 +4,21 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>Purely Advertising | Home Services Marketing</title>
+<!-- Meta Pixel base - PurelyAdvertising Pixel ID: 4111276329119847 -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)
+  }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  try{
+    fbq('init', '4111276329119847');
+    fbq('track', 'PageView');
+  }catch(e){console.warn('fbq init failed', e)}
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4111276329119847&ev=PageView&noscript=1"/></noscript>
 <style>
 /* Reset & base */
 :root{--bg:#0f1720;--card:#0b1220;--muted:#cbd5e1;--accent:#7c3aed;--accent-2:#ff4da6; --blob-blur:120px; --blob-color-1: rgba(99,102,241,0.14); --blob-color-2: rgba(236,72,153,0.10);}
@@ -529,6 +544,36 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-overflow-scrolling:touch}
 .services .card:hover::before { transform: rotate(-90deg) scaleX(1.34) scaleY(0.77); }
 
 </style>
+
+<script>
+// Meta Pixel event bindings: PageView already sent in head; track Lead on form submit and Contact on CTA clicks
+(function(){
+  function ready(fn){
+    if (document.readyState === 'complete' || document.readyState === 'interactive') return fn();
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+
+  ready(function(){
+    if (typeof fbq !== 'function') { console.warn('fbq not available'); return; }
+
+    // Lead: modal form submission or any form with class 'modal-form'
+    var leadForms = Array.from(document.querySelectorAll('form.modal-form, form[data-lead], form')); // broad fallback
+    leadForms.forEach(function(f){
+      f.addEventListener('submit', function(){
+        try { fbq('track', 'Lead'); } catch(e){ console.warn('fbq track Lead failed', e); }
+      });
+    });
+
+    // Contact/InitiateCheckout-like: common CTA selectors
+    var ctas = Array.from(document.querySelectorAll('.cta-btn, .request-plan, .request-plan-btn, .btn-request-plan, .btn-primary, a[href="#contact"]'));
+    ctas.forEach(function(el){
+      el.addEventListener('click', function(){
+        try { fbq('track', 'Contact'); } catch(e){ console.warn('fbq track Contact failed', e); }
+      });
+    });
+  });
+})();
+</script>
 </head>
 <body>
 <header class="header">
@@ -664,6 +709,68 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-overflow-scrolling:touch}
       </form>
       <div id="form-success" style="display:none;margin-top:10px;padding:12px;border-radius:10px;background:linear-gradient(90deg,#0b1726,#071025);color:white;font-weight:700;text-align:center">Thanks — we'll be in touch shortly.</div>
     </aside>
+
+    <!-- Thank-you toast (global) -->
+    <style>
+      #thankyou-toast{position:fixed;right:20px;bottom:20px;background:linear-gradient(90deg,#0b1726,#071025);color:white;padding:12px 16px;border-radius:10px;box-shadow:0 10px 30px rgba(2,6,23,0.6);transform:translateY(14px) scale(.98);opacity:0;transition:opacity .28s ease,transform .28s ease;z-index:2200;font-weight:700}
+      #thankyou-toast.visible{opacity:1;transform:translateY(0) scale(1)}
+    </style>
+
+    <div id="thankyou-toast" role="status" aria-live="polite" style="display:none">Thanks — your form was submitted.</div>
+
+    <script>
+    (function(){
+      function showToast(text){
+        var toast = document.getElementById('thankyou-toast');
+        if(!toast) return;
+        toast.textContent = text || 'Thanks — your form was submitted.';
+        toast.style.display = 'block';
+        // force reflow to ensure transition
+        void toast.offsetWidth;
+        toast.classList.add('visible');
+        if(toast._timer) clearTimeout(toast._timer);
+        toast._timer = setTimeout(function(){
+          toast.classList.remove('visible');
+          setTimeout(function(){ toast.style.display = 'none'; }, 320);
+        }, 3800);
+      }
+
+      // show existing in-page success areas when a form submits
+      function revealInlineSuccess(form){
+        if(form.classList && form.classList.contains('modal-form')){
+          var m = document.getElementById('modal-success'); if(m) m.style.display = 'block';
+        } else {
+          var f = document.getElementById('form-success'); if(f) f.style.display = 'block';
+        }
+      }
+
+      // Attach to all forms on the page
+      var forms = Array.from(document.querySelectorAll('form'));
+      var iframe = document.getElementById('hidden_iframe');
+
+      forms.forEach(function(form){
+        if (!form) return;
+        form.addEventListener('submit', function(ev){
+          try{
+            // show immediate toast feedback
+            showToast('Thanks — your form was submitted.');
+            revealInlineSuccess(form);
+
+            // If the form posts to the hidden iframe, wait for iframe load to confirm
+            if (iframe && form.target === 'hidden_iframe'){
+              var onload = function(){
+                try{ revealInlineSuccess(form); showToast('Thanks — your form was submitted.'); }catch(e){}
+                iframe.removeEventListener('load', onload);
+              };
+              // Attach once — some browsers may fire load immediately after submit
+              iframe.addEventListener('load', onload);
+            }
+          }catch(e){ console.warn('form submit handler failed', e); }
+          // Allow normal submission to proceed (do not preventDefault)
+        }, false);
+      });
+    })();
+    </script>
     <!-- Awards & partners strip (visual) + top certifications badges -->
     <div style="margin-top:14px;grid-column:2;">
       <div class="awards-strip" aria-hidden="false">
