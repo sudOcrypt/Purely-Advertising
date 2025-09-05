@@ -3,1102 +3,1047 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purely Advertising - Digital Marketing for Home Service Businesses</title>
-    <meta name="description" content="Digital advertising specialists for home service businesses. We help seal coating, asphalt, and exterior repair companies generate more leads and grow revenue.">
-    
-    <!-- Tailwind CSS -->
+    <title>Purely Advertising - Digital Marketing for Home Services</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    
     <style>
-      @keyframes blob {
-        0% {
-          transform: translate(0px, 0px) scale(1);
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
         }
-        33% {
-          transform: translate(30px, -50px) scale(1.1);
-        }
-        66% {
-          transform: translate(-20px, 20px) scale(0.9);
-        }
-        100% {
-          transform: translate(0px, 0px) scale(1);
-        }
-      }
-      
-      .animate-blob {
-        animation: blob 7s infinite;
-      }
-      
-      .animation-delay-2000 {
-        animation-delay: 2s;
-      }
-      
-      .animation-delay-4000 {
-        animation-delay: 4s;
-      }
-        
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: all 0.6s ease-out;
-        }
-        
-        .slide-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(20px);
-            transition: all 0.6s ease-out;
-        }
-        
-        .slide-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .counter {
-            font-variant-numeric: tabular-nums;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
+        .animate-blob { animation: blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
     </style>
 </head>
-<body class="bg-white">
-    <!-- Header -->
-    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-sm shadow-lg">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between py-4">
-                <div class="flex items-center space-x-2">
-                    <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-xl">P</span>
-                    </div>
-                    <span class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                        Purely Advertising
-                    </span>
-                </div>
+<body>
+    <div id="root"></div>
 
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-gray-600 hover:text-purple-600 transition-colors duration-200">Home</a>
-                    <a href="#services" class="text-gray-600 hover:text-purple-600 transition-colors duration-200">Services</a>
-                    <a href="#about" class="text-gray-600 hover:text-purple-600 transition-colors duration-200">About</a>
-                    <a href="#contact" class="text-gray-600 hover:text-purple-600 transition-colors duration-200">Contact</a>
-                </nav>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
 
-                <div class="hidden md:flex items-center space-x-4">
-                    <div class="flex items-center space-x-2 text-gray-600">
-                        <i data-lucide="phone" class="w-4 h-4"></i>
-                        <span class="text-sm">267-981-5104</span>
-                    </div>
-                    <a href="#contact" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-200 transform hover:scale-105">
-                        Get Started
-                    </a>
-                </div>
-
-                <button id="mobile-menu-btn" class="md:hidden">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
-            </div>
-
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="md:hidden transition-all duration-300 overflow-hidden max-h-0 opacity-0">
-                <nav class="py-4 space-y-4">
-                    <a href="#home" class="block text-gray-600 hover:text-purple-600 transition-colors duration-200">Home</a>
-                    <a href="#services" class="block text-gray-600 hover:text-purple-600 transition-colors duration-200">Services</a>
-                    <a href="#about" class="block text-gray-600 hover:text-purple-600 transition-colors duration-200">About</a>
-                    <a href="#contact" class="block text-gray-600 hover:text-purple-600 transition-colors duration-200">Contact</a>
-                    <div class="flex items-center space-x-2 text-gray-600 pt-2">
-                        <i data-lucide="phone" class="w-4 h-4"></i>
-                        <span class="text-sm">267-981-5104</span>
-                    </div>
-                    <a href="#contact" class="block w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-lg hover:from-purple-700 hover:to-blue-700 transition-colors duration-200 text-center">
-                        Get Started
-                    </a>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 pt-20">
-        <!-- Animated Background Elements -->
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-            <div class="absolute top-40 left-40 w-80 h-80 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-        </div>
-
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-6xl mx-auto">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div class="fade-in">
-                        <h1 class="text-5xl md:text-7xl font-bold text-gray-800 leading-tight mb-6">
-                            Grow Your
-                            <span class="block bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                                Home Service
-                            </span>
-                            Business
-                        </h1>
-                        <p class="text-xl text-gray-600 mb-8 max-w-2xl leading-relaxed">
-                            We specialize in digital advertising for local home service businesses. 
-                            From seal coating to exterior repairs, we help you reach more customers 
-                            and grow your revenue.
-                        </p>
-                        
-                        <div class="flex flex-col sm:flex-row gap-4 mb-12">
-                            <a href="#contact" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg text-center">
-                                Get Free Consultation
-                            </a>
-                            <a href="#services" class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300 transform hover:scale-105 text-center">
-                                Our Services
-                            </a>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="text-center">
-                                <div class="text-3xl font-bold text-purple-600 mb-2 counter" data-target="500">0</div>
-                                <div class="text-gray-600">Leads Generated</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-3xl font-bold text-blue-600 mb-2 counter" data-target="50">0</div>
-                                <div class="text-gray-600">Happy Clients</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-3xl font-bold text-indigo-600 mb-2 counter" data-target="300">0</div>
-                                <div class="text-gray-600">Average ROI</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="fade-in">
-                        <div class="relative">
-                            <img src="https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Digital marketing dashboard" class="rounded-2xl shadow-2xl">
-                            <div class="absolute -bottom-6 -left-6 bg-white rounded-xl p-6 shadow-xl">
-                                <div class="flex items-center space-x-4">
-                                    <div class="bg-green-100 rounded-full p-3">
-                                        <i data-lucide="trending-up" class="w-6 h-6 text-green-600"></i>
-                                    </div>
-                                    <div>
-                                        <div class="text-2xl font-bold text-gray-800">+150%</div>
-                                        <div class="text-gray-600">Lead Increase</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="absolute -top-6 -right-6 bg-white rounded-xl p-6 shadow-xl">
-                                <div class="flex items-center space-x-4">
-                                    <div class="bg-purple-100 rounded-full p-3">
-                                        <i data-lucide="target" class="w-6 h-6 text-purple-600"></i>
-                                    </div>
-                                    <div>
-                                        <div class="text-2xl font-bold text-gray-800">95%</div>
-                                        <div class="text-gray-600">Target Accuracy</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Lead Capture Form Section -->
-    <section class="py-16 bg-white border-b border-gray-100">
-      <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-              Get Your Free Digital Marketing Strategy Session
-            </h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-              Fill out this quick form and we'll show you exactly how to generate more leads for your home service business.
-            </p>
-          </div>
-
-          <div class="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8 shadow-lg">
-            <form id="bottomLeadForm" class="space-y-6">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label class="block text-gray-700 font-medium mb-2">Full Name *</label>
-                  <input type="text" name="fullName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200" placeholder="Enter your full name" />
-                </div>
-                <div>
-                  <label class="block text-gray-700 font-medium mb-2">Phone Number *</label>
-                  <input type="tel" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200" placeholder="(555) 123-4567" />
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-gray-700 font-semibold mb-2">Email Address *</label>
-                <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200" placeholder="your@email.com" />
-              </div>
-
-              <div>
-                <label class="block text-gray-700 font-semibold mb-3">How soon do you need digital advertising? *</label>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-purple-50 transition-colors duration-200">
-                    <input type="radio" name="urgency" value="YESTERDAY!" required class="mr-3 text-purple-600" />
-                    <span class="font-medium text-purple-600">YESTERDAY!</span>
-                  </label>
-                  <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-purple-50 transition-colors duration-200">
-                    <input type="radio" name="urgency" value="This week" required class="mr-3 text-purple-600" />
-                    <span>This week</span>
-                  </label>
-                  <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-purple-50 transition-colors duration-200">
-                    <input type="radio" name="urgency" value="Some other time in the future" required class="mr-3 text-purple-600" />
-                    <span>Future</span>
-                  </label>
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-gray-700 font-medium mb-2">Does your company specialize in seal coating? *</label>
-                <div class="space-y-3">
-                  <label class="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
-                    <input type="radio" name="sealCoating" value="Yes" required class="text-purple-600 focus:ring-purple-500 mr-3" />
-                    <span class="text-gray-700">Yes</span>
-                  </label>
-                  <label class="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
-                    <input type="radio" name="sealCoating" value="No" required class="text-purple-600 focus:ring-purple-500 mr-3" />
-                    <span class="text-gray-700">No</span>
-                  </label>
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-gray-700 font-medium mb-2">How much are you producing in profit each month? *</label>
-                <div class="space-y-3">
-                  <label class="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
-                    <input type="radio" name="monthlyProfit" value="$0 - $10,000" required class="text-purple-600 focus:ring-purple-500 mr-3" />
-                    <span class="text-gray-700">$0 - $10,000</span>
-                  </label>
-                  <label class="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
-                    <input type="radio" name="monthlyProfit" value="$10,000 - $15,000" required class="text-purple-600 focus:ring-purple-500 mr-3" />
-                    <span class="text-gray-700">$10,000 - $15,000</span>
-                  </label>
-                  <label class="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
-                    <input type="radio" name="monthlyProfit" value="$15,000 - $20,000" required class="text-purple-600 focus:ring-purple-500 mr-3" />
-                    <span class="text-gray-700">$15,000 - $20,000</span>
-                  </label>
-                  <label class="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
-                    <input type="radio" name="monthlyProfit" value="$20,000+" required class="text-purple-600 focus:ring-purple-500 mr-3" />
-                    <span class="text-gray-700">$20,000+</span>
-                  </label>
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                id="leadSubmitBtn"
-                class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
-              >
-                <i data-lucide="send" class="w-5 h-5 mr-2"></i>
-                Get Free Strategy Session
-              </button>
-              
-              <p class="text-sm text-gray-500 text-center">
-                <i data-lucide="shield-check" class="w-4 h-4 inline mr-1"></i>
-                Your information is secure and will never be shared
-              </p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Our Services</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Comprehensive digital marketing solutions designed specifically for home service businesses. 
-                    We help you reach more customers and grow your revenue.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group fade-in">
-                    <div class="mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="search" class="w-12 h-12 text-purple-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Google Ads Management</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Professional Google Ads campaigns that put your business at the top of search results when customers need your services.
-                    </p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Keyword research & strategy
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Ad creation & optimization
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Bid management
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Performance tracking
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group fade-in">
-                    <div class="mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="megaphone" class="w-12 h-12 text-blue-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Facebook & Instagram Ads</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Social media advertising campaigns designed to reach local homeowners and generate quality leads for your business.
-                    </p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Audience targeting
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Creative design
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Lead generation
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Retargeting campaigns
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group fade-in">
-                    <div class="mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="bar-chart-3" class="w-12 h-12 text-indigo-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Analytics & Reporting</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Comprehensive tracking and reporting to measure campaign performance and optimize your advertising ROI.
-                    </p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Conversion tracking
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Monthly reports
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            ROI analysis
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Performance insights
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group fade-in">
-                    <div class="mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="users" class="w-12 h-12 text-green-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Lead Generation</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Specialized lead generation strategies for home service businesses including seal coating, asphalt, and exterior repairs.
-                    </p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Quality lead filtering
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            CRM integration
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Lead nurturing
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Follow-up automation
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group fade-in">
-                    <div class="mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="smartphone" class="w-12 h-12 text-pink-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Local SEO</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Optimize your online presence to dominate local search results and attract customers in your service area.
-                    </p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Google My Business
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Local citations
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Review management
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Map optimization
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group fade-in">
-                    <div class="mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="globe" class="w-12 h-12 text-orange-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Website Optimization</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Landing page creation and website optimization to convert more visitors into paying customers.
-                    </p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Landing pages
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Conversion optimization
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Mobile responsive
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <div class="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3"></div>
-                            Speed optimization
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Industries We Serve -->
-            <div class="text-center fade-in">
-                <h3 class="text-3xl font-bold text-gray-800 mb-8">Industries We Serve</h3>
-                <div class="flex flex-wrap justify-center gap-4 mb-12">
-                    <span class="bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 px-6 py-3 rounded-full font-medium hover:from-purple-200 hover:to-blue-200 transition-all duration-300 transform hover:scale-105">Seal Coating</span>
-                    <span class="bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 px-6 py-3 rounded-full font-medium hover:from-purple-200 hover:to-blue-200 transition-all duration-300 transform hover:scale-105">Asphalt Paving</span>
-                    <span class="bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 px-6 py-3 rounded-full font-medium hover:from-purple-200 hover:to-blue-200 transition-all duration-300 transform hover:scale-105">Exterior Home Repair</span>
-                    <span class="bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 px-6 py-3 rounded-full font-medium hover:from-purple-200 hover:to-blue-200 transition-all duration-300 transform hover:scale-105">Roofing Services</span>
-                    <span class="bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 px-6 py-3 rounded-full font-medium hover:from-purple-200 hover:to-blue-200 transition-all duration-300 transform hover:scale-105">Landscaping</span>
-                    <span class="bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 px-6 py-3 rounded-full font-medium hover:from-purple-200 hover:to-blue-200 transition-all duration-300 transform hover:scale-105">HVAC Services</span>
-                    <span class="bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 px-6 py-3 rounded-full font-medium hover:from-purple-200 hover:to-blue-200 transition-all duration-300 transform hover:scale-105">Plumbing</span>
-                    <span class="bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 px-6 py-3 rounded-full font-medium hover:from-purple-200 hover:to-blue-200 transition-all duration-300 transform hover:scale-105">Electrical Work</span>
-                </div>
-
-                <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 text-white">
-                    <h3 class="text-3xl font-bold mb-4">Ready to Grow Your Business?</h3>
-                    <p class="text-purple-100 mb-6 text-lg">
-                        Let's discuss how we can help you generate more leads and increase your revenue.
-                    </p>
-                    <a href="#contact" class="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 inline-block">
-                        Get Free Strategy Session
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-                <div class="slide-in-left">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">About Purely Advertising</h2>
-                    <p class="text-xl text-gray-600 mb-6 leading-relaxed">
-                        We specialize in digital advertising for local home service businesses. 
-                        Our mission is to help contractors and service providers grow their businesses 
-                        through targeted, results-driven advertising campaigns.
-                    </p>
-                    <p class="text-gray-600 mb-8 leading-relaxed">
-                        From seal coating companies to exterior repair specialists, we understand 
-                        the unique challenges of marketing home services. Our data-driven approach 
-                        ensures every advertising dollar works harder to generate quality leads 
-                        and increase your revenue.
-                    </p>
-                    
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="bg-purple-100 rounded-full p-2 mr-4 mt-1">
-                                <i data-lucide="target" class="w-5 h-5 text-purple-600"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800 mb-1">Targeted Approach</h4>
-                                <p class="text-gray-600">We focus exclusively on home service businesses, understanding your unique market and customer needs.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 rounded-full p-2 mr-4 mt-1">
-                                <i data-lucide="trending-up" class="w-5 h-5 text-blue-600"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800 mb-1">Proven Results</h4>
-                                <p class="text-gray-600">Our campaigns consistently deliver high-quality leads and measurable ROI for our clients.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-green-100 rounded-full p-2 mr-4 mt-1">
-                                <i data-lucide="users" class="w-5 h-5 text-green-600"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800 mb-1">Personal Service</h4>
-                                <p class="text-gray-600">You'll work directly with experienced professionals who understand your business goals.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="slide-in-right">
-                    <div class="relative">
-                        <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Digital marketing strategy session" class="rounded-2xl shadow-2xl">
-                        <div class="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent rounded-2xl"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Stats Section -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 fade-in">
-                <div class="text-center bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="flex justify-center mb-4">
-                        <i data-lucide="target" class="w-8 h-8 text-purple-600"></i>
-                    </div>
-                    <div class="text-3xl md:text-4xl font-bold text-gray-800 mb-2 counter" data-target="200">0</div>
-                    <div class="text-gray-600 text-sm md:text-base">Successful Campaigns</div>
-                </div>
-                <div class="text-center bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="flex justify-center mb-4">
-                        <i data-lucide="users" class="w-8 h-8 text-blue-600"></i>
-                    </div>
-                    <div class="text-3xl md:text-4xl font-bold text-gray-800 mb-2 counter" data-target="5000">0</div>
-                    <div class="text-gray-600 text-sm md:text-base">Leads Generated</div>
-                </div>
-                <div class="text-center bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="flex justify-center mb-4">
-                        <i data-lucide="award" class="w-8 h-8 text-indigo-600"></i>
-                    </div>
-                    <div class="text-3xl md:text-4xl font-bold text-gray-800 mb-2 counter" data-target="50">0</div>
-                    <div class="text-gray-600 text-sm md:text-base">Happy Clients</div>
-                </div>
-                <div class="text-center bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="flex justify-center mb-4">
-                        <i data-lucide="trending-up" class="w-8 h-8 text-green-600"></i>
-                    </div>
-                    <div class="text-3xl md:text-4xl font-bold text-gray-800 mb-2 counter" data-target="300">0</div>
-                    <div class="text-gray-600 text-sm md:text-base">Average ROI</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gradient-to-br from-purple-50 to-blue-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Ready to Grow Your Business?</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Let's discuss how we can help you generate more leads and increase your revenue 
-                    with targeted digital advertising.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Contact Information -->
-                <div class="slide-in-left">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-8">Get In Touch</h3>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-                        <a href="tel:267-981-5104" class="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group">
-                            <div class="flex items-center mb-3">
-                                <div class="bg-gradient-to-r from-purple-100 to-blue-100 rounded-full p-3 mr-4 group-hover:from-purple-200 group-hover:to-blue-200 transition-colors duration-300">
-                                    <i data-lucide="phone" class="w-6 h-6 text-purple-600"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">Phone</h4>
-                                </div>
-                            </div>
-                            <p class="text-gray-700 font-medium">267-981-5104</p>
-                            <p class="text-gray-500 text-sm">Call or text anytime</p>
-                        </a>
-
-                        <a href="mailto:jared@purelyadvertising.com" class="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group">
-                            <div class="flex items-center mb-3">
-                                <div class="bg-gradient-to-r from-purple-100 to-blue-100 rounded-full p-3 mr-4 group-hover:from-purple-200 group-hover:to-blue-200 transition-colors duration-300">
-                                    <i data-lucide="mail" class="w-6 h-6 text-purple-600"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">Email</h4>
-                                </div>
-                            </div>
-                            <p class="text-gray-700 font-medium">jared@purelyadvertising.com</p>
-                            <p class="text-gray-500 text-sm">We respond within 24hrs</p>
-                        </a>
-
-                        <a href="https://instagram.com/purelyadvertising" target="_blank" rel="noopener noreferrer" class="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group">
-                            <div class="flex items-center mb-3">
-                                <div class="bg-gradient-to-r from-purple-100 to-blue-100 rounded-full p-3 mr-4 group-hover:from-purple-200 group-hover:to-blue-200 transition-colors duration-300">
-                                    <i data-lucide="instagram" class="w-6 h-6 text-purple-600"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">Instagram</h4>
-                                </div>
-                            </div>
-                            <p class="text-gray-700 font-medium">@purelyadvertising</p>
-                            <p class="text-gray-500 text-sm">Follow for tips & updates</p>
-                        </a>
-
-                        <a href="https://www.facebook.com/profile.php?id=61580363096728" target="_blank" rel="noopener noreferrer" class="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group">
-                            <div class="flex items-center mb-3">
-                                <div class="bg-gradient-to-r from-purple-100 to-blue-100 rounded-full p-3 mr-4 group-hover:from-purple-200 group-hover:to-blue-200 transition-colors duration-300">
-                                    <i data-lucide="facebook" class="w-6 h-6 text-purple-600"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">Facebook</h4>
-                                </div>
-                            </div>
-                            <p class="text-gray-700 font-medium">Purely Advertising</p>
-                            <p class="text-gray-500 text-sm">Like our page</p>
-                        </a>
-                    </div>
-
-                    <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl p-6 text-white">
-                        <h4 class="text-xl font-bold mb-3">Free Strategy Session</h4>
-                        <p class="mb-4">
-                            Book a free 30-minute consultation to discuss your business goals 
-                            and how we can help you achieve them.
-                        </p>
-                        <div class="flex items-center text-purple-100">
-                            <i data-lucide="map-pin" class="w-5 h-5 mr-2"></i>
-                            <span>Serving businesses nationwide</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Form -->
-                <div class="slide-in-right">
-                    <div class="bg-white rounded-xl shadow-lg p-8">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Start Growing Today</h3>
-                        
-                        <form id="contact-form" class="space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label class="block text-gray-700 font-medium mb-2">Name *</label>
-                                    <input type="text" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200" placeholder="Your full name">
-                                </div>
-                                <div>
-                                    <label class="block text-gray-700 font-medium mb-2">Email *</label>
-                                    <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200" placeholder="your@email.com">
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label class="block text-gray-700 font-medium mb-2">Phone</label>
-                                    <input type="tel" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200" placeholder="(555) 123-4567">
-                                </div>
-                                <div>
-                                    <label class="block text-gray-700 font-medium mb-2">Business Type</label>
-                                    <select name="business" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200">
-                                        <option value="">Select your business</option>
-                                        <option value="seal-coating">Seal Coating</option>
-                                        <option value="asphalt">Asphalt Paving</option>
-                                        <option value="exterior-repair">Exterior Home Repair</option>
-                                        <option value="roofing">Roofing</option>
-                                        <option value="landscaping">Landscaping</option>
-                                        <option value="hvac">HVAC</option>
-                                        <option value="plumbing">Plumbing</option>
-                                        <option value="electrical">Electrical</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-gray-700 font-medium mb-2">Service Interested In</label>
-                                <select name="service" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200">
-                                    <option value="">Select a service</option>
-                                    <option value="google-ads">Google Ads Management</option>
-                                    <option value="facebook-ads">Facebook & Instagram Ads</option>
-                                    <option value="lead-generation">Lead Generation</option>
-                                    <option value="local-seo">Local SEO</option>
-                                    <option value="website-optimization">Website Optimization</option>
-                                    <option value="full-package">Complete Marketing Package</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label class="block text-gray-700 font-medium mb-2">Tell us about your goals *</label>
-                                <textarea name="message" required rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200 resize-none" placeholder="What are your main business goals? How many leads do you need per month? What's your current marketing situation?"></textarea>
-                            </div>
-
-                            <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
-                                <i data-lucide="send" class="w-5 h-5 mr-2"></i>
-                                Get Free Consultation
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white">
-        <div class="container mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Company Info -->
-                <div class="col-span-1 md:col-span-2">
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold text-xl">P</span>
-                        </div>
-                        <span class="text-2xl font-bold">Purely Advertising</span>
-                    </div>
-                    <p class="text-gray-400 mb-6 leading-relaxed max-w-md">
-                        Digital advertising specialists for home service businesses. We help contractors 
-                        and service providers grow through targeted, results-driven campaigns.
-                    </p>
-                    <div class="space-y-3">
-                        <div class="flex items-center">
-                            <i data-lucide="phone" class="w-5 h-5 text-purple-400 mr-3"></i>
-                            <span class="text-gray-300">267-981-5104</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i data-lucide="mail" class="w-5 h-5 text-purple-400 mr-3"></i>
-                            <span class="text-gray-300">jared@purelyadvertising.com</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors duration-200">Home</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors duration-200">Services</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors duration-200">About</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors duration-200">Contact</a></li>
-                    </ul>
-                </div>
-
-                <!-- Services -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Services</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li>Google Ads Management</li>
-                        <li>Facebook & Instagram Ads</li>
-                        <li>Lead Generation</li>
-                        <li>Local SEO</li>
-                        <li>Website Optimization</li>
-                        <li>Analytics & Reporting</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-800 mt-12 pt-8">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <div class="text-gray-400 mb-4 md:mb-0">
-                        <p>&copy; 2024 Purely Advertising. All rights reserved.</p>
-                    </div>
-                    <div class="flex space-x-4">
-                        <a href="https://www.facebook.com/profile.php?id=61580363096728" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors duration-200">
-                            <i data-lucide="facebook" class="w-6 h-6"></i>
-                        </a>
-                        <a href="https://instagram.com/purelyadvertising" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors duration-200">
-                            <i data-lucide="instagram" class="w-6 h-6"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-
-        // Mobile menu toggle
-      // Bottom form submission
-      document.getElementById('bottomLeadForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(this);
-        const button = this.querySelector('button[type="submit"]');
-        const originalText = button.innerHTML;
-        
-        // Show loading state
-        button.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>Submitting...';
-        button.disabled = true;
-        
-        // Create Google Form URL with data
-        const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse';
-        
-        const params = new URLSearchParams();
-        params.append('entry.1895950474', formData.get('fullName'));
-        params.append('entry.1848460539', formData.get('phone'));
-        params.append('entry.1417314964', formData.get('email'));
-        params.append('entry.306218684', formData.get('urgency'));
-        params.append('entry.739887506', formData.get('sealCoating'));
-        params.append('entry.1507047135', formData.get('monthlyProfit'));
-        
-        // Submit to Google Form
-        fetch(googleFormUrl, {
-          method: 'POST',
-          mode: 'no-cors',
-          body: params
-        }).then(() => {
-          // Show success message
-          button.innerHTML = '<i data-lucide="check" class="w-5 h-5 mr-2"></i>Thank You!';
-          button.classList.remove('from-purple-600', 'to-blue-600');
-          button.classList.add('from-green-600', 'to-green-700');
-          
-          // Reset form
-          this.reset();
-          
-          // Reset button after 3 seconds
-          setTimeout(() => {
-            button.innerHTML = originalText;
-            button.disabled = false;
-            button.classList.remove('from-green-600', 'to-green-700');
-            button.classList.add('from-purple-600', 'to-blue-600');
-          }, 3000);
-          
-        }).catch(() => {
-          // Show error message
-          button.innerHTML = '<i data-lucide="x" class="w-5 h-5 mr-2"></i>Error - Try Again';
-          button.classList.remove('from-purple-600', 'to-blue-600');
-          button.classList.add('from-red-600', 'to-red-700');
-          
-          // Reset button after 3 seconds
-          setTimeout(() => {
-            button.innerHTML = originalText;
-            button.disabled = false;
-            button.classList.remove('from-red-600', 'to-red-700');
-            button.classList.add('from-purple-600', 'to-blue-600');
-          }, 3000);
-        });
-      });
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        let isMenuOpen = false;
-
-        mobileMenuBtn.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            if (isMenuOpen) {
-                mobileMenu.style.maxHeight = '24rem';
-                mobileMenu.style.opacity = '1';
-                mobileMenuBtn.innerHTML = '<i data-lucide="x" class="w-6 h-6"></i>';
-            } else {
-                mobileMenu.style.maxHeight = '0';
-                mobileMenu.style.opacity = '0';
-                mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
-            }
-            lucide.createIcons();
-        });
-
-        // Close mobile menu when clicking on links
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                isMenuOpen = false;
-                mobileMenu.style.maxHeight = '0';
-                mobileMenu.style.opacity = '0';
-                mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
-                lucide.createIcons();
-            });
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+        // Icon components using Lucide
+        const createIcon = (iconName) => {
+            return (props) => {
+                useEffect(() => {
+                    lucide.createIcons();
+                }, []);
+                return React.createElement('i', {
+                    'data-lucide': iconName,
+                    className: props.className || '',
+                    size: props.size || 24
+                });
+            };
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+        const Menu = createIcon('menu');
+        const X = createIcon('x');
+        const Phone = createIcon('phone');
+        const Mail = createIcon('mail');
+        const TrendingUp = createIcon('trending-up');
+        const Target = createIcon('target');
+        const Zap = createIcon('zap');
+        const Search = createIcon('search');
+        const Megaphone = createIcon('megaphone');
+        const BarChart3 = createIcon('bar-chart-3');
+        const Users = createIcon('users');
+        const Smartphone = createIcon('smartphone');
+        const Globe = createIcon('globe');
+        const Award = createIcon('award');
+        const Send = createIcon('send');
+        const MapPin = createIcon('map-pin');
+        const Instagram = createIcon('instagram');
+        const Facebook = createIcon('facebook');
+
+        // Header Component
+        const Header = () => {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+            const [isScrolled, setIsScrolled] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setIsScrolled(window.scrollY > 50);
+                };
+
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const scrollToSection = (sectionId) => {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    setIsMenuOpen(false);
+                }
+            };
+
+            return React.createElement('header', {
+                className: `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+                    isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
+                }`
+            }, 
+                React.createElement('div', { className: 'container mx-auto px-4' },
+                    React.createElement('div', { className: 'flex items-center justify-between py-4' },
+                        React.createElement('div', { className: 'flex items-center space-x-2' },
+                            React.createElement('div', { 
+                                className: 'w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center' 
+                            },
+                                React.createElement('span', { className: 'text-white font-bold text-xl' }, 'P')
+                            ),
+                            React.createElement('span', { 
+                                className: 'text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent' 
+                            }, 'Purely Advertising')
+                        ),
+                        React.createElement('nav', { className: 'hidden md:flex items-center space-x-8' },
+                            React.createElement('button', {
+                                onClick: () => scrollToSection('home'),
+                                className: 'text-gray-600 hover:text-purple-600 transition-colors duration-200'
+                            }, 'Home'),
+                            React.createElement('button', {
+                                onClick: () => scrollToSection('services'),
+                                className: 'text-gray-600 hover:text-purple-600 transition-colors duration-200'
+                            }, 'Services'),
+                            React.createElement('button', {
+                                onClick: () => scrollToSection('about'),
+                                className: 'text-gray-600 hover:text-purple-600 transition-colors duration-200'
+                            }, 'About'),
+                            React.createElement('button', {
+                                onClick: () => scrollToSection('contact'),
+                                className: 'text-gray-600 hover:text-purple-600 transition-colors duration-200'
+                            }, 'Contact')
+                        ),
+                        React.createElement('div', { className: 'hidden md:flex items-center space-x-4' },
+                            React.createElement('div', { className: 'flex items-center space-x-2 text-gray-600' },
+                                React.createElement(Phone, { size: 16 }),
+                                React.createElement('span', { className: 'text-sm' }, '267-981-5104')
+                            ),
+                            React.createElement('button', {
+                                onClick: () => scrollToSection('contact'),
+                                className: 'bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-200 transform hover:scale-105'
+                            }, 'Get Started')
+                        ),
+                        React.createElement('button', {
+                            className: 'md:hidden',
+                            onClick: () => setIsMenuOpen(!isMenuOpen)
+                        }, isMenuOpen ? React.createElement(X, { size: 24 }) : React.createElement(Menu, { size: 24 }))
+                    ),
+                    React.createElement('div', {
+                        className: `md:hidden transition-all duration-300 overflow-hidden ${
+                            isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                        }`
+                    },
+                        React.createElement('nav', { className: 'py-4 space-y-4' },
+                            React.createElement('button', {
+                                onClick: () => scrollToSection('home'),
+                                className: 'block w-full text-left text-gray-600 hover:text-purple-600 transition-colors duration-200'
+                            }, 'Home'),
+                            React.createElement('button', {
+                                onClick: () => scrollToSection('services'),
+                                className: 'block w-full text-left text-gray-600 hover:text-purple-600 transition-colors duration-200'
+                            }, 'Services'),
+                            React.createElement('button', {
+                                onClick: () => scrollToSection('about'),
+                                className: 'block w-full text-left text-gray-600 hover:text-purple-600 transition-colors duration-200'
+                            }, 'About'),
+                            React.createElement('button', {
+                                onClick: () => scrollToSection('contact'),
+                                className: 'block w-full text-left text-gray-600 hover:text-purple-600 transition-colors duration-200'
+                            }, 'Contact'),
+                            React.createElement('div', { className: 'flex items-center space-x-2 text-gray-600 pt-2' },
+                                React.createElement(Phone, { size: 16 }),
+                                React.createElement('span', { className: 'text-sm' }, '267-981-5104')
+                            ),
+                            React.createElement('button', {
+                                onClick: () => scrollToSection('contact'),
+                                className: 'w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-lg hover:from-purple-700 hover:to-blue-700 transition-colors duration-200'
+                            }, 'Get Started')
+                        )
+                    )
+                )
+            );
+        };
+
+        // Hero Component
+        const Hero = () => {
+            const [isVisible, setIsVisible] = useState(false);
+
+            useEffect(() => {
+                setIsVisible(true);
+            }, []);
+
+            const scrollToContact = () => {
+                const element = document.getElementById('contact');
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+
+            const scrollToServices = () => {
+                const element = document.getElementById('services');
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+
+            return React.createElement('section', {
+                id: 'home',
+                className: 'relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 pt-20'
+            },
+                React.createElement('div', { className: 'absolute inset-0 overflow-hidden' },
+                    React.createElement('div', { className: 'absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob' }),
+                    React.createElement('div', { className: 'absolute -bottom-40 -left-40 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000' }),
+                    React.createElement('div', { className: 'absolute top-40 left-40 w-80 h-80 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000' })
+                ),
+                React.createElement('div', { className: 'container mx-auto px-4 relative z-10' },
+                    React.createElement('div', { className: 'max-w-6xl mx-auto' },
+                        React.createElement('div', { className: 'grid grid-cols-1 lg:grid-cols-2 gap-12 items-center' },
+                            React.createElement('div', {
+                                className: `transform transition-all duration-1000 ${
+                                    isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                                }`
+                            },
+                                React.createElement('h1', { className: 'text-5xl md:text-7xl font-bold text-gray-800 leading-tight mb-6' },
+                                    'Grow Your',
+                                    React.createElement('span', { className: 'block bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent' }, 'Home Service'),
+                                    'Business'
+                                ),
+                                React.createElement('p', { className: 'text-xl text-gray-600 mb-8 max-w-2xl leading-relaxed' },
+                                    'We specialize in digital advertising for local home service businesses. From seal coating to exterior repairs, we help you reach more customers and grow your revenue.'
+                                ),
+                                React.createElement('div', { className: 'flex flex-col sm:flex-row gap-4 mb-12' },
+                                    React.createElement('button', {
+                                        onClick: scrollToContact,
+                                        className: 'bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg'
+                                    }, 'Get Free Consultation'),
+                                    React.createElement('button', {
+                                        onClick: scrollToServices,
+                                        className: 'border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300 transform hover:scale-105'
+                                    }, 'Our Services')
+                                ),
+                                React.createElement('div', { className: 'grid grid-cols-1 md:grid-cols-3 gap-6' },
+                                    React.createElement('div', { className: 'text-center' },
+                                        React.createElement('div', { className: 'text-3xl font-bold text-purple-600 mb-2' }, '500+'),
+                                        React.createElement('div', { className: 'text-gray-600' }, 'Leads Generated')
+                                    ),
+                                    React.createElement('div', { className: 'text-center' },
+                                        React.createElement('div', { className: 'text-3xl font-bold text-blue-600 mb-2' }, '50+'),
+                                        React.createElement('div', { className: 'text-gray-600' }, 'Happy Clients')
+                                    ),
+                                    React.createElement('div', { className: 'text-center' },
+                                        React.createElement('div', { className: 'text-3xl font-bold text-indigo-600 mb-2' }, '300%'),
+                                        React.createElement('div', { className: 'text-gray-600' }, 'Average ROI')
+                                    )
+                                )
+                            ),
+                            React.createElement('div', {
+                                className: `transform transition-all duration-1000 delay-300 ${
+                                    isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                                }`
+                            },
+                                React.createElement('div', { className: 'relative' },
+                                    React.createElement('img', {
+                                        src: 'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=800',
+                                        alt: 'Digital marketing dashboard',
+                                        className: 'rounded-2xl shadow-2xl'
+                                    }),
+                                    React.createElement('div', { className: 'absolute -bottom-6 -left-6 bg-white rounded-xl p-6 shadow-xl' },
+                                        React.createElement('div', { className: 'flex items-center space-x-4' },
+                                            React.createElement('div', { className: 'bg-green-100 rounded-full p-3' },
+                                                React.createElement(TrendingUp, { className: 'w-6 h-6 text-green-600' })
+                                            ),
+                                            React.createElement('div', null,
+                                                React.createElement('div', { className: 'text-2xl font-bold text-gray-800' }, '+150%'),
+                                                React.createElement('div', { className: 'text-gray-600' }, 'Lead Increase')
+                                            )
+                                        )
+                                    ),
+                                    React.createElement('div', { className: 'absolute -top-6 -right-6 bg-white rounded-xl p-6 shadow-xl' },
+                                        React.createElement('div', { className: 'flex items-center space-x-4' },
+                                            React.createElement('div', { className: 'bg-purple-100 rounded-full p-3' },
+                                                React.createElement(Target, { className: 'w-6 h-6 text-purple-600' })
+                                            ),
+                                            React.createElement('div', null,
+                                                React.createElement('div', { className: 'text-2xl font-bold text-gray-800' }, '95%'),
+                                                React.createElement('div', { className: 'text-gray-600' }, 'Target Accuracy')
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+                        React.createElement('div', { className: 'mt-16 max-w-2xl mx-auto' },
+                            React.createElement('div', { className: 'bg-white rounded-2xl shadow-2xl p-8 border border-gray-100' },
+                                React.createElement('div', { className: 'text-center mb-6' },
+                                    React.createElement('h3', { className: 'text-2xl font-bold text-gray-800 mb-2' },
+                                        'Get Your Free Marketing Strategy Session'
+                                    ),
+                                    React.createElement('p', { className: 'text-gray-600' },
+                                        'Fill out this quick form and we\'ll reach out within 24 hours'
+                                    )
+                                ),
+                                React.createElement('form', {
+                                    action: 'https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse',
+                                    method: 'POST',
+                                    target: 'hidden_iframe',
+                                    onSubmit: () => {
+                                        setTimeout(() => {
+                                            alert('Thank you! Your submission has been received. We\'ll reach out to you shortly to discuss how we can help grow your business.');
+                                        }, 500);
+                                    },
+                                    className: 'space-y-6'
+                                },
+                                    React.createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-6' },
+                                        React.createElement('div', null,
+                                            React.createElement('label', { className: 'block text-gray-700 font-medium mb-2' }, 'Full Name *'),
+                                            React.createElement('input', {
+                                                type: 'text',
+                                                name: 'entry.1895950474',
+                                                required: true,
+                                                className: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200',
+                                                placeholder: 'Your full name'
+                                            })
+                                        ),
+                                        React.createElement('div', null,
+                                            React.createElement('label', { className: 'block text-gray-700 font-medium mb-2' }, 'Phone Number *'),
+                                            React.createElement('input', {
+                                                type: 'tel',
+                                                name: 'entry.1848460539',
+                                                required: true,
+                                                className: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200',
+                                                placeholder: '(555) 123-4567'
+                                            })
+                                        )
+                                    ),
+                                    React.createElement('div', null,
+                                        React.createElement('label', { className: 'block text-gray-700 font-medium mb-2' }, 'Email *'),
+                                        React.createElement('input', {
+                                            type: 'email',
+                                            name: 'entry.1417314964',
+                                            required: true,
+                                            className: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200',
+                                            placeholder: 'your@email.com'
+                                        })
+                                    ),
+                                    React.createElement('div', null,
+                                        React.createElement('label', { className: 'block text-gray-700 font-medium mb-2' }, 'How soon do you need digital advertising? *'),
+                                        React.createElement('select', {
+                                            name: 'entry.306218684',
+                                            required: true,
+                                            className: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200'
+                                        },
+                                            React.createElement('option', { value: '' }, 'Select urgency'),
+                                            React.createElement('option', { value: 'YESTERDAY!' }, 'YESTERDAY!'),
+                                            React.createElement('option', { value: 'This week' }, 'This week'),
+                                            React.createElement('option', { value: 'Some other time in the future' }, 'Some other time in the future')
+                                        )
+                                    ),
+                                    React.createElement('div', null,
+                                        React.createElement('label', { className: 'block text-gray-700 font-medium mb-2' }, 'What type of service do you provide? *'),
+                                        React.createElement('select', {
+                                            name: 'entry.739887506',
+                                            required: true,
+                                            className: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200'
+                                        },
+                                            React.createElement('option', { value: '' }, 'Select your service type'),
+                                            React.createElement('option', { value: 'Seal Coating' }, 'Seal Coating'),
+                                            React.createElement('option', { value: 'Asphalt Paving' }, 'Asphalt Paving'),
+                                            React.createElement('option', { value: 'Exterior Home Repair' }, 'Exterior Home Repair'),
+                                            React.createElement('option', { value: 'Roofing Services' }, 'Roofing Services'),
+                                            React.createElement('option', { value: 'Landscaping' }, 'Landscaping'),
+                                            React.createElement('option', { value: 'HVAC Services' }, 'HVAC Services'),
+                                            React.createElement('option', { value: 'Plumbing' }, 'Plumbing'),
+                                            React.createElement('option', { value: 'Electrical Work' }, 'Electrical Work')
+                                        )
+                                    ),
+                                    React.createElement('div', null,
+                                        React.createElement('label', { className: 'block text-gray-700 font-medium mb-2' }, 'How much are you producing in profit each month? *'),
+                                        React.createElement('select', {
+                                            name: 'entry.1507047135',
+                                            required: true,
+                                            className: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200'
+                                        },
+                                            React.createElement('option', { value: '' }, 'Select profit range'),
+                                            React.createElement('option', { value: '$0 - $10,000' }, '$0 - $10,000'),
+                                            React.createElement('option', { value: '$10,000 - $15,000' }, '$10,000 - $15,000'),
+                                            React.createElement('option', { value: '$15,000 - $20,000' }, '$15,000 - $20,000'),
+                                            React.createElement('option', { value: '$20,000+' }, '$20,000+')
+                                        )
+                                    ),
+                                    React.createElement('button', {
+                                        type: 'submit',
+                                        className: 'w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg'
+                                    }, 'Get My Free Strategy Session'),
+                                    React.createElement('p', { className: 'text-xs text-gray-500 text-center' },
+                                        '🔒 Your information is secure and will never be shared with third parties'
+                                    )
+                                ),
+                                React.createElement('iframe', { name: 'hidden_iframe', style: { display: 'none' } })
+                            )
+                        )
+                    )
+                )
+            );
+        };
+
+        // Services Component
+        const Services = () => {
+            const [isVisible, setIsVisible] = useState(false);
+
+            useEffect(() => {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        if (entries[0].isIntersecting) {
+                            setIsVisible(true);
+                        }
+                    },
+                    { threshold: 0.1 }
+                );
+
+                const element = document.getElementById('services');
+                if (element) {
+                    observer.observe(element);
+                }
+
+                return () => observer.disconnect();
+            }, []);
+
+            const services = [
+                {
+                    icon: React.createElement(Search, { className: 'w-12 h-12 text-purple-600' }),
+                    title: 'Google Ads Management',
+                    description: 'Targeted Google Ads campaigns that put your home service business in front of customers actively searching for your services.',
+                    features: ['Keyword research', 'Ad creation & optimization', 'Bid management', 'Performance tracking']
+                },
+                {
+                    icon: React.createElement(Megaphone, { className: 'w-12 h-12 text-blue-600' }),
+                    title: 'Facebook & Instagram Ads',
+                    description: 'Social media advertising campaigns designed to reach local homeowners and generate quality leads for your business.',
+                    features: ['Audience targeting', 'Creative design', 'Lead generation', 'Retargeting campaigns']
+                },
+                {
+                    icon: React.createElement(BarChart3, { className: 'w-12 h-12 text-indigo-600' }),
+                    title: 'Analytics & Reporting',
+                    description: 'Comprehensive tracking and reporting to measure campaign performance and optimize your advertising ROI.',
+                    features: ['Conversion tracking', 'Monthly reports', 'ROI analysis', 'Performance insights']
+                },
+                {
+                    icon: React.createElement(Users, { className: 'w-12 h-12 text-green-600' }),
+                    title: 'Lead Generation',
+                    description: 'Specialized lead generation strategies for home service businesses including seal coating, asphalt, and exterior repairs.',
+                    features: ['Quality lead filtering', 'CRM integration', 'Lead nurturing', 'Follow-up automation']
+                },
+                {
+                    icon: React.createElement(Smartphone, { className: 'w-12 h-12 text-pink-600' }),
+                    title: 'Local SEO',
+                    description: 'Optimize your online presence to dominate local search results and attract customers in your service area.',
+                    features: ['Google My Business', 'Local citations', 'Review management', 'Map optimization']
+                },
+                {
+                    icon: React.createElement(Globe, { className: 'w-12 h-12 text-orange-600' }),
+                    title: 'Website Optimization',
+                    description: 'Landing page creation and website optimization to convert more visitors into paying customers.',
+                    features: ['Landing pages', 'Conversion optimization', 'Mobile responsive', 'Speed optimization']
+                }
+            ];
+
+            const industries = [
+                'Seal Coating',
+                'Asphalt Paving',
+                'Exterior Home Repair',
+                'Roofing Services',
+                'Landscaping',
+                'HVAC Services',
+                'Plumbing',
+                'Electrical Work'
+            ];
+
+            return React.createElement('section', {
+                id: 'services',
+                className: 'py-20 bg-white'
+            },
+                React.createElement('div', { className: 'container mx-auto px-4' },
+                    React.createElement('div', {
+                        className: `text-center mb-16 transform transition-all duration-1000 ${
+                            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                        }`
+                    },
+                        React.createElement('h2', { className: 'text-4xl md:text-5xl font-bold text-gray-800 mb-4' }, 'Our Services'),
+                        React.createElement('p', { className: 'text-xl text-gray-600 max-w-3xl mx-auto' },
+                            'Comprehensive digital marketing solutions designed specifically for home service businesses'
+                        )
+                    ),
+                    React.createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16' },
+                        services.map((service, index) =>
+                            React.createElement('div', {
+                                key: index,
+                                className: `bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group ${
+                                    isVisible 
+                                        ? 'translate-y-0 opacity-100' 
+                                        : 'translate-y-10 opacity-0'
+                                }`,
+                                style: { transitionDelay: `${index * 150}ms` }
+                            },
+                                React.createElement('div', { className: 'mb-6 group-hover:scale-110 transition-transform duration-300' },
+                                    service.icon
+                                ),
+                                React.createElement('h3', { className: 'text-2xl font-bold text-gray-800 mb-4' }, service.title),
+                                React.createElement('p', { className: 'text-gray-600 mb-6 leading-relaxed' }, service.description),
+                                React.createElement('ul', { className: 'space-y-2' },
+                                    service.features.map((feature, featureIndex) =>
+                                        React.createElement('li', {
+                                            key: featureIndex,
+                                            className: 'flex items-center text-gray-700'
+                                        },
+                                            React.createElement('div', { className: 'w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mr-3' }),
+                                            feature
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement('div', {
+                        className: `text-center transform transition-all duration-1000 delay-800 ${
+                            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                        }`
+                    },
+                        React.createElement('h3', { className: 'text-3xl font-bold text-gray-800 mb-8' }, 'Industries We Serve'),
+                        React.createElement('div', { className: 'flex flex-wrap justify-center gap-4 mb-12' },
+                            industries.map((industry, index) =>
+                                React.createElement('span', {
+                                    key: index,
+                                    className: 'bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 px-6 py-3 rounded-full font-medium hover:from-purple-200 hover:to-blue-200 transition-all duration-300 transform hover:scale-105'
+                                }, industry)
+                            )
+                        ),
+                        React.createElement('div', { className: 'bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 text-white' },
+                            React.createElement('h3', { className: 'text-3xl font-bold mb-4' }, 'Ready to Grow Your Business?'),
+                            React.createElement('p', { className: 'text-purple-100 mb-6 text-lg' },
+                                'Let\'s discuss how we can help you generate more leads and increase your revenue.'
+                            ),
+                            React.createElement('button', {
+                                onClick: () => {
+                                    const element = document.getElementById('contact');
+                                    if (element) element.scrollIntoView({ behavior: 'smooth' });
+                                },
+                                className: 'bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105'
+                            }, 'Get Free Strategy Session')
+                        )
+                    )
+                )
+            );
+        };
+
+        // About Component
+        const About = () => {
+            const [isVisible, setIsVisible] = useState(false);
+            const [counters, setCounters] = useState({ campaigns: 0, leads: 0, clients: 0, roi: 0 });
+
+            useEffect(() => {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        if (entries[0].isIntersecting) {
+                            setIsVisible(true);
+                            animateCounters();
+                        }
+                    },
+                    { threshold: 0.1 }
+                );
+
+                const element = document.getElementById('about');
+                if (element) {
+                    observer.observe(element);
+                }
+
+                return () => observer.disconnect();
+            }, []);
+
+            const animateCounters = () => {
+                const targets = { campaigns: 200, leads: 5000, clients: 50, roi: 300 };
+                const duration = 2000;
+                const steps = 60;
+                const interval = duration / steps;
+
+                let step = 0;
+                const timer = setInterval(() => {
+                    step++;
+                    const progress = step / steps;
                     
-                    // Animate counters
-                    const counters = entry.target.querySelectorAll('.counter');
-                    counters.forEach(counter => {
-                        animateCounter(counter);
+                    setCounters({
+                        campaigns: Math.floor(targets.campaigns * progress),
+                        leads: Math.floor(targets.leads * progress),
+                        clients: Math.floor(targets.clients * progress),
+                        roi: Math.floor(targets.roi * progress)
                     });
+
+                    if (step >= steps) {
+                        clearInterval(timer);
+                        setCounters(targets);
+                    }
+                }, interval);
+            };
+
+            const stats = [
+                { 
+                    icon: React.createElement(Target, { className: 'w-8 h-8 text-purple-600' }),
+                    number: counters.campaigns, 
+                    label: 'Successful Campaigns', 
+                    suffix: '+' 
+                },
+                { 
+                    icon: React.createElement(Users, { className: 'w-8 h-8 text-blue-600' }),
+                    number: counters.leads, 
+                    label: 'Leads Generated', 
+                    suffix: '+' 
+                },
+                { 
+                    icon: React.createElement(Award, { className: 'w-8 h-8 text-indigo-600' }),
+                    number: counters.clients, 
+                    label: 'Happy Clients', 
+                    suffix: '+' 
+                },
+                { 
+                    icon: React.createElement(TrendingUp, { className: 'w-8 h-8 text-green-600' }),
+                    number: counters.roi, 
+                    label: 'Average ROI', 
+                    suffix: '%' 
                 }
+            ];
+
+            return React.createElement('section', {
+                id: 'about',
+                className: 'py-20 bg-gradient-to-br from-gray-50 to-blue-50'
+            },
+                React.createElement('div', { className: 'container mx-auto px-4' },
+                    React.createElement('div', { className: 'grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20' },
+                        React.createElement('div', {
+                            className: `transform transition-all duration-1000 ${
+                                isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
+                            }`
+                        },
+                            React.createElement('h2', { className: 'text-4xl md:text-5xl font-bold text-gray-800 mb-6' },
+                                'About Purely Advertising'
+                            ),
+                            React.createElement('p', { className: 'text-xl text-gray-600 mb-6 leading-relaxed' },
+                                'We specialize in digital advertising for local home service businesses. Our mission is to help contractors and service providers grow their businesses through targeted, results-driven advertising campaigns.'
+                            ),
+                            React.createElement('p', { className: 'text-gray-600 mb-8 leading-relaxed' },
+                                'From seal coating companies to exterior repair specialists, we understand the unique challenges of marketing home services. Our data-driven approach ensures every advertising dollar works harder to generate quality leads and increase your revenue.'
+                            )
+                        ),
+                        React.createElement('div', {
+                            className: `transform transition-all duration-1000 delay-300 ${
+                                isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
+                            }`
+                        },
+                            React.createElement('div', { className: 'relative' },
+                                React.createElement('img', {
+                                    src: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
+                                    alt: 'Digital marketing strategy session',
+                                    className: 'rounded-2xl shadow-2xl'
+                                }),
+                                React.createElement('div', { className: 'absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent rounded-2xl' })
+                            )
+                        )
+                    ),
+                    React.createElement('div', {
+                        className: `grid grid-cols-2 md:grid-cols-4 gap-8 transform transition-all duration-1000 delay-500 ${
+                            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                        }`
+                    },
+                        stats.map((stat, index) =>
+                            React.createElement('div', {
+                                key: index,
+                                className: 'text-center bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300'
+                            },
+                                React.createElement('div', { className: 'flex justify-center mb-4' }, stat.icon),
+                                React.createElement('div', { className: 'text-3xl md:text-4xl font-bold text-gray-800 mb-2' },
+                                    `${stat.number}${stat.suffix}`
+                                ),
+                                React.createElement('div', { className: 'text-gray-600 text-sm md:text-base' }, stat.label)
+                            )
+                        )
+                    )
+                )
+            );
+        };
+
+        // Contact Component
+        const Contact = () => {
+            const [isVisible, setIsVisible] = useState(false);
+            const [formData, setFormData] = useState({
+                name: '',
+                email: '',
+                phone: '',
+                business: '',
+                service: '',
+                message: ''
             });
-        }, observerOptions);
+            const [isSubmitting, setIsSubmitting] = useState(false);
 
-        // Observe all animated elements
-        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
-            observer.observe(el);
-        });
+            useEffect(() => {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        if (entries[0].isIntersecting) {
+                            setIsVisible(true);
+                        }
+                    },
+                    { threshold: 0.1 }
+                );
 
-        // Counter animation
-        function animateCounter(counter) {
-            const target = parseInt(counter.getAttribute('data-target'));
-            const duration = 2000;
-            const steps = 60;
-            const increment = target / steps;
-            let current = 0;
-            
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    counter.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    counter.textContent = Math.floor(current);
+                const element = document.getElementById('contact');
+                if (element) {
+                    observer.observe(element);
                 }
-            }, duration / steps);
-        }
 
-        // Lead Form Submission
-        document.getElementById('leadForm').addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          const submitBtn = document.getElementById('submitBtn');
-          const originalText = submitBtn.innerHTML;
-          
-          // Show loading state
-          submitBtn.innerHTML = '<div class="flex items-center justify-center"><div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>Submitting...</div>';
-          submitBtn.disabled = true;
-          
-          // Get form data
-          const formData = new FormData(this);
-          const fullName = formData.get('fullName');
-          const phone = formData.get('phone');
-          const email = formData.get('email');
-          const urgency = formData.get('urgency');
-          const sealCoating = formData.get('sealCoating');
-          const profit = formData.get('profit');
-          
-          // Create Google Form submission URL
-          const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse';
-          
-          // Create form data for Google Form
-          const googleFormData = new FormData();
-          googleFormData.append('entry.1895950474', fullName);
-          googleFormData.append('entry.1848460539', phone);
-          googleFormData.append('entry.1417314964', email);
-          googleFormData.append('entry.306218684', urgency);
-          googleFormData.append('entry.739887506', sealCoating);
-          googleFormData.append('entry.1507047135', profit);
-          
-          // Submit to Google Form
-          fetch(googleFormUrl, {
-            method: 'POST',
-            body: googleFormData,
-            mode: 'no-cors'
-          }).then(() => {
-            // Success - show thank you message
-            submitBtn.innerHTML = '✅ Thank You! We\'ll Contact You Soon';
-            submitBtn.classList.remove('from-purple-600', 'to-blue-600', 'hover:from-purple-700', 'hover:to-blue-700');
-            submitBtn.classList.add('from-green-500', 'to-green-600');
-            
-            // Reset form after delay
-            setTimeout(() => {
-              this.reset();
-              submitBtn.innerHTML = originalText;
-              submitBtn.disabled = false;
-              submitBtn.classList.remove('from-green-500', 'to-green-600');
-              submitBtn.classList.add('from-purple-600', 'to-blue-600', 'hover:from-purple-700', 'hover:to-blue-700');
-            }, 3000);
-            
-          }).catch(() => {
-            // Error handling
-            submitBtn.innerHTML = '❌ Error - Please Try Again';
-            submitBtn.classList.remove('from-purple-600', 'to-blue-600');
-            submitBtn.classList.add('from-red-500', 'to-red-600');
-            submitBtn.disabled = false;
-            
-            setTimeout(() => {
-              submitBtn.innerHTML = originalText;
-              submitBtn.classList.remove('from-red-500', 'to-red-600');
-              submitBtn.classList.add('from-purple-600', 'to-blue-600', 'hover:from-purple-700', 'hover:to-blue-700');
-            }, 3000);
-          });
-        });
+                return () => observer.disconnect();
+            }, []);
 
-        // Contact form submission
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Simulate form submission
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            
-            submitBtn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2 inline-block"></div>Sending...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setIsSubmitting(true);
+                
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
                 alert('Thank you for your message! We\'ll get back to you within 24 hours.');
-                this.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                lucide.createIcons();
-            }, 1000);
-        });
+                setFormData({ name: '', email: '', phone: '', business: '', service: '', message: '' });
+                setIsSubmitting(false);
+            };
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('shadow-lg');
-            } else {
-                header.classList.remove('shadow-lg');
-            }
-        });
+            const handleChange = (e) => {
+                setFormData({
+                    ...formData,
+                    [e.target.name]: e.target.value
+                });
+            };
 
-        // Initialize animations on page load
-        setTimeout(() => {
-            document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight) {
-                    el.classList.add('visible');
-                    
-                    // Animate counters in hero section
-                    const counters = el.querySelectorAll('.counter');
-                    counters.forEach(counter => {
-                        animateCounter(counter);
-                    });
+            const contactInfo = [
+                {
+                    icon: React.createElement(Phone, { className: 'w-6 h-6' }),
+                    title: 'Phone',
+                    content: '267-981-5104',
+                    subContent: 'Call or text anytime',
+                    link: 'tel:267-981-5104'
+                },
+                {
+                    icon: React.createElement(Mail, { className: 'w-6 h-6' }),
+                    title: 'Email',
+                    content: 'jared@purelyadvertising.com',
+                    subContent: 'We respond within 24hrs',
+                    link: 'mailto:jared@purelyadvertising.com'
+                },
+                {
+                    icon: React.createElement(Instagram, { className: 'w-6 h-6' }),
+                    title: 'Instagram',
+                    content: '@purelyadvertising',
+                    subContent: 'Follow for tips & updates',
+                    link: 'https://instagram.com/purelyadvertising'
+                },
+                {
+                    icon: React.createElement(Facebook, { className: 'w-6 h-6' }),
+                    title: 'Facebook',
+                    content: 'Purely Advertising',
+                    subContent: 'Like our page',
+                    link: 'https://www.facebook.com/profile.php?id=61580363096728'
                 }
-            });
-        }, 100);
+            ];
+
+            return React.createElement('section', {
+                id: 'contact',
+                className: 'py-20 bg-gradient-to-br from-purple-50 to-blue-50'
+            },
+                React.createElement('div', { className: 'container mx-auto px-4' },
+                    React.createElement('div', {
+                        className: `text-center mb-16 transform transition-all duration-1000 ${
+                            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                        }`
+                    },
+                        React.createElement('h2', { className: 'text-4xl md:text-5xl font-bold text-gray-800 mb-4' },
+                            'Ready to Grow Your Business?'
+                        ),
+                        React.createElement('p', { className: 'text-xl text-gray-600 max-w-3xl mx-auto' },
+                            'Let\'s discuss how we can help you generate more leads and increase your revenue with targeted digital advertising.'
+                        )
+                    ),
+                    React.createElement('div', { className: 'grid grid-cols-1 lg:grid-cols-2 gap-12' },
+                        React.createElement('div', {
+                            className: `transform transition-all duration-1000 delay-300 ${
+                                isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
+                            }`
+                        },
+                            React.createElement('h3', { className: 'text-2xl font-bold text-gray-800 mb-8' }, 'Get In Touch'),
+                            React.createElement('div', { className: 'grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8' },
+                                contactInfo.map((info, index) =>
+                                    React.createElement('a', {
+                                        key: index,
+                                        href: info.link,
+                                        target: info.link.startsWith('http') ? '_blank' : '_self',
+                                        rel: info.link.startsWith('http') ? 'noopener noreferrer' : '',
+                                        className: 'bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group'
+                                    },
+                                        React.createElement('div', { className: 'flex items-center mb-3' },
+                                            React.createElement('div', { className: 'bg-gradient-to-r from-purple-100 to-blue-100 rounded-full p-3 mr-4 group-hover:from-purple-200 group-hover:to-blue-200 transition-colors duration-300' },
+                                                React.createElement('div', { className: 'text-purple-600' }, info.icon)
+                                            ),
+                                            React.createElement('div', null,
+                                                React.createElement('h4', { className: 'font-semibold text-gray-800' }, info.title)
+                                            )
+                                        ),
+                                        React.createElement('p', { className: 'text-gray-700 font-medium' }, info.content),
+                                        React.createElement('p', { className: 'text-gray-500 text-sm' }, info.subContent)
+                                    )
+                                )
+                            )
+                        ),
+                        React.createElement('div', {
+                            className: `transform transition-all duration-1000 delay-500 ${
+                                isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
+                            }`
+                        },
+                            React.createElement('div', { className: 'bg-white rounded-2xl shadow-2xl p-8 border border-gray-100' },
+                                React.createElement('div', { className: 'text-center mb-6' },
+                                    React.createElement('h3', { className: 'text-2xl font-bold text-gray-800 mb-2' },
+                                        'Get Your Free Marketing Strategy Session'
+                                    ),
+                                    React.createElement('p', { className: 'text-gray-600' },
+                                        'Fill out this quick form and we\'ll reach out within 24 hours'
+                                    )
+                                ),
+
+                                React.createElement('form', {
+                                    action: 'https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse',
+                                    method: 'POST',
+                                    target: 'hidden_iframe_bottom',
+                                    onSubmit: () => {
+                                        setTimeout(() => {
+                                            alert('Thank you! Your submission has been received. We\'ll reach out to you shortly to discuss how we can help grow your business.');
+                                        }, 500);
+                                    },
+                                    className: 'space-y-6'
+                                },
+                                    React.createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-6' },
+                                        React.createElement('div', null,
+                                            React.createElement('label', { className: 'block text-gray-700 font-medium mb-2' }, 'Full Name *'),
+                                            React.createElement('input', {
+                                                type: 'text',
+                                                name: 'entry.1895950474',
+                                                required: true,
+                                                className: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200',
+                                                placeholder: 'Your full name'
+                                            })
+                                        ),
+                                        React.createElement('div', null,
+                                            React.createElement('label', { className: 'block text-gray-700 font-medium mb-2' }, 'Phone Number *'),
+                                            React.createElement('input', {
+                                                type: 'tel',
+                                                name: 'entry.1848460539',
+                                                required: true,
+                                                className: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200',
+                                                placeholder: '(555) 123-4567'
+                                            })
+                                        )
+                                    ),
+
+                                    React.createElement('div', null,
+                                        React.createElement('label', { className: 'block text-gray-700 font-medium mb-2' }, 'Email *'),
+                                        React.createElement('input', {
+                                            type: 'email',
+                                            name: 'entry.1417314964',
+                                            required: true,
+                                            className: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200',
+                                            placeholder: 'your@email.com'
+                                        })
+                                    ),
+
+                                    React.createElement('div', null,
+                                        React.createElement('label', { className: 'block text-gray-700 font-medium mb-2' }, 'How soon do you need digital advertising? *'),
+                                        React.createElement('select', {
+                                            name: 'entry.306218684',
+                                            required: true,
+                                            className: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200'
+                                        },
+                                            React.createElement('option', { value: '' }, 'Select urgency'),
+                                            React.createElement('option', { value: 'YESTERDAY!' }, 'YESTERDAY!'),
+                                            React.createElement('option', { value: 'This week' }, 'This week'),
+                                            React.createElement('option', { value: 'Some other time in the future' }, 'Some other time in the future')
+                                        )
+                                    ),
+
+                                    React.createElement('div', null,
+                                        React.createElement('label', { className: 'block text-gray-700 font-medium mb-2' }, 'What type of service do you provide? *'),
+                                        React.createElement('select', {
+                                            name: 'entry.739887506',
+                                            required: true,
+                                            className: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200'
+                                        },
+                                            React.createElement('option', { value: '' }, 'Select your service type'),
+                                            React.createElement('option', { value: 'Seal Coating' }, 'Seal Coating'),
+                                            React.createElement('option', { value: 'Asphalt Paving' }, 'Asphalt Paving'),
+                                            React.createElement('option', { value: 'Exterior Home Repair' }, 'Exterior Home Repair'),
+                                            React.createElement('option', { value: 'Roofing Services' }, 'Roofing Services'),
+                                            React.createElement('option', { value: 'Landscaping' }, 'Landscaping'),
+                                            React.createElement('option', { value: 'HVAC Services' }, 'HVAC Services'),
+                                            React.createElement('option', { value: 'Plumbing' }, 'Plumbing'),
+                                            React.createElement('option', { value: 'Electrical Work' }, 'Electrical Work')
+                                        )
+                                    ),
+
+                                    React.createElement('div', null,
+                                        React.createElement('label', { className: 'block text-gray-700 font-medium mb-2' }, 'How much are you producing in profit each month? *'),
+                                        React.createElement('select', {
+                                            name: 'entry.1507047135',
+                                            required: true,
+                                            className: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200'
+                                        },
+                                            React.createElement('option', { value: '' }, 'Select profit range'),
+                                            React.createElement('option', { value: '$0 - $10,000' }, '$0 - $10,000'),
+                                            React.createElement('option', { value: '$10,000 - $15,000' }, '$10,000 - $15,000'),
+                                            React.createElement('option', { value: '$15,000 - $20,000' }, '$15,000 - $20,000'),
+                                            React.createElement('option', { value: '$20,000+' }, '$20,000+')
+                                        )
+                                    ),
+
+                                    React.createElement('button', {
+                                        type: 'submit',
+                                        className: 'w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg'
+                                    },
+                                        'Get My Free Strategy Session'
+                                    ),
+
+                                    React.createElement('p', { className: 'text-xs text-gray-500 text-center' },
+                                        '🔒 Your information is secure and will never be shared with third parties'
+                                    )
+                                ),
+
+                                React.createElement('iframe', { 
+                                    name: 'hidden_iframe_bottom', 
+                                    style: { display: 'none' } 
+                                })
+                            )
+                        )
+                    )
+                )
+            );
+        };
+
+        // Footer Component
+        const Footer = () => {
+            const scrollToSection = (sectionId) => {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+
+            return React.createElement('footer', { className: 'bg-gray-900 text-white' },
+                React.createElement('div', { className: 'container mx-auto px-4 py-12' },
+                    React.createElement('div', { className: 'grid grid-cols-1 md:grid-cols-4 gap-8' },
+                        React.createElement('div', { className: 'col-span-1 md:col-span-2' },
+                            React.createElement('div', { className: 'flex items-center space-x-2 mb-4' },
+                                React.createElement('div', { className: 'w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center' },
+                                    React.createElement('span', { className: 'text-white font-bold text-xl' }, 'P')
+                                ),
+                                React.createElement('span', { className: 'text-2xl font-bold' }, 'Purely Advertising')
+                            ),
+                            React.createElement('p', { className: 'text-gray-400 mb-6 leading-relaxed max-w-md' },
+                                'Digital advertising specialists for home service businesses. We help contractors and service providers grow through targeted, results-driven campaigns.'
+                            ),
+                            React.createElement('div', { className: 'space-y-3' },
+                                React.createElement('div', { className: 'flex items-center' },
+                                    React.createElement(Phone, { className: 'w-5 h-5 text-purple-400 mr-3' }),
+                                    React.createElement('span', { className: 'text-gray-300' }, '267-981-5104')
+                                ),
+                                React.createElement('div', { className: 'flex items-center' },
+                                    React.createElement(Mail, { className: 'w-5 h-5 text-purple-400 mr-3' }),
+                                    React.createElement('span', { className: 'text-gray-300' }, 'jared@purelyadvertising.com')
+                                )
+                            )
+                        ),
+                        React.createElement('div', null,
+                            React.createElement('h4', { className: 'text-lg font-semibold mb-4' }, 'Quick Links'),
+                            React.createElement('ul', { className: 'space-y-2' },
+                                React.createElement('li', null,
+                                    React.createElement('button', {
+                                        onClick: () => scrollToSection('home'),
+                                        className: 'text-gray-400 hover:text-white transition-colors duration-200'
+                                    }, 'Home')
+                                ),
+                                React.createElement('li', null,
+                                    React.createElement('button', {
+                                        onClick: () => scrollToSection('services'),
+                                        className: 'text-gray-400 hover:text-white transition-colors duration-200'
+                                    }, 'Services')
+                                ),
+                                React.createElement('li', null,
+                                    React.createElement('button', {
+                                        onClick: () => scrollToSection('about'),
+                                        className: 'text-gray-400 hover:text-white transition-colors duration-200'
+                                    }, 'About')
+                                ),
+                                React.createElement('li', null,
+                                    React.createElement('button', {
+                                        onClick: () => scrollToSection('contact'),
+                                        className: 'text-gray-400 hover:text-white transition-colors duration-200'
+                                    }, 'Contact')
+                                )
+                            )
+                        ),
+                        React.createElement('div', null,
+                            React.createElement('h4', { className: 'text-lg font-semibold mb-4' }, 'Services'),
+                            React.createElement('ul', { className: 'space-y-2 text-gray-400' },
+                                React.createElement('li', null, 'Google Ads Management'),
+                                React.createElement('li', null, 'Facebook & Instagram Ads'),
+                                React.createElement('li', null, 'Lead Generation'),
+                                React.createElement('li', null, 'Local SEO'),
+                                React.createElement('li', null, 'Website Optimization'),
+                                React.createElement('li', null, 'Analytics & Reporting')
+                            )
+                        )
+                    ),
+                    React.createElement('div', { className: 'border-t border-gray-800 mt-12 pt-8' },
+                        React.createElement('div', { className: 'flex flex-col md:flex-row justify-between items-center' },
+                            React.createElement('div', { className: 'text-gray-400 mb-4 md:mb-0' },
+                                React.createElement('p', null, '© 2024 Purely Advertising. All rights reserved.')
+                            ),
+                            React.createElement('div', { className: 'flex space-x-4' },
+                                React.createElement('a', {
+                                    href: 'https://www.facebook.com/profile.php?id=61580363096728',
+                                    target: '_blank',
+                                    rel: 'noopener noreferrer',
+                                    className: 'text-gray-400 hover:text-white transition-colors duration-200'
+                                }, React.createElement(Facebook, { className: 'w-6 h-6' })),
+                                React.createElement('a', {
+                                    href: 'https://instagram.com/purelyadvertising',
+                                    target: '_blank',
+                                    rel: 'noopener noreferrer',
+                                    className: 'text-gray-400 hover:text-white transition-colors duration-200'
+                                }, React.createElement(Instagram, { className: 'w-6 h-6' }))
+                            )
+                        )
+                    )
+                )
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            return React.createElement('div', { className: 'min-h-screen' },
+                React.createElement(Header),
+                React.createElement(Hero),
+                React.createElement(Services),
+                React.createElement(About),
+                React.createElement(Contact),
+                React.createElement(Footer)
+            );
+        };
+
+        // Render the app
+        ReactDOM.render(React.createElement(App), document.getElementById('root'));
     </script>
 </body>
 </html>
