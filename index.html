@@ -819,8 +819,7 @@
                                     action: 'https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/formResponse',
                                     method: 'POST',
                                     target: 'hidden_iframe_bottom',
-                                    onSubmit: (e) => {
-                                        e.preventDefault();
+                                    onSubmit: () => {
                                         setTimeout(() => {
                                             showThankYouModal();
                                         }, 500);
