@@ -165,51 +165,7 @@
     </style>
 </head>
 <body>
-    <!-- Removed early DOM-manipulation script to ensure crawlers and users see the same content -->
-
-        <!-- Static fallback: visible immediately. This prevents a white page if the React/Babel bundle fails to parse.
-                 It will be hidden automatically if the React app sets window.__APP_RENDERED = true. -->
-    <div id="static-fallback" style="font-family:system-ui, -apple-system, 'Segoe UI', Roboto, Arial; padding:24px; background:linear-gradient(180deg,#fff,#f7f9fc);">
-            <header style="display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;padding:12px 0;">
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <div style="width:44px;height:44px;background:linear-gradient(90deg,#7c3aed,#2563eb);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">P</div>
-                    <div style="font-size:20px;font-weight:700;color:#111">Purely Advertising</div>
-                </div>
-                <div style="display:flex;gap:12px;align-items:center">
-                    <a href="tel:267-981-5104" style="color:#111;text-decoration:none">267-981-5104</a>
-                    <a href="https://g.page/r/CYbakEDR7MZWEAI/review" target="_blank" rel="noopener noreferrer" style="background:#f59e0b;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none">Leave a Review</a>
-                </div>
-            </header>
-
-            <main style="max-width:1100px;margin:18px auto;padding:24px;background:#fff;border-radius:12px;box-shadow:0 6px 24px rgba(16,24,40,0.06)">
-                <h1 style="font-size:28px;margin:0 0 12px;color:#0f172a">Digital advertising for home service businesses</h1>
-                <p style="margin:0 0 18px;color:#334155">We help contractors, seal coating companies and local service providers generate consistent leads with Google & Facebook ads.</p>
-                <div style="display:flex;gap:12px;flex-wrap:wrap">
-                    <a href="tel:267-981-5104" style="background:#6d28d9;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none">Call 267-981-5104</a>
-                    <a href="#contact" style="background:#e5e7eb;color:#111;padding:12px 18px;border-radius:10px;text-decoration:none">Contact</a>
-                    <a href="https://g.page/r/CYbakEDR7MZWEAI/review" target="_blank" rel="noopener noreferrer" style="background:#f59e0b;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none">Leave a Google Review</a>
-                </div>
-            </main>
-        </div>
-
-        <script>
-            // If the React app manages to initialize successfully it should set window.__APP_RENDERED = true
-            // then this script will hide the static fallback to avoid duplicate content.
-            (function(){
-                function hideIfAppReady(){
-                    if (window.__APP_RENDERED) {
-                        var el = document.getElementById('static-fallback');
-                        if (el) el.style.display = 'none';
-                    }
-                }
-                // Check a few times in case the app sets the flag async
-                hideIfAppReady();
-                var tries = 0;
-                var interval = setInterval(function(){ tries++; hideIfAppReady(); if(tries>20) clearInterval(interval); }, 150);
-            })();
-        </script>
-
-        <div id="root"></div>
+    <div id="root"></div>
 
         <!-- Important: non-JS / crawler fallback to avoid cloaking issues with Google.
                  This static content mirrors the key messaging and contact CTA so crawlers
@@ -217,33 +173,11 @@
         <noscript>
             <div style="padding:24px; background:#f8fafc; border:1px solid #e6edf3; margin:16px; border-radius:12px; font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;">
                 <h1 style="font-size:24px; margin-bottom:8px; color:#1f2937;">Purely Advertising</h1>
-                <p style="margin:0 0 12px; color:#374151;">Digital advertising for home services — contact us for a free consultation.</p>
+                <p style="margin:0 0 12px; color:#374151;">Digital advertising specialists for home service businesses. We help contractors and service providers grow through targeted, results-driven campaigns.</p>
                 <p style="margin:0 0 12px; color:#374151;">Call us: <a href="tel:267-981-5104">267-981-5104</a> or email <a href="mailto:jared@purelyadvertising.com">jared@purelyadvertising.com</a></p>
                 <p style="margin:0 0 12px; color:#374151;">Get a free quote: visit our Google Form at <a href="https://docs.google.com/forms/d/e/1FAIpQLSfnUiQU84xYf0K6OMU5i03HkNwsymKfiX461GpeppMd180P5Q/viewform" target="_blank" rel="noopener noreferrer">Request a Quote</a></p>
             </div>
         </noscript>
-
-        <script>
-            // Extra safety: remove any stray standalone text nodes (e.g. lone "google") that might show briefly
-            (function(){
-                try {
-                    var body = document.body;
-                    if (!body) return;
-                    var walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT, null, false);
-                    var nodes = [];
-                    while (walker.nextNode()) nodes.push(walker.currentNode);
-                    nodes.forEach(function(n){
-                        try {
-                            var txt = n.nodeValue && n.nodeValue.trim();
-                            if (!txt) return;
-                            if (txt.toLowerCase() === 'google' || txt === 'Digital advertising specialists for home service businesses. We help contractors and service providers grow through targeted, results-driven campaigns.') {
-                                if (n.parentNode) n.parentNode.removeChild(n);
-                            }
-                        } catch(e){}
-                    });
-                } catch(e){}
-            })();
-        </script>
 
     <script type="text/babel">
         const { useState, useEffect } = React;
@@ -1004,7 +938,7 @@
                                 'Help other home service businesses find us by sharing your experience!'
                             ),
                             React.createElement('a', {
-                                href: 'https://g.page/r/CYbakEDR7MZWEAI/review',
+                                href: 'https://g.page/r/YOUR_GOOGLE_BUSINESS_ID/review',
                                 target: '_blank',
                                 rel: 'noopener noreferrer',
                                 className: 'inline-flex items-center bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg'
@@ -1201,7 +1135,7 @@
                                 'Your review helps us reach more home service businesses who need quality digital marketing.'
                             ),
                             React.createElement('a', {
-                                href: 'https://g.page/r/CYbakEDR7MZWEAI/review',
+                                href: 'https://g.page/r/YOUR_GOOGLE_BUSINESS_ID/review',
                                 target: '_blank',
                                 rel: 'noopener noreferrer',
                                 className: 'inline-flex items-center bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg'
@@ -1385,17 +1319,15 @@
           );
         };
 
-    // Render the app
-    ReactDOM.render(React.createElement(App), document.getElementById('root'));
-    // Signal that the dynamic app rendered so the static fallback can hide
-    try { window.__APP_RENDERED = true; } catch (e) { /* ignore */ }
+        // Render the app
+        ReactDOM.render(React.createElement(App), document.getElementById('root'));
     </script>
 
     <!-- Floating Action Buttons -->
     <div id="floatingActions" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-3 opacity-0 translate-y-10 transition-all duration-500">
       <!-- Google Review Button -->
       <a
-        href="https://g.page/r/CYbakEDR7MZWEAI/review"
+        href="https://g.page/r/YOUR_GOOGLE_BUSINESS_ID/review"
         target="_blank"
         rel="noopener noreferrer"
         class="bg-yellow-500 hover:bg-yellow-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 group"
